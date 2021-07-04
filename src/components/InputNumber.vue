@@ -6,41 +6,42 @@
         :type="getType"
         :placeholder="getPlaceHolder"
         :id="getId"
-        @keypress="
-        checkInput($event)"
+        @keypress="checkInput($event)"
         v-model="inputNumber"
       />
       <p>{{ inputNumber }}</p>
+      <p>{{ massage }}</p>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-props: {
-  label:{
-    type:String,
-    required : true
+  props: {
+    label: {
+      type: String,
+      required: true,
+    },
+    placeHolder: {
+      type: String,
+      required: true,
+    },
+    inputType: {
+      type: String,
+      required: true,
+    },
+    id: {
+      type: String,
+      required: true,
+    },
   },
-  placeHolder:{
-    type:String,
-    required : true
-  },
-  inputType:{
-    type:String,
-    required : true
-  },
-  id:{
-    type:String,
-    required : true
-  }
-
-},
   data() {
     return {
       inputLength: 0,
       inputNumber: "",
-      jumboState:0
+      jumboState: 0,
+      inputIsWrong: true,
+      massage: "",
       //0 req not sent
       //1 req sent not confirmed
       //2 req sent confirmed
@@ -54,33 +55,45 @@ props: {
       return this.label;
     },
     getPlaceHolder() {
-      return  this.placeHolder;
+      return this.placeHolder;
     },
     getId() {
       return this.id;
     },
   },
   methods: {
-    
-    checkInput($ev){
-        this.checkNumericInput($ev);
-        this.limitLength($ev);
+    checkInput($ev) {
+      this.checkNumericInput($ev);
+      this.limitLength($ev);
+      this.updateInput(this.inputNumber);
+      if (this.id === "phoneNumber") {
+        this.check09($ev);
+      }
     },
     checkNumericInput($ev) {
       if ($ev.which < 48 || $ev.which > 57) {
         $ev.preventDefault();
-      } else {
-        this.inputLength++;
       }
-      console.log();
-      console.log(this.inputLength);
     },
     limitLength($ev) {
       if (this.id === "phoneNumber" || this.id === "idNumber") {
-        if (this.inputNumber.length > 10) {
+        if (this.inputNumber.length > 9) {
           $ev.preventDefault();
         }
       }
+    },
+    check09() {
+      if (this.inputNumber.length >= 9) {
+        if (this.inputNumber[0] == 0 && this.inputNumber[1] == 9) {
+          this.inputIsWrong = false;
+        } else {
+          this.inputIsWrong = true;
+        }
+      }
+      console.log(this.inputNumber);
+    },
+    updateInput(value) {
+      this.$emit("updateInput", value);
     },
   },
 };
@@ -108,7 +121,7 @@ input {
   border: white solid 0px;
   font-size: 27px;
   direction: rtl;
-  padding: 0 22px 0 0!important;
+  padding: 0 22px 0 0 !important;
 }
 
 input::placeholder {

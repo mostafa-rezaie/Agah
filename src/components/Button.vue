@@ -14,7 +14,7 @@ export default {
       type: String,
       default: "click me!",
     },
-    disabled: {
+    active: {
       type: Boolean,
       default: false,
     },
@@ -28,7 +28,7 @@ export default {
     getClass() {
       return {
         active : this.active,
-        disabled : this.disabled
+       
       };
     },
   },
@@ -51,7 +51,5 @@ button {
 .active {
   background-color: #0a5bff;
 }
-.deactive {
-  background-color: #80aaff;
-}
+
 </style>

@@ -14,28 +14,26 @@
       placeHolder="شماره خود را وارد کنید"
       inputType="tel"
       id="phoneNumber"
+      @updateInput="checkInputNumber"
     ></app-input-number>
     <app-input-number
-        label="کد ملی"
-        placeHolder="کد ملی خود را وارد کنید"
-        inputType="text"
-        id="idNumber"
-        v-model="natioanlCode"
+      label="کد ملی"
+      placeHolder="کد ملی خود را وارد کنید"
+      inputType="text"
+      id="idNumber"
+      @updateInput="checkInputId"
     ></app-input-number>
-
+    <!-- <button style="width : 200px" @click="printInputFlag"></button> -->
     <app-input-captcha
       label="کد امنیتی"
       placeHolder="لطفا عدد رو به رو را وارد کنید"
       inputType="text"
       id="capthcaCode"
+      @updateCaptch="checkCaptcha"
     >
     </app-input-captcha>
     <app-result-box> </app-result-box>
-    <app-button 
-        :disabled="!checkButton"
-    label="دریافت کد تایید"
-     
-    ></app-button>
+    <app-button :active="fieldHandler" label="دریافت کد تایید"></app-button>
   </div>
 </template>
 
@@ -50,13 +48,28 @@ export default {
   data() {
     return {
       ok: false,
-      natioanlCode:""
+      natioanlCode: "",
+      idIsCorrect: false,
+      phoneIsCorrect: false,
+      captchaIsCorrect: false,
+      fieldsAreCorrect: false,
+      temp: [],
     };
   },
-  computed:{
-    checkButton(){
-        return this.natioanlCode.length>0;
-    }
+  computed: {
+    // checkButton(){
+    //     return this.natioanlCode.length>0;
+    // },
+    checkPhoneNumber() {
+      return true;
+    },
+    fieldHandler() {
+      if (this.phoneIsCorrect && this.idIsCorrect) {
+        return true;
+      } else {
+        return false;
+      }
+    },
   },
   components: {
     appJumbo: Jumbotron,
@@ -68,6 +81,36 @@ export default {
   methods: {
     checkValid() {
       return true;
+    },
+    checkInputNumber(value) {
+      this.temp = value;
+      if (value.length > 9) {
+        if (value[0] == 0 && value[1] == 9) {
+          console.log("phone is  true");
+          this.phoneIsCorrect = true;
+          return true;
+        }
+      } else {
+        this.phoneIsCorrect = false;
+        console.log("phone is  false");
+        return false;
+      }
+    },
+    checkInputId(value) {
+      if (value.length > 9) {
+        this.idIsCorrect = true;
+        console.log("id is true");
+        return true;
+      } else {
+        console.log("id is false");
+        this.idIsCorrect = false;
+        return false;
+      }
+    },
+    checkCaptcha(value) {
+      if (value) {
+        this.captchaIsCorrect = true;
+      }
     },
   },
 };
