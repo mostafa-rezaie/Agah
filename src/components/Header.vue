@@ -15,7 +15,9 @@
       </nav>
 
       <div class="logo">
+        <router-link to="/">
         <img src="../assets/img/logo.svg" alt="logo" />
+        </router-link>
       </div>
     </div>
   </div>

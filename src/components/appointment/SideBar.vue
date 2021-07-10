@@ -8,11 +8,11 @@
           title : 'قدم اول',
           subTitle : 'انتخاب شعبه'
         }"
-
        :iconSrc='require("../../assets/img/homeSideBar.svg")'
         ></app-side-element>
         <app-side-line
         deactive 
+
         ></app-side-line>
         <app-side-element
         subTitleDeactive
@@ -65,7 +65,7 @@ export default {
 }
 .side-bar {
   height: 100%; 
-  width: 289px; 
+  width: 18%; 
   position: fixed; 
   z-index: 1; 
   top: 0;
@@ -76,7 +76,7 @@ export default {
 }
 
 .element-container {
-    margin-right: 44px;
+    margin-right: 5px;
     margin-top: 122px;
 }
 .line {
