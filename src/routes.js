@@ -1,4 +1,4 @@
-import Home from "./components/Home.vue";
+import Home from "./components/home/Home.vue";
 import Login from "./components/login/Login.vue";
 import Confirm from "./components/confirmation/Confirm.vue";
 import Result from "./components/result/Result.vue";

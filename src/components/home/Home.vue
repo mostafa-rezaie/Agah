@@ -16,9 +16,9 @@
 </template>
 
 <script>
-import Jumbotron from './Jumbotron.vue'
-import Card from './Card.vue'
-import Header from './Header.vue'
+import Jumbotron from '../Jumbotron.vue'
+import Card from '../Card.vue'
+import Header from '../Header.vue'
 
 export default {
   components:{
