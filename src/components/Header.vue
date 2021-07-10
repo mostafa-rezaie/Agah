@@ -11,9 +11,7 @@
         <div id="item2">پنل مشتریان</div>
         <div id="item3">آگاه اکسپرس</div>
         <div id="item4">باشگاه مشتریان</div>
-        <router-link tag="div" to="/login">
-          <a> نوبت دهی </a>
-        </router-link>
+        <div id="item4">نوبت دهی</div>
       </nav>
 
       <div class="logo">
