@@ -110,4 +110,12 @@ h3 {
 .pointer-active {
   cursor: pointer;
 }
+.card > div{
+height: 100%;
+overflow: auto;
+}
+.card{
+  padding-right: 0 !important ;
+  padding-left: 0 !important ;
+}
 </style>
