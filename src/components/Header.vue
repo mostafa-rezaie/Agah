@@ -1,5 +1,5 @@
 <template>
-  <div id="outer-container">
+  <div id="outer-container" :class="getClass">
     <div class="outer-nav">
       <div class="go-to-page">
         <span class="btn">
@@ -24,7 +24,22 @@
 </template>
 
 <script>
-export default {};
+export default {
+  props :{
+    navOffset70 : {
+      type : Boolean,
+      default : false
+    }
+  },
+  computed: {
+    getClass (){
+      return{
+        navOffset70 : this.navOffset70
+        }
+        
+    }
+  },
+};
 </script>
 
 <style scoped>
@@ -33,7 +48,9 @@ export default {};
   flex-wrap: wrap;
   justify-content: space-around;
   align-items: center;
-  width: 100%;
+  width:100%;
+  left: 0;
+  /* this is part is extra  */
   height: 120px;
 }
 .go-to-page {
@@ -62,5 +79,10 @@ export default {};
 }
 .btn > div {
   margin-top: 15px;
+}
+
+.navOffset70{
+  width: 85%;
+  left: 0;
 }
 </style>

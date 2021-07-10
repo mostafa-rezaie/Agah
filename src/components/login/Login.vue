@@ -1,5 +1,6 @@
 <template>
   <div>
+    <app-header></app-header>
     <app-jumbo
       title="کد ملی و شماره همراه خود را جهت ثبت نوبت احراز هویت وارد کنید"
       subTitle="نوبت دهی احراز هویت برای افرادی می باشد که قبلا در آگاه ثبت نام کرده اند و احراز هویت نشده اند"
@@ -32,27 +33,30 @@
       @updateCaptch="checkCaptcha"
     >
     </app-input-captcha>
-    <app-result-box> </app-result-box>
+    <div class="btn-container">
+      <router-link to="/confirm" tag="div">
     <app-button :active="fieldHandler" label="دریافت کد تایید"></app-button>
+      </router-link>
+    </div>
   </div>
 </template>
 
 <script>
 import Jumbotron from "../Jumbotron.vue";
-import InputNumber from "../InputNumber.vue";
-import InputCaptcha from "../InputCaptcha.vue";
+import InputNumber from "./InputNumber.vue";
+import InputCaptcha from "./InputCaptcha.vue";
 import Button from "../Button.vue";
-import ResultBox from "../ResultBox.vue";
+import Header from "../Header.vue";
 
 export default {
   data() {
     return {
       ok: false,
-      natioanlCode: "",
       idIsCorrect: false,
       phoneIsCorrect: false,
       captchaIsCorrect: false,
       fieldsAreCorrect: false,
+      numberIsCorrect : false,
       temp: [],
     };
   },
@@ -64,7 +68,7 @@ export default {
       return true;
     },
     fieldHandler() {
-      if (this.phoneIsCorrect && this.idIsCorrect) {
+      if (this.numberIsCorrect && this.idIsCorrect &&this.captchaIsCorrect) {
         return true;
       } else {
         return false;
@@ -76,38 +80,40 @@ export default {
     appInputNumber: InputNumber,
     appInputCaptcha: InputCaptcha,
     appButton: Button,
-    appResultBox: ResultBox,
+    appHeader: Header,
   },
   methods: {
     checkValid() {
       return true;
     },
     checkInputNumber(value) {
+      //change input event --> checkinput --> update input -->$emit
       this.temp = value;
       if (value.length > 9) {
         if (value[0] == 0 && value[1] == 9) {
           console.log("phone is  true");
-          this.phoneIsCorrect = true;
+          this.numberIsCorrect = true;
           return true;
         }
       } else {
-        this.phoneIsCorrect = false;
+        this.numberIsCorrect = false;
         console.log("phone is  false");
         return false;
       }
     },
     checkInputId(value) {
-      if (value.length > 9) {
+      if (value.length > 8) {
         this.idIsCorrect = true;
-        console.log("id is true");
+        // console.log("id is true");
         return true;
       } else {
-        console.log("id is false");
+        // console.log("id is false");
         this.idIsCorrect = false;
         return false;
       }
     },
     checkCaptcha(value) {
+      console.log(value)
       if (value) {
         this.captchaIsCorrect = true;
       }
@@ -116,5 +122,9 @@ export default {
 };
 </script>
 
-<style lang="postcss" scoped>
+<style  scoped>
+.btn-container{
+  direction: rtl;
+  margin-right: 290px;
+}
 </style>

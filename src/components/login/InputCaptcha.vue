@@ -2,10 +2,10 @@
   <div>
     <div class="container">
       <label :for="getId"> {{ this.label }} </label>
-      <input :type="getType" :placeholder="getPlaceHolder" :id="getId" />
+      <input @keypress="sayHey(true)" :type="getType" :placeholder="getPlaceHolder" :id="getId" />
       <span id="captcha">2222</span>
-      <button @click="sayHey">
-        <img src="../assets/img/restartCaptcha.svg" alt="Captcha" />
+      <button @click="sayHey(true)">
+        <img src="../../assets/img/restartCaptcha.svg" alt="Captcha" />
       </button>
     </div>
   </div>
@@ -13,7 +13,7 @@
 
 <script>
 export default {
-  props: ["label", "placeHolder", "inputType", "id"],
+  props: ["label", "placeHolder", "inputType", "id",'captchaIscorrect'],
 
   computed: {
     getType() {
@@ -30,8 +30,9 @@ export default {
     },
   },
   methods: {
-    sayHey() {
+    sayHey(value) {
       console.log("hey");
+      this.$emit('updateCaptch',value)
     },
   },
 };
@@ -59,6 +60,8 @@ input {
   border: white solid 0px;
   display: inline;
   padding: 0 22px 0 0 !important;
+  font-size: 27px;
+
 }
 
 input::placeholder {

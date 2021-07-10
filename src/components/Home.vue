@@ -1,5 +1,9 @@
 <template>
   <div>
+      <app-header
+   
+    ></app-header>
+
     <app-jumbo
         title="سیستم نوبت دهی آگاه"
         subTitle="خدمات کارگزاری اگاه"
@@ -14,11 +18,13 @@
 <script>
 import Jumbotron from './Jumbotron.vue'
 import Card from './Card.vue'
+import Header from './Header.vue'
 
 export default {
   components:{
     appJumbo : Jumbotron,
-    appCard : Card
+    appCard : Card,
+    appHeader : Header,
   }
 };
 </script>

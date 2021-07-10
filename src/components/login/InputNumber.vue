@@ -6,8 +6,9 @@
         :type="getType"
         :placeholder="getPlaceHolder"
         :id="getId"
-        @keypress="checkInput($event)"
+        @input="checkInput($event)"
         v-model="inputNumber"
+        :class="getClass"
       />
       <p>{{ inputNumber }}</p>
       <p>{{ massage }}</p>
@@ -34,6 +35,11 @@ export default {
       type: String,
       required: true,
     },
+    
+    sizeConfirm :{
+      type: Boolean,
+      default :false
+    }
   },
   data() {
     return {
@@ -60,30 +66,43 @@ export default {
     getId() {
       return this.id;
     },
+    getClass(){
+      return {
+        sizeConfirm : this.sizeConfirm
+      }
+    }
   },
   methods: {
     checkInput($ev) {
+      this.updateInput(this.inputNumber);
       this.checkNumericInput($ev);
       this.limitLength($ev);
-      this.updateInput(this.inputNumber);
-      if (this.id === "phoneNumber") {
-        this.check09($ev);
-      }
+      console.log($ev.target.value)
+      // if (this.id === "phoneNumber") {
+      //   this.check09($ev);
+      // }
     },
     checkNumericInput($ev) {
       if ($ev.which < 48 || $ev.which > 57) {
+      // console.log('changed');
+
         $ev.preventDefault();
       }
     },
     limitLength($ev) {
-      if (this.id === "phoneNumber" || this.id === "idNumber") {
-        if (this.inputNumber.length > 9) {
+      if (this.id === "phoneNumber" ) {
+        if (this.inputNumber.length > 10) {
+          $ev.preventDefault();
+        }
+      }
+      if (this.id == 'idNumber'){
+        if (this.inputNumber.length > 9){
           $ev.preventDefault();
         }
       }
     },
     check09() {
-      if (this.inputNumber.length >= 9) {
+      if (this.inputNumber.length > 10) {
         if (this.inputNumber[0] == 0 && this.inputNumber[1] == 9) {
           this.inputIsWrong = false;
         } else {
@@ -129,5 +148,9 @@ input::placeholder {
   color: grey;
   /* text-indent: 20px; */
   /* background-color: red; */
+}
+.sizeConfirm{
+  width: 450px;
+  display: inline-block;
 }
 </style>

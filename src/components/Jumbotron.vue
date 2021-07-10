@@ -6,7 +6,6 @@
         <h3 :class="getSubTitleClass">{{ subTitle }}</h3>
       </div>
     </div>
-    <button @click="jumboState++">clikc me!</button>
   </div>
 </template>
 
@@ -23,39 +22,16 @@ export default {
 
   data() {
     return {
-      // title: "title",
-      // subTitle: "subtitle",
+     
       jumboState: 0,
-      //0 req not sent
-      //1 sent no confirm
-      //2 sent confirm
+     
     };
   },
   methods: {
-    // changeState() {
-    //   this.jumboState++;
-    // },
+   
   },
 
-  // watch:{
-  //   checkState(){
-  //     switch (this.jumboState){
-  //       case 0 :
-  //         this.title = 'کد ملی و شماره همراه خود را جهت ثبت نوبت احراز هویت وارد کنید'
-  //         this.subTitle = 'نوبت دهی احراز هویت برای افرادی می باشد که قبلا در آگاه ثبت نام کرده اند و احراز هویت نشده اند'
-  //         break
-  //       case 1 :
-  //         this.title = 'title1'
-  //         this.subTitle = 'subtitle 2'
-  //         break
-  //       case 2 :
-  //         this.title = 'کد ملی و شماره همراه خود را جهت ثبت نوبت احراز هویت وارد کنید'
-  //         this.subTitle = 'نوبت دهی احراز هویت برای افرادی می باشد که قبلا در آگاه ثبت نام کرده اند و احراز هویت نشده اند'
-  //         break
-
-  //     }
-  //   }
-  // },
+  
   watch: {
     changeText() {
       if (this.jumboState == 1) {
@@ -120,7 +96,7 @@ export default {
 }
 
 .title-center {
-  font-size: 33px;
+  font-size: 23px;
   font-weight: 400;
 }
 .title-right {
