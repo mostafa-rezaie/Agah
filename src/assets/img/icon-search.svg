@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="32" height="32" viewBox="0 0 32 32">
+  <defs>
+    <clipPath id="clip-path">
+      <path id="Path_10072" data-name="Path 10072" d="M816.053-2495.553l-9.866-9.865a12.651,12.651,0,0,0-1.606-17.666,12.65,12.65,0,0,0-17.667,1.606,12.651,12.651,0,0,0,1.606,17.666,12.485,12.485,0,0,0,16.061,0l9.865,9.866Zm-29.827-17.9a10.282,10.282,0,0,1,10.324-10.324,10.282,10.282,0,0,1,10.325,10.324,10.282,10.282,0,0,1-10.325,10.325A10.282,10.282,0,0,1,786.226-2513.449Z" transform="translate(-784.053 2525.947)" fill="#525252" clip-rule="evenodd"/>
+    </clipPath>
+    <clipPath id="clip-path-2">
+      <path id="Path_10071" data-name="Path 10071" d="M16-2461.581H2365.42V-2535H16Z" transform="translate(-16 2535)" fill="#525252"/>
+    </clipPath>
+  </defs>
+  <g id="Icon_Search_-_16" data-name="Icon / Search - 16" clip-path="url(#clip-path)">
+    <g id="Group_11247" data-name="Group 11247" transform="translate(-1762.186 -20.77)" clip-path="url(#clip-path-2)">
+      <path id="Path_10070" data-name="Path 10070" d="M779.053-2530.947H834V-2476H779.053Z" transform="translate(971.661 2540.246)" fill="#525252"/>
+    </g>
+  </g>
+</svg>
