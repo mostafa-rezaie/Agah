@@ -86,10 +86,14 @@ position: absolute;
 margin: 10px 10px 0px 0px ;
 }
 
-.search-bar , .drop-down-list > a  {
+ .drop-down-list > a  {
   border-bottom: 1px solid #d1d1d1;
 }
+
 .drop-down-list > a{
   display: none;
+}
+input {
+  outline: none;
 }
 </style>
