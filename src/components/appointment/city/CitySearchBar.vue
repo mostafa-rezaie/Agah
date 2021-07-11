@@ -4,19 +4,19 @@
       <div class="drop-down-list">
         <div class="search-bar">
           <div id="search-icon-wrapper">
-            <img src="../../../assets/img/icon-search.svg" alt="" />
+            <img src="../../../assets/img/icon-search.svg" alt=""/>
           </div>
           <input
-            class="city-seach-bar"
-            name="city"
-            id="city"
-            placeholder="تهران"
-            @input="filterCity($event)"
+              class="city-search-bar"
+              name="city"
+              id="city"
+              placeholder="تهران"
+              @input="filterCity($event)"
           />
         </div>
         <a v-for="(city, index) in filteredCities" :key="index">{{
-          city.label
-        }}</a>
+            city.label
+          }}</a>
       </div>
     </div>
   </div>
@@ -51,8 +51,8 @@ export default {
     },
     filterCity($e) {
       this.filteredCities = this.cities.filter(
-        (value) =>
-          $e.target.value.length > 0 && value.label.startsWith($e.target.value)
+          (value) =>
+              $e.target.value.length > 0 && value.label.startsWith($e.target.value)
       );
     },
   },
@@ -68,37 +68,43 @@ export default {
   min-width: 490px;
   overflow: auto;
 }
+
 .drop-down-list a {
   display: block;
-  padding: 15px 15px 15px 0px;
+  padding: 15px 15px 15px 0;
   background-color: #f6f6f6;
   border-bottom: grey;
   text-decoration: none;
   color: black;
   border-top: none;
 }
+
 .drop-down-list {
   width: 460px;
   border: 2px solid #cccccc;
 }
+
 .search-bar input {
-  padding: 15px 25px 15px 0px;
+  padding: 15px 25px 15px 0;
   background-color: #f6f6f6;
   border: none;
   margin-right: 40px;
   box-sizing: content-box;
   /* height: 100%; */
 }
+
 .search-bar > input :focus-visible {
   border: none;
 }
+
 .search-bar {
   background-color: #f6f6f6;
 }
+
 #search-icon-wrapper > img {
   display: block;
   position: absolute;
-  margin: 10px 10px 0px 0px;
+  margin: 10px 10px 0 0;
 }
 
 .drop-down-list > a {
@@ -108,6 +114,7 @@ export default {
 .drop-down-list > a {
   /* display: none; */
 }
+
 input {
   outline: none;
 }
