@@ -42,6 +42,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    simple :{
+      type : Boolean,
+      default : false
+    }
   },
   data() {
     return {};
@@ -53,7 +57,8 @@ export default {
         active: this.active,
         sizeMd: this.sizeMd,
         empty: this.empty,
-        iconIsSet :this.iconIsSet
+        iconIsSet :this.iconIsSet,
+        simple : this.simple
       };
     },
     getIcon() {
@@ -120,5 +125,10 @@ button {
 }
 .iconIsSet > div>.btn-text{
   padding-right: 30px;
+}
+.simple{
+background-color: white;
+color: black;
+border: none;
 }
 </style>
