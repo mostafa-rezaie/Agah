@@ -7,7 +7,7 @@
         <div class="subtitle">شعبه مورد نظر خود را انتخاب یا جستجو کنید</div>
       </div>
       <router-view></router-view>
-
+  
       <app-side-bar></app-side-bar>
     </div>
   </div>
