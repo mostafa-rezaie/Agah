@@ -15,20 +15,52 @@
             name="city"
             id="city"
             placeholder="تهران"
+            @input="filterCity($event)"
           />
         </div>
-        <a href="#">تهران</a>
-        <a href="#">تهران</a>
-        <a href="#">تهران</a>
-        <a href="#">تهران</a>
-        <a href="#">تهران</a>
+        <a v-for="(city, index) in filteredCities" :key="index">{{
+          city.label
+        }}</a>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      cities: [
+        {
+          label: "تهران",
+        },
+        {
+          label: "سمنان",
+        },
+        {
+          label: "تبریز",
+        },
+      ],
+      filteredCities: [],
+      temp: 0,
+    };
+  },
+  computed: {},
+  methods: {
+    tempf($ev) {
+      console.log($ev.target.value.length);
+      if ($ev.target.value.startsWith("a")) {
+        console.log("you reach here");
+      }
+    },
+    filterCity($e) {
+      this.filteredCities = this.cities.filter(
+        (value) =>
+          $e.target.value.length > 0 && value.label.startsWith($e.target.value)
+      );
+    },
+  },
+};
 </script>
 <style scoped>
 .text-container {
@@ -62,7 +94,7 @@ export default {};
   color: black;
   border-top: none;
 }
-.drop-down-list{
+.drop-down-list {
   width: 460px;
   border: 2px solid #cccccc;
 }
@@ -74,24 +106,24 @@ export default {};
   box-sizing: content-box;
   /* height: 100%; */
 }
-.search-bar > input :focus-visible{
+.search-bar > input :focus-visible {
   border: none;
 }
 .search-bar {
   background-color: #f6f6f6;
 }
-#search-icon-wrapper > img { 
-display: block;
-position: absolute;
-margin: 10px 10px 0px 0px ;
+#search-icon-wrapper > img {
+  display: block;
+  position: absolute;
+  margin: 10px 10px 0px 0px;
 }
 
- .drop-down-list > a  {
+.drop-down-list > a {
   border-bottom: 1px solid #d1d1d1;
 }
 
-.drop-down-list > a{
-  display: none;
+.drop-down-list > a {
+  /* display: none; */
 }
 input {
   outline: none;
