@@ -55,7 +55,7 @@
 
 <script>
 import Button from "../../Button.vue";
-import BranchCard from "../choose-branch/BranchCard.vue";
+import BranchCard from "../branch/BranchCard";
 import TextBox from "../TextBox.vue";
 
 export default {

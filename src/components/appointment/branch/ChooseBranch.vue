@@ -1,7 +1,6 @@
 <template>
   <div>
     <div class="wrapper">
-      <div class="search-bar-city">city search bar</div>
       <div class="choose-branch-wrapper">
         <div class="col-10 text-box-branch">
           <div class="title-wrapper">
@@ -12,22 +11,31 @@
           </div>
           <div class="cards">
             <app-branch-card
-              v-for="(branch, index) in branches"
-              :key="index"
-              :title="branch.title"
-              :subtitle="branch.subtitle"
-            ></app-branch-card>
+
+                v-for="(branch, index) in branches"
+                :key="index"
+                :title="branch.title"
+                :subtitle=branch.subtitle
+                :active="index == activatedCardIndex"
+                :iconIsSet="index == activatedCardIndex "
+                @clicked="clickHandler(index)"
+            >
+
+            </app-branch-card>
+
+
           </div>
+
           <!-- <img src="../../../assets/img/checked.svg" alt=""> -->
         </div>
       </div>
 
       <div class="btn-box">
         <app-button
-          label="مرحله قبل"
-          simple
-          iconIsSet
-          :icon="goBackIconSrc"
+            label="مرحله قبل"
+            simple
+            iconIsSet
+            :icon="goBackIconSrc"
         ></app-button>
 
         <app-button label="مرحله بعدی"></app-button>
@@ -38,7 +46,7 @@
 
 <script>
 import Button from "../../Button.vue";
-import BranchCard from "./BranchCard.vue";
+import BranchCard from "./BranchCard";
 
 export default {
   data() {
@@ -59,16 +67,16 @@ export default {
           subtitle: "تهران، سعادت آباد، بلوار دریا، روبه روی پارک دلاوران، طبقه فوقانی جین وست",
         },
       ],
+      activatedCardIndex: 1
     };
   },
-  computed: {
-    getCardIconSrc() {
-      if (this.checkIconState == 1) {
-        return require("../../../assets/img/checked.svg");
-      } else {
-        return require("../../../assets/img/circle-unchecked.svg");
-      }
-    },
+  computed: {},
+  methods: {
+    clickHandler(index) {
+      console.log('hey from parent')
+      this.activatedCardIndex = index
+    }
+
   },
   components: {
     appButton: Button,
@@ -78,13 +86,15 @@ export default {
 </script>
 
 <style scoped>
-.cards{
+.cards {
   margin-top: 49px;
 }
+
 .title-text {
   font-size: 24px;
   display: inline-block;
 }
+
 .vertical-line {
   margin-right: 10px;
   height: 2px;
@@ -93,23 +103,28 @@ export default {
   display: inline-block;
   background-color: #e6e6e6;
 }
+
 .choose-branch-wrapper {
   direction: rtl;
   height: 489px;
   width: 1112px;
   margin: 20px;
 }
+
 .wrapper {
   direction: rtl;
 }
+
 .search-bar-city {
   margin: 20px;
   border: solid;
 }
+
 .text-box-branch {
   direction: rtl;
   /* border: solid; */
 }
+
 .btn-box {
   direction: rtl;
 }
