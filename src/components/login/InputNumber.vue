@@ -6,7 +6,7 @@
           :type="getType"
           :placeholder="getPlaceHolder"
           :id="getId"
-          @input="checkInput($event)"
+          @keypress="checkInput($event)"
           v-model="inputNumber"
           :class="getClass"
       />
@@ -74,45 +74,45 @@ export default {
   },
   methods: {
     checkInput($ev) {
-      this.updateInput(this.inputNumber);
       this.checkNumericInput($ev);
       this.limitLength($ev);
+      this.updateInput(this.inputNumber);
       console.log($ev.target.value)
       // if (this.id === "phoneNumber") {
       //   this.check09($ev);
       // }
     },
     checkNumericInput($ev) {
-      // if ($ev.which < 48 || $ev.which > 57) {
-      // console.log('changed');
+      if ($ev.keyCode < 48 || $ev.keyCode > 57) {
+        $ev.preventDefault();
+      }
+    },
+    limitLength($ev) {
+      if (this.id === "phoneNumber") {
 
-      $ev.preventDefault();
-    }
-  },
-  limitLength($ev) {
-    if (this.id === "phoneNumber") {
+        if (this.inputNumber.length > 10) {
+          $ev.preventDefault();
+        }
+      }
+      if (this.id == 'idNumber') {
+        if (this.inputNumber.length > 9) {
+          $ev.preventDefault();
+        }
+      }
+    },
+    check09() {
       if (this.inputNumber.length > 10) {
-        $ev.preventDefault();
+        if (this.inputNumber[0] == 0 && this.inputNumber[1] == 9) {
+          this.inputIsWrong = false;
+        } else {
+          this.inputIsWrong = true;
+        }
       }
-    }
-    if (this.id == 'idNumber') {
-      if (this.inputNumber.length > 9) {
-        $ev.preventDefault();
-      }
-    }
-  },
-  check09() {
-    if (this.inputNumber.length > 10) {
-      if (this.inputNumber[0] == 0 && this.inputNumber[1] == 9) {
-        this.inputIsWrong = false;
-      } else {
-        this.inputIsWrong = true;
-      }
-    }
-    console.log(this.inputNumber);
-  },
-  updateInput(value) {
-    this.$emit("updateInput", value);
+      console.log(this.inputNumber);
+    },
+    updateInput(value) {
+      this.$emit("updateInput", value);
+    },
   },
 };
 
