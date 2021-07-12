@@ -3,8 +3,9 @@ import Login from "./components/login/Login.vue";
 import Confirm from "./components/confirmation/Confirm.vue";
 import Result from "./components/result/Result.vue";
 import Appointment from "./components/appointment/Appointment.vue";
-import CitySearchBar from "./components/appointment/city/CitySearchBar.vue";
 import CheckAppointment from "./components/appointment/checkAppointment/CheckAppointment";
+import Branch from "./components/appointment/branch/Branch";
+
 import ChooseBranch from "./components/appointment/choose-branch/ChooseBranch.vue";
 import ChooseDay from "./components/appointment/choose-day/ChooseDay.vue";
 import Summary from "./components/appointment/summary/Summary.vue";
@@ -19,7 +20,7 @@ export const routes = [
     component: Appointment,
     children: [
       { path: "/", component: CheckAppointment },
-      { path: "city", component: CitySearchBar },
+      { path: "branch", component: Branch },
       { path: "choose-branch", component: ChooseBranch },
       { path: "choose-day", component: ChooseDay },
       { path: "summary", component: Summary },
