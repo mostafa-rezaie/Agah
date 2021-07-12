@@ -67,7 +67,7 @@ export default {
           subtitle: "تهران، سعادت آباد، بلوار دریا، روبه روی پارک دلاوران، طبقه فوقانی جین وست",
         },
       ],
-      activatedCardIndex: 1
+      activatedCardIndex: -1
     };
   },
   computed: {},
