@@ -16,29 +16,27 @@ export default {
       type: Boolean,
       default: false,
     },
+    textBoxActive : {
+      type : Boolean,
+      default : false
+    }
   },
   data() {
     return {
-      active: false,
+
     };
   },
   computed: {
     getClass() {
       return {
-        active: this.active,
+        active: this.textBoxActive,
       };
     },
   },
   methods: {
     clickHandler() {
-      //chech if it is activated before or not
-      if (!this.isActivatedBefore) {
-        this.changeState();
-      } else {
-        if (this.active) {
-          this.changeState();
-        }
-      }
+      //check if it is activated before or not
+     this.$emit('clicked',true)
     },
     changeState() {
       this.active = !this.active;
