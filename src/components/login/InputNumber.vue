@@ -3,12 +3,12 @@
     <div class="container">
       <label :for="getId"> {{ this.label }} </label>
       <input
-        :type="getType"
-        :placeholder="getPlaceHolder"
-        :id="getId"
-        @input="checkInput($event)"
-        v-model="inputNumber"
-        :class="getClass"
+          :type="getType"
+          :placeholder="getPlaceHolder"
+          :id="getId"
+          @input="checkInput($event)"
+          v-model="inputNumber"
+          :class="getClass"
       />
       <p>{{ inputNumber }}</p>
       <p>{{ massage }}</p>
@@ -35,10 +35,10 @@ export default {
       type: String,
       required: true,
     },
-    
-    sizeConfirm :{
+
+    sizeConfirm: {
       type: Boolean,
-      default :false
+      default: false
     }
   },
   data() {
@@ -66,9 +66,9 @@ export default {
     getId() {
       return this.id;
     },
-    getClass(){
+    getClass() {
       return {
-        sizeConfirm : this.sizeConfirm
+        sizeConfirm: this.sizeConfirm
       }
     }
   },
@@ -83,42 +83,42 @@ export default {
       // }
     },
     checkNumericInput($ev) {
-      if ($ev.which < 48 || $ev.which > 57) {
+      // if ($ev.which < 48 || $ev.which > 57) {
       // console.log('changed');
 
+      $ev.preventDefault();
+    }
+  },
+  limitLength($ev) {
+    if (this.id === "phoneNumber") {
+      if (this.inputNumber.length > 10) {
         $ev.preventDefault();
       }
-    },
-    limitLength($ev) {
-      if (this.id === "phoneNumber" ) {
-        if (this.inputNumber.length > 10) {
-          $ev.preventDefault();
-        }
+    }
+    if (this.id == 'idNumber') {
+      if (this.inputNumber.length > 9) {
+        $ev.preventDefault();
       }
-      if (this.id == 'idNumber'){
-        if (this.inputNumber.length > 9){
-          $ev.preventDefault();
-        }
+    }
+  },
+  check09() {
+    if (this.inputNumber.length > 10) {
+      if (this.inputNumber[0] == 0 && this.inputNumber[1] == 9) {
+        this.inputIsWrong = false;
+      } else {
+        this.inputIsWrong = true;
       }
-    },
-    check09() {
-      if (this.inputNumber.length > 10) {
-        if (this.inputNumber[0] == 0 && this.inputNumber[1] == 9) {
-          this.inputIsWrong = false;
-        } else {
-          this.inputIsWrong = true;
-        }
-      }
-      console.log(this.inputNumber);
-    },
-    updateInput(value) {
-      this.$emit("updateInput", value);
-    },
+    }
+    console.log(this.inputNumber);
+  },
+  updateInput(value) {
+    this.$emit("updateInput", value);
   },
 };
+
 </script>
 
-<style  scoped>
+<style scoped>
 * {
   direction: rtl;
 }
@@ -127,11 +127,13 @@ label {
   display: block;
   margin-bottom: 3px;
 }
+
 .container {
   margin-right: 278px;
   margin-top: 47px;
   margin-bottom: 47px;
 }
+
 input {
   box-sizing: border-box;
   width: 526px;
@@ -149,7 +151,8 @@ input::placeholder {
   /* text-indent: 20px; */
   /* background-color: red; */
 }
-.sizeConfirm{
+
+.sizeConfirm {
   width: 450px;
   display: inline-block;
 }
