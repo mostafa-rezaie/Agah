@@ -5,6 +5,7 @@ import Result from "./components/result/Result.vue";
 import Appointment from "./components/appointment/Appointment.vue";
 import CheckAppointment from "./components/appointment/checkAppointment/CheckAppointment";
 import Branch from "./components/appointment/branch/Branch";
+import Accept from "./components/appointment/accept/Accept";
 
 import ChooseDay from "./components/appointment/choose-day/ChooseDay.vue";
 import Summary from "./components/appointment/summary/Summary.vue";
@@ -22,6 +23,7 @@ export const routes = [
       { path: "branch", component: Branch },
       { path: "choose-day", component: ChooseDay },
       { path: "summary", component: Summary },
+      { path: "accept", component: Accept },
     ],
   },
 ];
