@@ -35,7 +35,7 @@
     </app-input-captcha>
     <div class="btn-container">
       <router-link to="/confirm" tag="div">
-    <app-button :active="fieldHandler" label="دریافت کد تایید"></app-button>
+        <app-button :active="fieldHandler" label="دریافت کد تایید"></app-button>
       </router-link>
     </div>
   </div>
@@ -47,6 +47,7 @@ import InputNumber from "./InputNumber.vue";
 import InputCaptcha from "./InputCaptcha.vue";
 import Button from "../Button.vue";
 import Header from "../Header.vue";
+import axios from "axios";
 
 export default {
   data() {
@@ -56,8 +57,18 @@ export default {
       phoneIsCorrect: false,
       captchaIsCorrect: false,
       fieldsAreCorrect: false,
-      numberIsCorrect : false,
+      numberIsCorrect: false,
       temp: [],
+      capthca: {
+        id: {
+          type: String,
+          default: -1,
+        },
+        src: {
+          type: String,
+          default: " ",
+        },
+      },
     };
   },
   computed: {
@@ -68,13 +79,15 @@ export default {
       return true;
     },
     fieldHandler() {
-      if (this.numberIsCorrect && this.idIsCorrect &&this.captchaIsCorrect) {
+      if (this.numberIsCorrect && this.idIsCorrect && this.captchaIsCorrect) {
         return true;
       } else {
         return false;
       }
+      //adding API
     },
   },
+
   components: {
     appJumbo: Jumbotron,
     appInputNumber: InputNumber,
@@ -113,17 +126,40 @@ export default {
       }
     },
     checkCaptcha(value) {
-      console.log(value)
+      console.log(value);
       if (value) {
         this.captchaIsCorrect = true;
       }
     },
   },
+  beforeCreate() {
+    // this.$api
+    axios
+      .get("https://agah-admission-api.webjarprojects.ir/api/Customer/IsUp")
+      .then(() => {
+        // console.log("system is up");
+      })
+      .catch((err) => {
+        alert("سیستم قادر به پاسخوگی نیست");
+        console.log(err);
+      });
+  },
+  beforeMount() {
+    this.$api.get("Captcha")
+    .then(res => res.data)
+    .then((res) => {
+      this.capthca = { id: res.data.captchaId, src: res.data.captchaUrl };
+      console.log(res);
+      // console.log(this.capthca);
+    });
+  },
+  mounted() {},
+  created() {},
 };
 </script>
 
 <style  scoped>
-.btn-container{
+.btn-container {
   direction: rtl;
   margin-right: 290px;
 }

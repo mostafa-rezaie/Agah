@@ -2,8 +2,13 @@
   <div>
     <div class="container">
       <label :for="getId"> {{ this.label }} </label>
-      <input @keypress="sayHey(true)" :type="getType" :placeholder="getPlaceHolder" :id="getId" />
-      <span id="captcha">2222</span>
+      <input
+        @keypress="sayHey(true)"
+        :type="getType"
+        :placeholder="getPlaceHolder"
+        :id="getId"
+      />
+      <img :src="getCaptchaSrc" alt="captcha img" />
       <button @click="sayHey(true)">
         <img src="../../assets/img/restartCaptcha.svg" alt="Captcha" />
       </button>
@@ -13,7 +18,26 @@
 
 <script>
 export default {
-  props: ["label", "placeHolder", "inputType", "id",'captchaIscorrect'],
+  props: {
+    label: {
+      type: String,
+      default: "کد امنیتی",
+    },
+    placeHolder: {
+      type: String,
+      default: "لطفا عدد رو به رو را وارد کنید",
+    },
+    inputType: {
+      type: String,
+      default: "text",
+    },
+    captchaCode: {
+      type: String,
+    },
+    captchaSrc: {
+      type: String,
+    },
+  },
 
   computed: {
     getType() {
@@ -28,11 +52,14 @@ export default {
     getId() {
       return this.id;
     },
+    getCaptchaSrc() {
+      return this.captchaSrc;
+    },
   },
   methods: {
     sayHey(value) {
       console.log("hey");
-      this.$emit('updateCaptch',value)
+      this.$emit("updateCaptch", value);
     },
   },
 };
@@ -61,7 +88,6 @@ input {
   display: inline;
   padding: 0 22px 0 0 !important;
   font-size: 27px;
-
 }
 
 input::placeholder {
@@ -77,7 +103,7 @@ input::placeholder {
 button {
   height: 74px;
   width: 75px;
-  background-color: #0A5BFF;
+  background-color: #0a5bff;
   border: 0 solid white;
 }
 </style>
