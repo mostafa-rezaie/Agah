@@ -17,7 +17,7 @@
         ></app-button>
       </div>
       <div class="btn-search">
-        <router-link to="appointment/city" >
+        <router-link to="appointment/branch" >
 
         <app-button label="جستجوی شعب" sizeMd empty> </app-button>
         </router-link>
