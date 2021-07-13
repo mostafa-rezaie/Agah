@@ -7,7 +7,7 @@
         <div class="subtitle">شعبه مورد نظر خود را انتخاب یا جستجو کنید</div>
       </div>
       <router-view></router-view>
-  
+
       <app-side-bar></app-side-bar>
     </div>
   </div>
@@ -19,17 +19,17 @@ import SideBar from "./SideBar.vue";
 export default {
   data() {
     return {
-      inChooseCity : false
-    }
+      inChooseCity: false,
+    };
   },
   components: {
     appSideBar: SideBar,
     appHeader: Header,
   },
   computed: {
-    textContainerHandler(){
+    textContainerHandler() {
       return this.inChooseCity;
-    }
+    },
   },
 };
 </script>
