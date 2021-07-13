@@ -13,7 +13,7 @@
     <div class="container">
       <div class="row justify-content-md-center">
         <div class="card col-5 left-card pointer-active">
-          <router-link tag="div" to="#">
+          <router-link tag="div" to="consultation">
             <div class="card-container">
               <app-card
                 :text="{
@@ -41,7 +41,7 @@
       </div>
       <div class="row row-pure justify-content-md-center">
         <div class="card col-5 left-card pointer-active">
-          <router-link tag="div" to="#">
+          <router-link tag="div" to="edit">
             <div class="card-container">
               <app-card
                 :text="{
@@ -54,7 +54,7 @@
           </router-link>
         </div>
         <div class="card col-5 right-card pointer-active">
-          <router-link tag="div" to="#">
+          <router-link tag="div" to="cooperation">
             <div class="card-container">
               <app-card
                 :text="{

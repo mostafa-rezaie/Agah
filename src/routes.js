@@ -9,6 +9,12 @@ import Accept from "./components/appointment/accept/Accept";
 
 import ChooseDay from "./components/appointment/choose-day/ChooseDay.vue";
 import Summary from "./components/appointment/summary/Summary.vue";
+import Consultation from "./components/consultation/Consultation.vue";
+import Cooperation from "./components/cooperation/Cooperation.vue";
+import Edit from "./components/edit/Edit.vue";
+
+import NearestBranch from './components/appointment/checkAppointment/NearestBranch'
+import NotFound from './components/notFound/NotFound.vue'
 
 export const routes = [
   { path: "", component: Home },
@@ -24,6 +30,14 @@ export const routes = [
       { path: "choose-day", component: ChooseDay },
       { path: "summary", component: Summary },
       { path: "accept", component: Accept },
+     
     ],
   },
+  { path: "/nearest-branch", component: NearestBranch },
+  { path: "/consultation", component: Consultation },
+  { path: "/cooperation", component: Cooperation },
+  { path: "/edit", component: Edit },
+  { path: "*", component: NotFound },
+  
+
 ];
