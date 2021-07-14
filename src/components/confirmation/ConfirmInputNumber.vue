@@ -1,16 +1,20 @@
 <template>
   <div class="outer-container">
-    <div class="container">
-      <label :for="getId"> {{ this.label }} </label>
+    <label :for="getId"> {{ this.label }} </label>
+    <div class="input-wrapper">
       <input
         :type="getType"
         :placeholder="getPlaceHolder"
         :id="getId"
         :class="getClass"
+        :disabled="getInputStatus"
       />
+      <router-link :to="backSrc" >
+
       <button v-show="getId !== 'confirmCode'">
         <img src="../../assets/img/editButton.svg" alt="editButton" />
       </button>
+      </router-link>
     </div>
   </div>
 </template>
@@ -34,9 +38,17 @@ export default {
       type: String,
       required: true,
     },
-    sizeFull :{
-        type: Boolean,
-        default : false
+    sizeFull: {
+      type: Boolean,
+      default: false,
+    },
+    inputIsDisabled :{
+      type : Boolean,
+      default : true
+    },
+    backSrc :{
+      type : String,
+      default : '/'
     }
   },
   data() {
@@ -60,7 +72,14 @@ export default {
         sizeFull: this.sizeFull,
       };
     },
+    getInputStatus(){
+      return this.inputIsDisabled
+    },
+    getInputValue(){
+      return this.value;
+    }
   },
+
   methods: {},
 };
 </script>
@@ -74,8 +93,8 @@ label {
   display: block;
   margin-bottom: 3px;
 }
-.container {
-  margin-right: 278px;
+.outer-container {
+  margin-right: 290px;
   margin-top: 47px;
   margin-bottom: 47px;
 }
@@ -89,7 +108,9 @@ input {
   direction: rtl;
   padding: 0 22px 0 0 !important;
 }
-
+.input-wrapper{
+  display: flex;
+}
 input::placeholder {
   font-size: 20px;
   color: black;
@@ -108,7 +129,7 @@ button {
   border: 0 solid white;
 }
 
-.sizeFull{
-    width: 524px;
+.sizeFull {
+  width: 524px;
 }
 </style>

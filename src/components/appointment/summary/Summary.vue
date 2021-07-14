@@ -1,67 +1,61 @@
 <template>
   <div>
-
     <div class="wrapper">
-      <div class="top-text-container">
-        <div class="title name ">{{ name }} گرامی</div>
-        <div class="top-subtitle">در صورت موافقت، نوبت احراز هویت خود را تایید کنید</div>
+      <div class="inner-wrapper">
+        <div class="top-text-container">
+          <div class="title name">{{ name }} گرامی</div>
+          <div class="top-subtitle">
+            در صورت موافقت، نوبت احراز هویت خود را تایید کنید
+          </div>
+        </div>
+        <div class="summary-text-container">
+          <div class="option-container">
+            <div class="image-container">
+              <img src="../../../assets/img/location-address.svg" alt="" />
+            </div>
+            <div class="text-container">
+              <div class="title">شعبه مراجعه</div>
+              <div class="subtitle">{{ branch }}</div>
+            </div>
+          </div>
+          <div class="option-container">
+            <div class="image-container">
+              <img src="../../../assets/img/calender.svg" alt="" />
+            </div>
+            <div class="text-container">
+              <div class="title">روز مراجعه</div>
+              <div class="subtitle">{{ day }}</div>
+            </div>
+          </div>
+          <div class="option-container">
+            <div class="image-container">
+              <img src="../../../assets/img/watch.svg" alt="" />
+            </div>
+            <div class="text-container">
+              <div class="title">ساعت مراجعه</div>
+              <div class="subtitle">{{ time }}</div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="summary-text-container">
-        <div class="option-container">
-          <div class="image-container">
-            <img src="../../../assets/img/location-address.svg" alt=""/>
-          </div>
-          <div class="text-container">
 
-
-            <div class="title">شعبه مراجعه</div>
-            <div class="subtitle">{{ branch }}</div>
-          </div>
-        </div>
-        <div class="option-container">
-          <div class="image-container">
-            <img src="../../../assets/img/calender.svg" alt=""/>
-          </div>
-          <div class="text-container">
-
-
-            <div class="title">روز مراجعه</div>
-            <div class="subtitle">{{ day }}</div>
-          </div>
-        </div>
-        <div class="option-container">
-          <div class="image-container">
-            <img src="../../../assets/img/watch.svg" alt=""/>
-          </div>
-          <div class="text-container">
-
-            <div class="title">ساعت مراجعه</div>
-            <div class="subtitle">{{ time }}</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="btn-box">
-      <router-link to="choose-day">
-        <app-button
+      <div class="btn-box">
+        <router-link to="choose-day">
+          <app-button
             label="مرحله قبل"
             simple
             iconIsSet
             :icon="goBackIconSrc"
-        ></app-button>
-      </router-link>
+          ></app-button>
+        </router-link>
 
-      <!-- left button  -->
-      <router-link to="accept">
-
-        <app-button label="مرحله بعدی"></app-button>
-      </router-link>
+        <!-- left button  -->
+        <router-link to="accept">
+          <app-button label="مرحله بعدی"></app-button>
+        </router-link>
+      </div>
     </div>
-
-
   </div>
-
 </template>
 <script>
 import Button from "../../Button.vue";
@@ -71,16 +65,15 @@ export default {
     return {
       goBackIconSrc: require("../../../assets/img/go-back-icon.svg"),
 
-      name: 'عرفان محمدی',
-      day: 'سه شنبه - ۲۷ شهریور',
-      branch: 'خیابان نلسون ماندلا باااااااا',
-      time: 'بین ۸ الی ۱۰ ',
-    }
+      name: "عرفان محمدی",
+      day: "سه شنبه - ۲۷ شهریور",
+      branch: "خیابان نلسون ماندلا باااااااا",
+      time: "بین ۸ الی ۱۰ ",
+    };
   },
   components: {
     appButton: Button,
-
-  }
+  },
 };
 </script>
 <style scoped>
@@ -90,7 +83,6 @@ export default {
   height: 100px;
   align-items: center;
   /*justify-content: space-around;*/
-
 }
 
 .text-container {
@@ -103,9 +95,13 @@ export default {
 }
 
 .wrapper {
-  margin-right: 86px;
-  margin-top: 82px;
+  display: flex;
+  flex-direction: column;
+  margin-right: 20px;
+  margin-top: 30px;
   direction: rtl;
+  height: 735px;
+  justify-content: space-between;
 }
 
 .name {
@@ -120,7 +116,6 @@ export default {
 
 .top-text-container {
   line-height: 50px;
-
 }
 
 .top-subtitle {
@@ -128,13 +123,11 @@ export default {
 }
 
 .summary-text-container {
-  margin-top: 102px;
+  margin-top: 25px;
 }
 
 .btn-box {
   direction: rtl;
-  position: relative;
-  bottom: -10px;
-
+  margin-right: -20px;
 }
 </style>

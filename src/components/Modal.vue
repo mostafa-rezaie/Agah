@@ -1,9 +1,10 @@
 <template>
-  <div class="modal-backdrop isHidden" >
+  <div class="modal-backdrop" :class="getHiddenClass" >
     <div class="modal">
       <div class="modal-header">
         {{ modalText.headerText }}
       </div>
+
       <br />
       <div class="modal-body">
         {{ modalText.bodyText }}

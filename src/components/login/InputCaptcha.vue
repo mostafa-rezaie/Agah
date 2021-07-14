@@ -3,7 +3,7 @@
     <div class="container">
       <label :for="getId"> {{ this.label }} </label>
       <input
-        @keypress="sayHey(true)"
+        @keypress="captchaHandler($event)"
         :type="getType"
         :placeholder="getPlaceHolder"
         :id="getId"
@@ -33,9 +33,11 @@ export default {
     },
     captchaCode: {
       type: String,
+      default : '123456'
     },
     captchaSrc: {
       type: String,
+      default : ' '
     },
   },
 
@@ -57,9 +59,16 @@ export default {
     },
   },
   methods: {
-    sayHey(value) {
-      console.log("hey");
-      this.$emit("updateCaptch", value);
+    captchaHandler($ev) {
+      if ($ev.target.value.length>1){
+        this.$emit("updateCaptch", true);
+      }else{
+        this.$emit('updateCaptch',false)
+      }
+      if ($ev.target.value.length >5){
+        $ev.preventDefault();
+        
+      }
     },
   },
 };
@@ -81,7 +90,7 @@ label {
 }
 input {
   box-sizing: border-box;
-  width: 297px;
+  width: 357px;
   height: 74px;
   background-color: #f8f9fa;
   border: white solid 0px;
