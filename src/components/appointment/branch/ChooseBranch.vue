@@ -30,28 +30,17 @@
         </div>
       </div>
 
-      <div class="btn-box">
-        <app-button
-            label="مرحله قبل"
-            simple
-            iconIsSet
-            :icon="goBackIconSrc"
-        ></app-button>
 
-        <app-button label="مرحله بعدی"></app-button>
-      </div>
     </div>
   </div>
 </template>
 
 <script>
-import Button from "../../Button.vue";
 import BranchCard from "./BranchCard";
 
 export default {
   data() {
     return {
-      goBackIconSrc: require("../../../assets/img/go-back-icon.svg"),
       checkIconState: 0,
       branches: [
         {
@@ -79,7 +68,6 @@ export default {
 
   },
   components: {
-    appButton: Button,
     appBranchCard: BranchCard,
   },
 };
@@ -125,7 +113,5 @@ export default {
   /* border: solid; */
 }
 
-.btn-box {
-  direction: rtl;
-}
+
 </style>

@@ -8,18 +8,19 @@
     </div>
     <div class="btn-container">
       <div class="btn-gps">
-        <app-button
-          label="یافتن نزدیک ترین شعبه"
-          sizeMd
-          active
-          iconIsSet
-          :icon="iconSrc"
-        ></app-button>
+        <router-link to="/nearest-branch">
+          <app-button
+            label="یافتن نزدیک ترین شعبه"
+            sizeMd
+            active
+            iconIsSet
+            :icon="iconSrc"
+          ></app-button>
+        </router-link>
       </div>
       <div class="btn-search">
-        <router-link to="appointment/city" >
-
-        <app-button label="جستجوی شعب" sizeMd empty> </app-button>
+        <router-link to="appointment/branch">
+          <app-button label="جستجوی شعب" sizeMd empty> </app-button>
         </router-link>
       </div>
     </div>
@@ -73,12 +74,12 @@ export default {
 </script>
 
 <style scoped>
-
-.btn-search ,.btn-gps{
-    display: inline-block;
+.btn-search,
+.btn-gps {
+  display: inline-block;
 }
-.btn-search{
-    margin-right: 30px;
+.btn-search {
+  margin-right: 30px;
 }
 .btn-container {
   direction: rtl;

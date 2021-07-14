@@ -1,46 +1,49 @@
 <template>
-  <div class="modal-backdrop" :class="getHiddenClass" >
+  <div class="modal-backdrop" :class="getHiddenClass">
     <div class="modal">
       <div class="modal-header">
-        {{ modalText.headerText }}
+        <img :src="iconSrc" alt="header imgae" />
       </div>
-
       <br />
       <div class="modal-body">
-        {{ modalText.bodyText }}
+        {{ modalText }}
       </div>
       <br />
       <div class="modal-footer">
-        {{ modalText.footerText }}
-      </div>
-      <div class="btn-container">
-        <slot></slot>
+        <router-link :to="buttonLink">
+          <app-button :label="buttonText" active></app-button>
+        </router-link>
       </div>
     </div>
   </div>
 </template>
 <script>
+import Button from "./Button.vue";
 export default {
-  components: {},
+  components: {
+    appButton: Button,
+  },
   props: {
     modalText: {
-      bodyText: {
-        type: String,
-        default: "body text",
-      },
-      headerText: {
-        type: String,
-        default: "header text",
-      },
-      footerText: {
-        type: String,
-        default: "footer text",
-      },
+      type: String,
+      default: "modal body text",
     },
     isHidden: {
       type: Boolean,
       default: true,
     },
+    iconSrc: {
+      type: String,
+      default: "icon address ",
+    },
+    buttonText: {
+      type: String,
+      default: "button text",
+    },
+    buttonLink : {
+        type: String,
+        default : '/'
+    }
   },
   computed: {
     getHiddenClass() {
@@ -71,17 +74,21 @@ export default {
   overflow-x: auto;
   display: flex;
   flex-direction: column;
-  width: 586px;
-  height: 324px;
+  justify-content: space-around;
+  width: 804px;
+  height: 500px;
   padding: 10px;
   box-sizing: content-box;
+  align-items: center;
 }
 
 .modal-header {
+  margin-top: 10px;
 }
 .modal-body {
-  margin: 100px 52px 40px 52px;
-  font-size: 20px;
+  margin: 50px 20px 40px 20px;
+  font-size: 24px;
+  text-align: center;
 }
 .modal-footer {
 }

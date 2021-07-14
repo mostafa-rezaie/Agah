@@ -1,11 +1,9 @@
 <template>
-  <div class="outer-container">
+  <div @click="passToParent" class="outer-container">
     <div class="inner-container">
       <button :class="getClass">
-        <div class="btn-container" >
-          <div class="icon" v-if="iconIsSet">
-            <img :src="icon" alt="gps icon" />
-          </div>
+        <div class="btn-container">
+          <img :src="icon" alt="gps icon" class="icon" v-if="iconIsSet" />
           <div class="btn-text">
             {{ label }}
           </div>
@@ -42,7 +40,15 @@ export default {
       type: Boolean,
       default: false,
     },
-    simple :{
+    simple: {
+      type: Boolean,
+      default: false,
+    },
+    textColorBlue :{
+      type : Boolean,
+      default : false
+    },
+    smallSize :{
       type : Boolean,
       default : false
     }
@@ -50,15 +56,21 @@ export default {
   data() {
     return {};
   },
-
+  methods: {
+    passToParent (){
+      this.$emit('clicked',true)
+    }
+  },
   computed: {
     getClass() {
       return {
         active: this.active,
         sizeMd: this.sizeMd,
         empty: this.empty,
-        iconIsSet :this.iconIsSet,
-        simple : this.simple
+        iconIsSet: this.iconIsSet,
+        simple: this.simple,
+        blueText : this.textColorBlue,
+        smSize : this.smallSize
       };
     },
     getIcon() {
@@ -108,27 +120,35 @@ button {
   /* justify-self: center; */
   align-self: center;
 }
-.btn-text , .icno{
+.btn-text,
+.icno {
   display: inline-block;
 }
-.btn-text{
+.btn-text {
   align-self: center;
   text-align: center;
 }
 .btn-container {
-  width:auto;
+  width: auto;
   height: auto;
 }
 .iconIsSet > div {
   display: flex;
-  margin-right: 72px;
+  margin-right: 45px;
 }
-.iconIsSet > div>.btn-text{
+.iconIsSet > div > .btn-text {
   padding-right: 30px;
 }
-.simple{
-background-color: white;
-color: black;
-border: none;
+.simple {
+  background-color: white;
+  color: black;
+  border: none;
+}
+.blueText div {
+color: #0a5bff;
+}
+.smSize {
+  width: 200px;
+
 }
 </style>

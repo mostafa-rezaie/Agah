@@ -7,7 +7,8 @@
         <div class="choose-day-wrapper">
           <div class="box-day">
             <div class="title-wrapper">
-              <div class="title-text">روز مراجعه را انتخاب کنید</div>
+              <div class=" first-title">ویرایش زمان نوبت</div>
+              <div class="title-text second">روز مراجعه را انتخاب کنید</div>
             </div>
             <div class="cards">
               <app-branch-card
@@ -44,9 +45,9 @@
       <!-- right button  -->
 
       <div class="btn-box">
-      <router-link to="branch">
+      <router-link to="edit-appointment">
         <app-button
-            label="مرحله قبل"
+            label="حذف نوبت"
             simple
             iconIsSet
             :icon="goBackIconSrc"
@@ -54,9 +55,9 @@
       </router-link>
 
         <!-- left button  -->
-        <router-link to="summary">
+        <router-link to="/">
 
-        <app-button label="مرحله بعدی"></app-button>
+        <app-button label="ویرایش زمان نوبت"></app-button>
         </router-link>
       </div>
     </div>
@@ -139,16 +140,24 @@ export default {
 }
 
 .title-text {
-  font-size: 24px;
+  font-size: 20px;
   display: inline-block;
 }
-
+.first-title {
+  font-size: 24px;
+  margin-bottom: 25px;
+  font-weight: bold;
+}
 .choose-day-wrapper,
 .time-box-wrapper {
   direction: rtl;
   height: 430px;
   width: 1112px;
   margin: 20px;
+}
+.choose-time-wrapper {
+  margin-top: 70px;
+  position: relative;
 }
 .inner-wrapper{
   width: 1112px;

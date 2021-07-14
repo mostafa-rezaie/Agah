@@ -5,7 +5,7 @@
         <div class="top-text-container">
           <div class="title name">{{ name }} گرامی</div>
           <div class="top-subtitle">
-            در صورت موافقت، نوبت احراز هویت خود را تایید کنید
+            شما میتوانید فقط یکبار نوبت خود را ویرایش کنید
           </div>
         </div>
         <div class="summary-text-container">
@@ -40,27 +40,45 @@
       </div>
 
       <div class="btn-box">
-        <router-link to="choose-day">
-          <app-button
-            label="مرحله قبل"
-            simple
-            iconIsSet
-            :icon="goBackIconSrc"
-          ></app-button>
-        </router-link>
+        <div class="delete-btn-container">
+          <button @click="deleteAppointment">حذف نوبت</button>
+        </div>
 
         <!-- left button  -->
-        <router-link to="accept">
-          <app-button label="مرحله بعدی"></app-button>
-        </router-link>
+        <div class="edit-btn-container">
+          <router-link to="edit-time">
+            <button>ویرایش نوبت</button>
+          </router-link>
+        </div>
       </div>
     </div>
+    <app-modal
+      v-if="delRequest"
+      :modalText="{bodyText : 'در صورت حذف نوبت امکان بازگشت نوبت وجود ندارد',
+      headerText : 'از حذف نوبت خود اطمینان دارید؟',
+      footerText : ''}"
+    >
+    <router-link to="/">
+    <app-button style="border : solid 2px red"
+    simple
+    label="بله حذف شود "
+    ></app-button>
+    </router-link>
+    <app-button 
+    @clicked="toggleDelRequest"
+    style="border : solid 2px grey ; margin-right : 10px"
+    simple
+    label="انصراف و بستن"
+    ></app-button>
+    
+    </app-modal>
   </div>
 </template>
 <script>
+import Modal from "../../Modal.vue";
 import Button from "../../Button.vue";
-
 export default {
+  props: {},
   data() {
     return {
       goBackIconSrc: require("../../../assets/img/go-back-icon.svg"),
@@ -69,9 +87,20 @@ export default {
       day: "سه شنبه - ۲۷ شهریور",
       branch: "خیابان نلسون ماندلا باااااااا",
       time: "بین ۸ الی ۱۰ ",
+      delRequest: false,
     };
   },
+  methods: {
+    deleteAppointment() {
+      this.delRequest = true;
+    },
+    toggleDelRequest (){
+      console.log('hey')
+      this.delRequest = false
+    }
+  },
   components: {
+    appModal: Modal,
     appButton: Button,
   },
 };
@@ -97,10 +126,10 @@ export default {
 .wrapper {
   display: flex;
   flex-direction: column;
-  margin-right: 20px;
+  margin-right: 34px;
   margin-top: 30px;
   direction: rtl;
-  height: 735px;
+  height: 720px;
   justify-content: space-between;
 }
 
@@ -128,6 +157,31 @@ export default {
 
 .btn-box {
   direction: rtl;
-  margin-right: -20px;
+  display: flex;
+  width: 525px;
+  justify-content: space-between;
+}
+
+.edit-btn-container,
+.edit-btn-container {
+  display: inline-block;
+}
+
+button {
+  width: 278px;
+  height: 72px;
+  background-color: white;
+  font-size: 20px;
+  border: none;
+}
+.delete-btn-container > button {
+  width: 200px;
+  color: grey;
+  border: solid 2px rgb(206, 206, 206);
+  display: inline-block;
+}
+.edit-btn-container button {
+  border: solid 2px #0a5bff;
+  color: #0a5bff;
 }
 </style>
