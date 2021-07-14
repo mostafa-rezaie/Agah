@@ -10,21 +10,14 @@
       tempClass="active"
     >
     </app-jumbo>
-    <app-confirm-input-number
-      label="شماه همراه"
-      placeHolder="0919*****17"
-      inputType="tel"
-      id="phoneNumber"
-      value="09199999999"
-      backSrc="/login"
-    ></app-confirm-input-number>
+    
     <app-confirm-input-number
       label="کد ملی"
       placeHolder="5565665665"
       inputType="text"
       id="idNumber"
       value="5555555555"
-      backSrc="/login"
+      backSrc = '/edit'
     ></app-confirm-input-number>
     <app-confirm-input-number
       label="کد تایید"
@@ -35,7 +28,7 @@
       :inputIsDisabled="false"
     ></app-confirm-input-number>
     <div class="btn-container">
-      <router-link to="/result">
+      <router-link to="/user-panel">
         <app-button :active="true" label="مرحله بعد"></app-button>
       </router-link>
     </div>
@@ -44,7 +37,7 @@
 
 <script>
 import Jumbotron from "../Jumbotron.vue";
-import ConfirmInputNumber from "./ConfirmInputNumber.vue";
+import ConfirmInputNumber from "../confirmation/ConfirmInputNumber.vue"
 import Button from "../Button.vue";
 import Header from "../Header.vue";
 export default {

@@ -3,12 +3,13 @@
     <div class="container">
       <label :for="getId"> {{ this.label }} </label>
       <input
-          :type="getType"
-          :placeholder="getPlaceHolder"
-          :id="getId"
-          @keypress="checkInput($event)"
-          v-model="inputNumber"
-          :class="getClass"
+        :type="getType"
+        :placeholder="getPlaceHolder"
+        :id="getId"
+        @keypress="checkInput($event)"
+        @input="passData"
+        v-model="inputNumber"
+        :class="getClass"
       />
       <p>{{ inputNumber }}</p>
       <p>{{ massage }}</p>
@@ -17,6 +18,7 @@
 </template>
 
 <script>
+import { mapMutations } from "vuex";
 export default {
   props: {
     label: {
@@ -38,8 +40,8 @@ export default {
 
     sizeConfirm: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
   data() {
     return {
@@ -68,16 +70,26 @@ export default {
     },
     getClass() {
       return {
-        sizeConfirm: this.sizeConfirm
-      }
-    }
+        sizeConfirm: this.sizeConfirm,
+      };
+    },
   },
   methods: {
+    ...mapMutations({
+      setUserTel: "setUserTelNumber",
+      setUserId: "setUserIdNumber",
+    }),
+    passData($event) {
+      if ($event.target.value.length == 11) {
+        this.setUserTel($event.target.value);
+      }
+    },
     checkInput($ev) {
+      console.log("hey");
       this.checkNumericInput($ev);
       this.limitLength($ev);
       this.updateInput(this.inputNumber);
-      console.log($ev.target.value)
+      console.log($ev.target.value);
       // if (this.id === "phoneNumber") {
       //   this.check09($ev);
       // }
@@ -89,13 +101,13 @@ export default {
     },
     limitLength($ev) {
       if (this.id === "phoneNumber") {
-
         if (this.inputNumber.length > 10) {
           $ev.preventDefault();
         }
       }
-      if (this.id == 'idNumber') {
+      if (this.id == "idNumber") {
         if (this.inputNumber.length > 9) {
+          this.setUserId($ev.target.value);
           $ev.preventDefault();
         }
       }
@@ -115,7 +127,6 @@ export default {
     },
   },
 };
-
 </script>
 
 <style scoped>
