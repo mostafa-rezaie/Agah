@@ -1,5 +1,6 @@
-﻿/* @import url("../../node_modules/bootstrap/dist/css/bootstrap-grid.css"); */
-@import url(fontiran.css); 
+﻿@import url("fontiran.css");
+@import url("loading.css");
+/* @import url("../../node_modules/bootstrap/dist/css/bootstrap-grid.css"); */
 /* لینک فایلی که وظیفه بارگذاری فونت ها را برعهده دارد */
 body,* {
 	font-family: iranyekan  !important;

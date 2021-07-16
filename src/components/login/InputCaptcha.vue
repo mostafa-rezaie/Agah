@@ -8,8 +8,8 @@
         :placeholder="getPlaceHolder"
         :id="getId"
       />
-      <img :src="getCaptchaSrc" alt="captcha img" />
-      <button @click="sayHey(true)">
+      <img :src=getCaptchaSrc alt="captcha img" />
+      <button @click="clickHandler(true)">
         <img src="../../assets/img/restartCaptcha.svg" alt="Captcha" />
       </button>
     </div>
@@ -70,6 +70,9 @@ export default {
         
       }
     },
+    clickHandler(value){
+      this.$emit('clicked',value)
+    }
   },
 };
 </script>
