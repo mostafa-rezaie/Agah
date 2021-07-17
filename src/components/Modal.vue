@@ -1,15 +1,23 @@
 <template>
-  <div class="modal-backdrop" :class="getHiddenClass" >
+
+  <div class="modal-backdrop">
     <div class="modal">
       <div class="modal-header">
         {{ modalText.headerText }}
       </div>
 
-      <br />
+      <br/>
       <div class="modal-body">
+        <slot name="icon"></slot>
+        <br>
         {{ modalText.bodyText }}
       </div>
-      <br />
+      <br/>
+      <div class="modal-body-subtitle">
+        {{ modalText.subtitleBodyText }}
+      </div>
+      <br/>
+
       <div class="modal-footer">
         {{ modalText.footerText }}
       </div>
@@ -28,6 +36,11 @@ export default {
         type: String,
         default: "body text",
       },
+      subtitleBodyText: {
+        type: String,
+        default: "",
+      },
+
       headerText: {
         type: String,
         default: "header text",
@@ -71,29 +84,42 @@ export default {
   overflow-x: auto;
   display: flex;
   flex-direction: column;
-  width: 586px;
-  height: 324px;
+  width: 650px;
+  height: 400px;
   padding: 10px;
   box-sizing: content-box;
 }
 
 .modal-header {
 }
+
+.modal-body-subtitle {
+  margin-right: 52px;
+  margin-top: -10px;
+  font-weight: 300;
+
+}
+
 .modal-body {
-  margin: 100px 52px 40px 52px;
+  margin: 25px 52px 40px 52px;
   font-size: 20px;
 }
+
 .modal-footer {
 }
+
 .isHidden {
   display: none;
 }
+
 .continue,
 .next-page {
   display: inline-block;
   margin-right: 10px;
 }
+
 .btn-container {
   margin-top: 50px;
+  text-align: center;
 }
 </style>

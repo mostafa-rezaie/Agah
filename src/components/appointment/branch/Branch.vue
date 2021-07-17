@@ -54,6 +54,8 @@ export default {
 <style scoped>
 .btn-box {
   direction: rtl;
+  display: flex;
+  margin-bottom: 10px;
 
 }
 </style>

@@ -11,7 +11,7 @@
         <div class="summary-text-container">
           <div class="option-container">
             <div class="image-container">
-              <img src="../../../assets/img/location-address.svg" alt="" />
+              <img src="../../../assets/img/location-address.svg" alt=""/>
             </div>
             <div class="text-container">
               <div class="title">شعبه مراجعه</div>
@@ -20,7 +20,7 @@
           </div>
           <div class="option-container">
             <div class="image-container">
-              <img src="../../../assets/img/calender.svg" alt="" />
+              <img src="../../../assets/img/calender.svg" alt=""/>
             </div>
             <div class="text-container">
               <div class="title">روز مراجعه</div>
@@ -29,7 +29,7 @@
           </div>
           <div class="option-container">
             <div class="image-container">
-              <img src="../../../assets/img/watch.svg" alt="" />
+              <img src="../../../assets/img/watch.svg" alt=""/>
             </div>
             <div class="text-container">
               <div class="title">ساعت مراجعه</div>
@@ -53,30 +53,37 @@
       </div>
     </div>
     <app-modal
-      v-if="delRequest"
-      :modalText="{bodyText : 'در صورت حذف نوبت امکان بازگشت نوبت وجود ندارد',
-      headerText : 'از حذف نوبت خود اطمینان دارید؟',
+        v-if="delRequest"
+        :modalText="{subtitleBodyText : 'در صورت حذف نوبت امکان بازگشت نوبت وجود ندارد',
+      bodyText : 'از حذف نوبت خود اطمینان دارید؟',
       footerText : ''}"
     >
-    <router-link to="/">
-    <app-button style="border : solid 2px red"
-    simple
-    label="بله حذف شود "
-    ></app-button>
-    </router-link>
-    <app-button 
-    @clicked="toggleDelRequest"
-    style="border : solid 2px grey ; margin-right : 10px"
-    simple
-    label="انصراف و بستن"
-    ></app-button>
-    
+      <template v-slot:icon>
+        <div class="close-icon">
+
+          <img src="../../../assets/img/close-icon.svg" alt="close icon">
+        </div>
+      </template>
+      <app-button
+          @clicked="toggleDelRequest"
+          style="border : solid 2px grey ; margin-right : 5px "
+          simple
+          label="انصراف و بستن"
+      ></app-button>
+
+      <router-link to="/">
+        <app-button style="border : solid 2px red ; margin-right : 10px"
+                    simple
+                    label="بله حذف شود "
+        ></app-button>
+      </router-link>
     </app-modal>
   </div>
 </template>
 <script>
 import Modal from "../../Modal.vue";
 import Button from "../../Button.vue";
+
 export default {
   props: {},
   data() {
@@ -92,9 +99,10 @@ export default {
   },
   methods: {
     deleteAppointment() {
+      console.log('clicked')
       this.delRequest = true;
     },
-    toggleDelRequest (){
+    toggleDelRequest() {
       console.log('hey')
       this.delRequest = false
     }
@@ -174,12 +182,14 @@ button {
   font-size: 20px;
   border: none;
 }
+
 .delete-btn-container > button {
   width: 200px;
   color: grey;
   border: solid 2px rgb(206, 206, 206);
   display: inline-block;
 }
+
 .edit-btn-container button {
   border: solid 2px #0a5bff;
   color: #0a5bff;

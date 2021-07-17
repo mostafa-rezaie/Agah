@@ -3,22 +3,22 @@
     <div class="container">
       <label :for="getId"> {{ this.label }} </label>
       <input
-        :type="getType"
-        :placeholder="getPlaceHolder"
-        :id="getId"
-        @keypress="checkInput($event)"
-        @input="passData"
-        v-model="inputNumber"
-        :class="getClass"
+          :type="getType"
+          :placeholder="getPlaceHolder"
+          :id="getId"
+          @keypress="inputHandler($event)"
+          @input="updateInput($event)"
+          v-model="inputNumber"
+          :class="getClass"
       />
-      <p>{{ inputNumber }}</p>
-      <p>{{ massage }}</p>
+<!--      <p>{{ inputNumber }}</p>-->
+<!--      <p>{{ massage }}</p>-->
     </div>
   </div>
 </template>
 
 <script>
-import { mapMutations } from "vuex";
+
 export default {
   props: {
     label: {
@@ -75,24 +75,17 @@ export default {
     },
   },
   methods: {
-    ...mapMutations({
-      setUserTel: "setUserTelNumber",
-      setUserId: "setUserIdNumber",
-    }),
-    passData($event) {
-      if ($event.target.value.length == 11) {
-        this.setUserTel($event.target.value);
-      }
+
+
+    inputHandler($ev) {
+      this.checkInput($ev)
     },
     checkInput($ev) {
-      console.log("hey");
       this.checkNumericInput($ev);
       this.limitLength($ev);
-      this.updateInput(this.inputNumber);
-      console.log($ev.target.value);
-      // if (this.id === "phoneNumber") {
-      //   this.check09($ev);
-      // }
+      //update input in the parent
+      // this.updateInput($ev.target.value);
+
     },
     checkNumericInput($ev) {
       if ($ev.keyCode < 48 || $ev.keyCode > 57) {
@@ -107,23 +100,12 @@ export default {
       }
       if (this.id == "idNumber") {
         if (this.inputNumber.length > 9) {
-          this.setUserId($ev.target.value);
           $ev.preventDefault();
         }
       }
     },
-    check09() {
-      if (this.inputNumber.length > 10) {
-        if (this.inputNumber[0] == 0 && this.inputNumber[1] == 9) {
-          this.inputIsWrong = false;
-        } else {
-          this.inputIsWrong = true;
-        }
-      }
-      console.log(this.inputNumber);
-    },
-    updateInput(value) {
-      this.$emit("updateInput", value);
+    updateInput($ev) {
+      this.$emit("updateInput", $ev.target.value);
     },
   },
 };

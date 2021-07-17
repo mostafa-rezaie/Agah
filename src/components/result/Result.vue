@@ -17,12 +17,16 @@
       placeHolder="0919*****17"
       inputType="tel"
       id="phoneNumber"
+      backSrc="/login"
+
     ></app-confirm-input-number>
     <app-confirm-input-number
       label="کد ملی"
       placeHolder="5565665665"
       inputType="text"
       id="idNumber"
+      backSrc="/login"
+
     ></app-confirm-input-number>
     <app-result-box :title="getTitle" :subTitle="getSubTitle"> </app-result-box>
     <div class="btn-container">
@@ -42,10 +46,9 @@ import Header from '../Header.vue'
 export default {
   data() {
     return {
-      state: 0,
-      //0 accepted
-      // 1 unfinished
-      // 2 sign up
+      state: 'accepted',
+      // states could be :
+      // accepted , unfinished or signUp
     };
   },
   components: {
@@ -59,11 +62,11 @@ export default {
   computed: {
     getLabel() {
       switch (this.state) {
-        case 0:
+        case 'accepted':
           return "رفتن به آگاه اکسپرس";
-        case 1:
+        case 'unfinished':
           return "تکمیل ثبت نام";
-        case 2:
+        case 'signUp':
           return "ثبت نام در آگاه اکسپرس";
         default:
           return "رفتن به آگاه اکسپرس";
@@ -71,11 +74,11 @@ export default {
     },
     getTitle() {
       switch (this.state) {
-        case 0:
+        case 'accepted':
           return "عرفان محمدی گرامی";
-        case 1:
+        case 'unfinished':
           return "شما ثبت نام خود را تکمیل نکرده اید";
-        case 2:
+        case 'signUp':
           return "شما در آگاه ثبت نام نکرده اید ! ";
         default:
           return "شما در آگاه ثبت نام نکرده اید !";
@@ -83,11 +86,11 @@ export default {
     },
     getSubTitle() {
         switch (this.state) {
-        case 0:
+        case 'accepted':
           return "احراز هویت شما قبلا با موفقیت انجام شده است و دسترسی شما به سامانه معاملات آنلاین فعال گردیده است";
-        case 1:
+        case 'unfinished':
           return "فرآیند ثبت نام شما تکمیل نشده است ابتدا ثبت نام خود را تکمیل سپس اقدام به نوبت دهی احراز هویت کنید";
-        case 2:
+        case 'signUp':
           return "شما در آگاه ثبت نام نکرده اید و امکان دریافت نوبت برای احراز هویت وجود ندارد";
         default:
           return "شما در آگاه ثبت نام نکرده اید !";

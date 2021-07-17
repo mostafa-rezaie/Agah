@@ -51,6 +51,11 @@ export default {
     smallSize :{
       type : Boolean,
       default : false
+    },
+    notAllowed :{
+      type : Boolean,
+      default : false
+
     }
   },
   data() {
@@ -70,7 +75,9 @@ export default {
         iconIsSet: this.iconIsSet,
         simple: this.simple,
         blueText : this.textColorBlue,
-        smSize : this.smallSize
+        smSize : this.smallSize,
+        notAllowed : this.notAllowed
+
       };
     },
     getIcon() {
@@ -95,11 +102,13 @@ button {
   background-color: #80aaff;
   color: white;
   font-size: 20px;
+  cursor: pointer ;
   /* border : 2 solid white; */
 }
 .active {
   background-color: #0a5bff;
   padding: 0;
+  cursor: pointer;
 }
 .outer-container {
   display: inline-block;
@@ -112,6 +121,8 @@ button {
   background-color: white;
   border-color: #0a5bff;
   color: #0a5bff;
+  cursor: pointer;
+
 }
 .icon {
   display: inline-block;
@@ -150,5 +161,8 @@ color: #0a5bff;
 .smSize {
   width: 200px;
 
+}
+.notAllowed {
+  cursor: not-allowed;
 }
 </style>

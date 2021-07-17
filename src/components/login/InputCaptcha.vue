@@ -4,6 +4,7 @@
       <label :for="getId"> {{ this.label }} </label>
       <input
         @keypress="captchaHandler($event)"
+        @input="passData($event)"
         :type="getType"
         :placeholder="getPlaceHolder"
         :id="getId"
@@ -61,14 +62,18 @@ export default {
   methods: {
     captchaHandler($ev) {
       if ($ev.target.value.length>1){
-        this.$emit("updateCaptch", true);
+        this.$emit("updateCaptcha", true);
       }else{
-        this.$emit('updateCaptch',false)
+        this.$emit('updateCaptcha',false)
       }
       if ($ev.target.value.length >5){
         $ev.preventDefault();
         
       }
+    },
+    passData($ev){
+      console.log('data entered')
+      this.$emit('entered',$ev.target.value)
     },
     clickHandler(value){
       this.$emit('clicked',value)

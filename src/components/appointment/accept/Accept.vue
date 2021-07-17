@@ -83,6 +83,7 @@ export default {
   margin-right: 20px;
   font-size: 20px;
   font-weight: 400;
+  margin-top: 10px;
 }
 
 .accept-text-container {
@@ -94,5 +95,16 @@ export default {
   position: relative;
   bottom: -10px;
 
+}
+li {
+  list-style: none;
+  margin-bottom: 15px;
+}
+li::before{
+  content: '• ';
+  color: #0A5BFF;
+}
+ul{
+  padding: 0;
 }
 </style>

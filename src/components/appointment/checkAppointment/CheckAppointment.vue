@@ -55,7 +55,7 @@ export default {
   },
   data() {
     return {
-      state: 1,
+      state: 'noAppointment',
       // 0 has no appointment
       // 1 has appointment
       iconSrc: require("../../../assets/img/gpsIcon.svg"),

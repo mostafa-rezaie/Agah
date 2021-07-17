@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="test" v-if="loaderFlag">
+    <div class="loader" v-if="loaderFlag">
       <img src="../../assets/img/loading-gif.svg" alt="">
     </div>
     <app-header></app-header>
@@ -25,7 +25,8 @@
         placeHolder="کد ملی خود را وارد کنید"
         inputType="text"
         id="idNumber"
-        @updateInput="checkInputId"
+        @updateInput="checkIdNumber"
+
     ></app-input-number>
     <!-- <button style="width : 200px" @click="printInputFlag"></button> -->
     <app-input-captcha
@@ -35,19 +36,27 @@
         :captchaSrc="'https://'+captcha.src "
         :captcahCode="captcha.id"
         id="capthcaCode"
-        @updateCaptch="checkCaptcha"
         @clicked="getCaptcha"
+        @entered="setCaptcha"
     >
     </app-input-captcha>
+    <!--    <p>{{captchaEntered}}</p>-->
     <div class="btn-container">
-      <router-link to="/confirm" tag="div">
-        <app-button :active="fieldHandler" label="دریافت کد تایید"></app-button>
-      </router-link>
+      <!--      <router-link to="" tag="div"-->
+      <!--      >-->
+      <app-button
+          :active="fieldHandler"
+          :not-allowed="!fieldHandler"
+          label="دریافت کد تایید"
+          @clicked="clickHandler"
+      ></app-button>
+      <!--      </router-link>-->
     </div>
   </div>
 </template>
 
 <script>
+import {mapMutations} from "vuex";
 import Jumbotron from "../Jumbotron.vue";
 import InputNumber from "./InputNumber.vue";
 import InputCaptcha from "./InputCaptcha.vue";
@@ -55,21 +64,20 @@ import Button from "../Button.vue";
 import Header from "../Header.vue";
 // import axios from "axios";
 
+
 export default {
   data() {
     return {
-      ok: false,
-      idIsCorrect: false,
-      phoneIsCorrect: false,
-      captchaIsCorrect: false,
-      fieldsAreCorrect: false,
       numberIsCorrect: false,
-      temp: [],
-      loaderFlag: true,
+      captchaIsEntered: false,
+      loaderFlag: false,
+      phoneNumber: '',
+      idNumber: '',
+      captchaEntered: '',
       captcha: {
         id: {
           type: String,
-          default: -1,
+          default: '123456',
         },
         src: {
           type: String,
@@ -77,19 +85,6 @@ export default {
         },
       },
     };
-  },
-  computed: {
-
-    checkPhoneNumber() {
-      return true;
-    },
-    fieldHandler() {
-      if (this.numberIsCorrect && this.idIsCorrect && this.captchaIsCorrect) {
-        return true;
-      } else {
-        return false;
-      }
-    },
   },
 
   components: {
@@ -99,47 +94,47 @@ export default {
     appButton: Button,
     appHeader: Header,
   },
-  methods: {
-    checkValid() {
-      return true;
-    },
-    checkInputNumber(value) {
-      //change input event --> checkinput --> update input -->$emit
-      this.temp = value;
-      if (value.length > 9) {
-        if (value[0] == 0 && value[1] == 9) {
-          console.log("phone is  true");
-          this.numberIsCorrect = true;
-          return true;
-        }
-      } else {
-        this.numberIsCorrect = false;
-        console.log("phone is  false");
-        return false;
-      }
-    },
-    checkInputId(value) {
-      if (value.length > 8) {
-        this.idIsCorrect = true;
-        // console.log("id is true");
+  computed: {
+
+    fieldHandler() {
+      if (this.phoneNumber.length > 10
+          && this.phoneNumber[0] == '0'
+          && this.phoneNumber[1] == '9'
+          && this.idNumber.length > 9
+          && this.captchaEntered.length > 0
+      ) {
         return true;
       } else {
-        // console.log("id is false");
-        this.idIsCorrect = false;
         return false;
       }
     },
-    checkCaptcha(value) {
-      console.log(value);
-      if (value) {
-        this.captchaIsCorrect = true;
-      }
+  },
+
+  methods: {
+    ...mapMutations({
+      setUserTel: "setUserTelNumber",
+      setUserId: "setUserIdNumber",
+      serUserCaptcha: 'setCaptchaCode'
+    }),
+    checkInputNumber(value) {
+      this.phoneNumber = value
+
+    },
+    checkIdNumber(value) {
+      this.idNumber = value
+    },
+
+
+    setCaptcha(value) {
+      console.log(value)
+      this.captchaEntered = value
     },
     hideLoader() {
       this.loaderFlag = false
     },
-    getCaptcha() {
 
+    getCaptcha() {
+      console.log('hey')
       this.$api.get('Captcha')
           .then((res) => res.data)
           .then((res) => {
@@ -151,25 +146,49 @@ export default {
               this.hideLoader()
             }
           })
-    }
-  },
-  beforeCreate() {
+    },
+    clickHandler() {
+      if (this.fieldHandler) {
+        //remove the default from this.captcha.id
+        if (this.captchaEntered == this.captcha.id.default) {
+          // if (this.checkSystemIsUp()) {
+            console.log('system is running')
+            // if (this.getVerification()) {
 
-  },
-  beforeMount() {
+              this.setUserTel(this.phoneNumber)
+              this.setUserId(this.idNumber)
+              this.serUserCaptcha(this.captcha.id)
+              this.$router.push({path: 'confirm'})
+            // }
+          // }
+        } else
+          alert('captcha is incorrect')
+      }
+    },
+    getVerification() {
+      this.$api.get('Customer/VerificationCode')
+          .then(res => {
+            console.log(res.data)
+          }).catch(() => {
+        console.log('verification code failed')
+      })
+    },
 
+    checkSystemIsUp() {
+      this.$api.get('Customer/IsUp')
+          .then(res => {
+            console.log(res.request.status)
+          }).catch(() => {
+        console.log('system is down')
+      })
+      console.log('i am out')
+    },
   },
   mounted() {
-    this.getCaptcha();
-
+    // this.getCaptcha();
   }
-  ,
-  created() {
+};
 
-  }
-  ,
-}
-;
 </script>
 
 <style scoped>
