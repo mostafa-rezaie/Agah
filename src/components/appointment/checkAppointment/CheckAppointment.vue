@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="text-box">
-      <div class="title">عرفان محمدی گرامی</div>
+      <div class="title">{{this.getFullName}}</div>
       <div class="subTitle">
         برای انتخاب شعبه یکی از گزینه های زیر را انتخاب کنید
       </div>
@@ -39,12 +39,15 @@
           'عرفان محمدی عزیز یک نوبت برای شما فعال است.در صورت افزودن نوبت جدبد نوبت قبلی شما حذف میشود',
         footerText: '',
       }"
+      :isHidden="false"
     ></app-modal>
   </div>
 </template>
 
 
 <script>
+import { mapGetters } from "vuex";
+
 import Button from "../../Button.vue";
 import Modal from "../../Modal.vue";
 
@@ -62,6 +65,14 @@ export default {
     };
   },
   computed: {
+    
+    ...mapGetters({
+      // getUserTel: "getUserTelNumber",
+      // getUserId: "getUserIdNumber",
+      // getCaptcha: "getUserCaptchaCode",
+      // getToken: "getUserToken",
+      getFullName : 'getUserFullName'
+    }),
     getState() {
       if (this.state == 1) {
         return true;

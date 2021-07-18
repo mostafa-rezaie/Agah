@@ -9,7 +9,7 @@
         :placeholder="getPlaceHolder"
         :id="getId"
       />
-      <img :src=getCaptchaSrc alt="captcha img" />
+      <img :src="getCaptchaSrc" alt="captcha img" />
       <button @click="clickHandler(true)">
         <img src="../../assets/img/restartCaptcha.svg" alt="Captcha" />
       </button>
@@ -98,7 +98,7 @@ label {
 }
 input {
   box-sizing: border-box;
-  width: 357px;
+  width: 320px;
   height: 74px;
   background-color: #f8f9fa;
   border: white solid 0px;
@@ -122,5 +122,8 @@ button {
   width: 75px;
   background-color: #0a5bff;
   border: 0 solid white;
+}
+.container > img {
+  margin-right: 3px;
 }
 </style>

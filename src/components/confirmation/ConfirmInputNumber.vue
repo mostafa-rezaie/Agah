@@ -8,12 +8,13 @@
         :id="getId"
         :class="getClass"
         :disabled="getInputStatus"
+        @input="passConfirmCode"
+        @keypress="preventInput"
       />
-      <router-link :to="backSrc" >
-
-      <button v-show="getId !== 'confirmCode'">
-        <img src="../../assets/img/editButton.svg" alt="editButton" />
-      </button>
+      <router-link :to="backSrc">
+        <button v-show="getId !== 'confirmCode'">
+          <img src="../../assets/img/editButton.svg" alt="editButton" />
+        </button>
       </router-link>
     </div>
   </div>
@@ -42,14 +43,14 @@ export default {
       type: Boolean,
       default: false,
     },
-    inputIsDisabled :{
-      type : Boolean,
-      default : true
+    inputIsDisabled: {
+      type: Boolean,
+      default: true,
     },
-    backSrc :{
-      type : String,
-      default : '/'
-    }
+    backSrc: {
+      type: String,
+      default: "/",
+    },
   },
   data() {
     return {};
@@ -72,15 +73,26 @@ export default {
         sizeFull: this.sizeFull,
       };
     },
-    getInputStatus(){
-      return this.inputIsDisabled
+    getInputStatus() {
+      return this.inputIsDisabled;
     },
-    getInputValue(){
+    getInputValue() {
       return this.value;
-    }
+    },
   },
 
-  methods: {},
+  methods: {
+    passConfirmCode($ev) {
+      if ($ev.target.value.length > 5) {
+        this.$emit("entered", $ev.target.value);
+      }
+    },
+    preventInput($ev) {
+      if ($ev.target.value.length > 5) {
+        $ev.preventDefault();
+      }
+    },
+  },
 };
 </script>
 
@@ -108,7 +120,7 @@ input {
   direction: rtl;
   padding: 0 22px 0 0 !important;
 }
-.input-wrapper{
+.input-wrapper {
   display: flex;
 }
 input::placeholder {

@@ -10,8 +10,9 @@
           @input="updateInput($event)"
           v-model="inputNumber"
           :class="getClass"
+          :value="getValue"
       />
-<!--      <p>{{ inputNumber }}</p>-->
+     <!-- <p>{{ this.getValue }}</p> -->
 <!--      <p>{{ massage }}</p>-->
     </div>
   </div>
@@ -42,6 +43,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    value :{
+      type : String,
+      default : ''
+    }
   },
   data() {
     return {
@@ -73,6 +78,9 @@ export default {
         sizeConfirm: this.sizeConfirm,
       };
     },
+    getValue (){
+      return this.value
+    }
   },
   methods: {
 

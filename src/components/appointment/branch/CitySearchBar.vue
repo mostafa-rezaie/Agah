@@ -4,79 +4,96 @@
       <div class="drop-down-list">
         <div class="search-bar">
           <div id="search-icon-wrapper">
-            <img src="../../../assets/img/icon-search.svg" alt=""/>
+            <img src="../../../assets/img/icon-search.svg" alt="" />
           </div>
           <input
-              class="city-search-bar"
-              name="city"
-              id="city"
-              :placeholder="placeHolder"
-              @input="filterCity($event)"
+            class="city-search-bar"
+            name="city"
+            id="city"
+            :placeholder="placeHolder"
+            @input="filterCity($event)"
           />
         </div>
         <a
-            v-for="(city, index) in filteredCities" :key="index"
-            @click="updateSearchState(city.label)"
-        >{{ city.label }}</a>
+          v-for="(city, index) in filteredCities"
+          :key="index"
+          @click="updateSearchState(city)"
+          >{{ city }}</a
+        >
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
   data() {
     return {
-      cities: [
-        {
-          label: "تهران",
-        },
-        {
-          label: "سمنان",
-        },
-        {
-          label: "تبریز",
-        },
-      ],
+      citiesLabel: [],
       filteredCities: [],
       temp: 0,
       chosenCity: {
         isSet: false,
-        label: ''
+        label: "",
       },
-      placeHolder: 'تهران',
-
+      cityInfo: [],
+      placeHolder: "تهران",
     };
   },
   computed: {
-
+    ...mapGetters({
+      getToken: "getUserToken",
+    }),
   },
   methods: {
-
     filterCity($e) {
       this.filteredCities = this.cities.filter(
-          (value) =>
-              $e.target.value.length > 0 && value.label.startsWith($e.target.value)
+        (value) =>
+          $e.target.value.length > 0 && value.startsWith($e.target.value)
       );
-
     },
     updateSearchState(cityLabel) {
-      document.getElementById('city').value = cityLabel
+      document.getElementById("city").value = cityLabel;
       this.filteredCities = [];
-      this.placeHolder = cityLabel
-      this.chosenCity.isSet = true
-      this.passCityState()
+      this.placeHolder = cityLabel;
+      this.chosenCity.isSet = true;
+      this.passCityState();
     },
     passCityState() {
-      this.$emit('getCityState', this.isCityChosen)
-
-    }
+      this.$emit("getCityState", this.isCityChosen);
+    },
+    getCities() {
+      console.log(this.getToken);
+      this.$api
+        .get("/Urban/branch", {
+          headers: {
+            authorization: "Bearer " + this.getToken,
+          },
+        })
+        .then((res) => res.data)
+        .then((res) => res.data)
+        .then((res) => res.data)
+        .then((res) => {
+          console.log(res);
+          this.cityInfo = res;
+          this.getCitiesLabel;
+        });
+    },
+    getCitiesLabel() {
+      let i = 0;
+      this.cityInfo.forEach((element) => {
+        this.cities[i] = element.title;
+        i++;
+      });
+    },
+  },
+  mounted() {
+    this.getCities();
   },
 };
 </script>
 <style scoped>
-
-
 .drop-down {
   direction: rtl;
   margin-right: 97px;
@@ -127,7 +144,6 @@ export default {
   border-bottom: 1px solid #d1d1d1;
   cursor: pointer;
 }
-
 
 input {
   outline: none;
