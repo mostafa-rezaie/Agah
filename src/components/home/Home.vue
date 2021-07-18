@@ -10,9 +10,9 @@
       subTitleClass="sub-title-center"
     ></app-jumbo>
 
-    <div class="container">
+    <div class="container ">
       <div class="row justify-content-md-center">
-        <div class="card col-5 left-card pointer-active">
+        <div class="card col-5 col-md-5 left-card pointer-active">
           <router-link tag="div" to="consultation">
             <div class="card-container">
               <app-card
@@ -25,7 +25,7 @@
             </div>
           </router-link>
         </div>
-        <div class="card col-5 right-card pointer-active">
+        <div class="card col-5 col-md-5 right-card pointer-active">
           <router-link tag="div" to="/login">
             <div class="card-container">
               <app-card
@@ -40,7 +40,7 @@
         </div>
       </div>
       <div class="row row-pure justify-content-md-center">
-        <div class="card col-5 left-card pointer-active">
+        <div class="card col-5 col-md-5 left-card pointer-active">
           <router-link tag="div" to="edit">
             <div class="card-container">
               <app-card
@@ -53,7 +53,7 @@
             </div>
           </router-link>
         </div>
-        <div class="card col-5 right-card pointer-active">
+        <div class="card col-5 col-md-5 right-card pointer-active">
           <router-link tag="div" to="cooperation">
             <div class="card-container">
               <app-card
@@ -95,7 +95,7 @@ export default {
 .card {
   background-color: #ececec;
   direction: rtl;
-  width: 536px;
+  /* width: 536px; */
 }
 .card-container > div {
   display: flex;
@@ -124,4 +124,17 @@ export default {
   padding-right: 0 !important ;
   padding-left: 0 !important ;
 }
+@media screen  and (min-width:1200px){
+  .card{
+    width: 536px;
+  }
+  
+}
+@media screen  and (max-width:1200px){
+  .container{
+    margin: 5px ;
+
+  }
+}
+
 </style>
