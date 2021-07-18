@@ -1,7 +1,8 @@
 <template>
 
-  <div class="modal-backdrop">
-    <div class="modal">
+  <div class="modal-backdrop isHidden" >
+    <!-- TODO delete isHidden class  -->
+    <div class="modal " >
       <div class="modal-header">
         {{ modalText.headerText }}
       </div>
