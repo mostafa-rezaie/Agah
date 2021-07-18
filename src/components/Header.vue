@@ -85,4 +85,16 @@ export default {
   width: 85%;
   left: 0;
 }
+@media screen and (max-width:800px) {
+  .go-to-page , .inner-nav {
+    display: none;
+  }
+  .outer-nav {
+    display: inline;
+  }
+  .logo{
+    text-align: left;
+    margin-left: 20px;
+  }
+}
 </style>
