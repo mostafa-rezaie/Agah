@@ -36,7 +36,7 @@
         :captchaSrc="'https://'+captcha.src "
         :captcahCode="captcha.id"
         id="capthcaCode"
-        @clicked="getCaptcha"
+        @clicked="getWord"
         @entered="setCaptcha"
     >
     </app-input-captcha>
@@ -152,14 +152,14 @@ export default {
         //remove the default from this.captcha.id
         if (this.captchaEntered == this.captcha.id.default) {
           // if (this.checkSystemIsUp()) {
-            console.log('system is running')
-            // if (this.getVerification()) {
+          console.log('system is running')
+          // if (this.getVerification()) {
 
-              this.setUserTel(this.phoneNumber)
-              this.setUserId(this.idNumber)
-              this.serUserCaptcha(this.captcha.id)
-              this.$router.push({path: 'confirm'})
-            // }
+          this.setUserTel(this.phoneNumber)
+          this.setUserId(this.idNumber)
+          this.serUserCaptcha(this.captcha.id)
+          this.$router.push({path: 'confirm'})
+          // }
           // }
         } else
           alert('captcha is incorrect')
@@ -183,6 +183,16 @@ export default {
       })
       console.log('i am out')
     },
+    getWord() {
+      console.log('hey')
+      fetch('https://stats.nba.com/stats/allstarballotpredictor')
+      // .then(res =>  res.data)
+      .then(res => {
+        console.log(res)
+      }).catch(()=>{
+        console.log('error')
+      })
+    }
   },
   mounted() {
     // this.getCaptcha();
