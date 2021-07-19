@@ -83,9 +83,7 @@ export default {
 
   methods: {
     passConfirmCode($ev) {
-      if ($ev.target.value.length > 5) {
         this.$emit("entered", $ev.target.value);
-      }
     },
     preventInput($ev) {
       if ($ev.target.value.length > 5) {

@@ -30,14 +30,14 @@ import { mapGetters } from "vuex";
 export default {
   data() {
     return {
-      citiesLabel: [],
+      citiesTitle: ['تهران' , 'بوشهر' ,'سمنان ' ,'مرکزی' ],
       filteredCities: [],
       temp: 0,
       chosenCity: {
         isSet: false,
         label: "",
       },
-      cityInfo: [],
+      urbanData: [],
       placeHolder: "تهران",
     };
   },
@@ -48,20 +48,20 @@ export default {
   },
   methods: {
     filterCity($e) {
-      this.filteredCities = this.cities.filter(
+      this.filteredCities = this.citiesTitle.filter(
         (value) =>
           $e.target.value.length > 0 && value.startsWith($e.target.value)
       );
     },
-    updateSearchState(cityLabel) {
-      document.getElementById("city").value = cityLabel;
+    updateSearchState(cityTitle) {
+      document.getElementById("city").value = cityTitle;
       this.filteredCities = [];
-      this.placeHolder = cityLabel;
+      this.placeHolder = cityTitle;
       this.chosenCity.isSet = true;
       this.passCityState();
     },
     passCityState() {
-      this.$emit("getCityState", this.isCityChosen);
+      this.$emit("getCityState", this.chosenCity.isSet);
     },
     getCities() {
       console.log(this.getToken);
@@ -76,14 +76,14 @@ export default {
         .then((res) => res.data)
         .then((res) => {
           console.log(res);
-          this.cityInfo = res;
-          this.getCitiesLabel;
+          this.urbanData = res;
+          this.setCitiesTitle();
         });
     },
-    getCitiesLabel() {
+    setCitiesTitle() {
       let i = 0;
-      this.cityInfo.forEach((element) => {
-        this.cities[i] = element.title;
+      this.urbanData.forEach((element) => {
+        this.citiesTitle[i] = element.title;
         i++;
       });
     },
