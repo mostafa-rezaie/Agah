@@ -42,6 +42,7 @@ export default {
   height: 51px;
   margin-top: 11px;
   margin-bottom: 8.7px;
+  min-width: 21px;
 }
 .card-icon {
   flex-grow: 1;
@@ -63,6 +64,31 @@ export default {
   font-weight: lighter;
   width: 400px;
   margin: 20px 0 0 0;
+}
+@media screen and (max-width:870px) {
+  .card-icon{
+    width: 60%;
+  }
+  .img-container {
+    width: 13%;
+  }
+  .card-text{
+    width: 85%;
+  }
+  .title , .subtitle {
+    font-size: 13px;
+  }
+  .subtitle {
+    margin-top: 5px;
+    width:85%
+  }
+  .card-text{
+    height: 60%;
+    align-self: center;
+  }
+}
+@media screen and (max-width:700px) {
+  
 }
 
 </style>

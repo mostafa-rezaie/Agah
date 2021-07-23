@@ -92,7 +92,7 @@ label {
   margin-bottom: 3px;
 }
 .container {
-  margin-right: 278px;
+  /* margin-right: 278px; */
   margin-top: 47px;
   margin-bottom: 47px;
 }
@@ -103,7 +103,7 @@ input {
   background-color: #f8f9fa;
   border: white solid 0px;
   display: inline;
-  padding: 0 22px 0 0 !important;
+  padding: 0 22px 0 0 ;
   font-size: 27px;
 }
 
@@ -125,5 +125,46 @@ button {
 }
 .container > img {
   margin-right: 3px;
+}
+@media screen and (min-width : 1100px) {
+  .container {
+  }
+  
+}
+@media screen and (max-width : 568px) {
+  .container {
+    /* margin-right: 16%; */
+    width: 95%;
+    margin-right: auto;
+    margin-left: auto;
+  }
+  .container > input{
+    width: 65%;
+    height: 52px;
+  }
+  .container > img{
+    width: 15%;
+  }
+  .container > button{
+    position: relative;
+    width: 17%;
+    height: 52px;
+  }
+  input{
+    padding-right: 5px;
+
+  }
+  button > img{
+    /* width: 50%; */
+    /* height: 50%; */
+    margin: auto;
+  }
+  .container > input::placeholder{
+font-size: 16px;
+  }
+  .container > label{
+    font-size: 14px;
+  }
+  
 }
 </style>

@@ -13,47 +13,48 @@
       tempClass="active"
     >
     </app-jumbo>
-    <app-input-number
-      label="شماه همراه"
-      placeHolder="شماره خود را وارد کنید"
-      inputType="tel"
-      id="phoneNumber"
-      value="09128874778"
-      
-      @updateInput="checkInputNumber"
-    ></app-input-number>
-    <!-- TODO delete value prop -->
-    <app-input-number
-      label="کد ملی"
-      placeHolder="کد ملی خود را وارد کنید"
-      inputType="text"
-      id="idNumber"
-      value ="8673239953"
-      @updateInput="checkIdNumber"
-    ></app-input-number>
-    <!-- <button style="width : 200px" @click="printInputFlag"></button> -->
-    <app-input-captcha
-      label="کد امنیتی"
-      placeHolder="لطفا عدد رو به رو را وارد کنید"
-      inputType="text"
-      :captchaSrc="'https://' + captcha.src"
-      :captcahCode="captcha.id"
-      id="capthcaCode"
-      @clicked="getCaptcha"
-      @entered="setCaptcha"
-    >
-    </app-input-captcha>
-    <!--    <p>{{captchaEntered}}</p>-->
-    <div class="btn-container">
-      <!--      <router-link to="" tag="div"-->
-      <!--      >-->
-      <app-button
-        :active="fieldHandler"
-        :not-allowed="!fieldHandler"
-        label="دریافت کد تایید"
-        @clicked="clickHandler"
-      ></app-button>
-      <!--      </router-link>-->
+    <div class="container">
+      <app-input-number
+        label="شماره همراه"
+        placeHolder="شماره خود را وارد کنید"
+        inputType="tel"
+        id="phoneNumber"
+        value="09128874778"
+        @updateInput="checkInputNumber"
+      ></app-input-number>
+      <!-- TODO delete value prop -->
+      <app-input-number
+        label="کد ملی"
+        placeHolder="کد ملی خود را وارد کنید"
+        inputType="text"
+        id="idNumber"
+        value="8673239953"
+        @updateInput="checkIdNumber"
+      ></app-input-number>
+      <!-- <button style="width : 200px" @click="printInputFlag"></button> -->
+      <app-input-captcha
+        label="کد امنیتی"
+        placeHolder="لطفا عدد رو به رو را وارد کنید"
+        inputType="text"
+        :captchaSrc="'https://' + captcha.src"
+        :captcahCode="captcha.id"
+        id="capthcaCode"
+        @clicked="getCaptcha"
+        @entered="setCaptcha"
+      >
+      </app-input-captcha>
+      <!--    <p>{{captchaEntered}}</p>-->
+      <div class="btn-container ">
+        <!--      <router-link to="" tag="div"-->
+        <!--      >-->
+        <app-button
+          :active="fieldHandler"
+          :not-allowed="!fieldHandler"
+          label="دریافت کد تایید"
+          @clicked="clickHandler"
+        ></app-button>
+        <!--      </router-link>-->
+      </div>
     </div>
   </div>
 </template>
@@ -72,7 +73,7 @@ export default {
     return {
       numberIsCorrect: false,
       captchaIsEntered: false,
-      loaderFlag: true,
+      loaderFlag: false,
       phoneNumber: "",
       idNumber: "",
       captchaEntered: "",
@@ -177,8 +178,10 @@ export default {
                     if (res.data.isSuccess) {
                       console.log("validate is success");
                       this.$router.push({ path: "confirm" });
-                    }else{
-                      alert('خطا در برقراری ارتباط با آگاه یا خطا در مقادیر ورودی')
+                    } else {
+                      alert(
+                        "خطا در برقراری ارتباط با آگاه یا خطا در مقادیر ورودی"
+                      );
                     }
                   });
               }
@@ -245,6 +248,24 @@ export default {
 <style scoped>
 .btn-container {
   direction: rtl;
-  margin-right: 290px;
+}
+@media screen and (min-width: 1100px) {
+  .btn-container {
+  }
+}
+@media screen and (max-width: 1100px) {
+  .btn-container {
+  }
+}
+@media screen and (max-width: 600px) {
+  .btn-container {
+    margin: auto;
+    width: 95%;
+  }
+  
+  .container{
+    padding-right: 0;
+    padding-left: 0;
+  }
 }
 </style>

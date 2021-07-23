@@ -22,16 +22,11 @@ export default {
 
   data() {
     return {
-     
       jumboState: 0,
-     
     };
   },
-  methods: {
-   
-  },
+  methods: {},
 
-  
   watch: {
     changeText() {
       if (this.jumboState == 1) {
@@ -86,7 +81,7 @@ export default {
   color: white;
   height: 92px;
   width: 803px;
-  margin-right: 309px;
+  margin-right: 16%;
 }
 .jumbotron {
   margin-top: 0px;
@@ -120,4 +115,46 @@ export default {
 }
 .active {
 }
+@media screen and (max-width: 500px) {
+  .text-center {
+    padding-right: 0;
+    padding-left: 0;
+    width: 242px;
+  }}
+  @media screen and (max-width: 1100px) {
+    .text-right {
+      margin-left:auto;
+      margin-right:auto;
+      width: 90%;
+
+    }
+    .sub-title-right,.title-right{
+      font-size: 20px;
+    }
+  }
+  @media screen and (max-width:700px) {
+    .sub-title-right , .title-right{
+
+      font-size: 16px;
+      }
+      .jumbotron{
+        height: 150px;
+
+      }
+      .sub-title-right{
+        margin-top: 5px;
+      }
+      .text-right{
+        padding-top: 15px;
+      }
+      
+      
+    
+  }
+  @media screen and (max-width:400px) {
+    .sub-title-right , .title-right {
+      font-size: 14px;
+    }
+    
+  }
 </style>

@@ -165,4 +165,17 @@ color: #0a5bff;
 .notAllowed {
   cursor: not-allowed;
 }
+@media screen and (max-width:600px) {
+  button{
+    width: 100%;
+    height: 60px;
+  }
+  .btn-text{
+    font-size: 16px;
+  }
+  .outer-container{
+    width: 100%;
+  }
+
+}
 </style>

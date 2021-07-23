@@ -1,5 +1,5 @@
 <template>
-  <div class="outer-container">
+  <div class="outer-container container">
     <label :for="getId"> {{ this.label }} </label>
     <div class="input-wrapper">
       <input
@@ -104,7 +104,7 @@ label {
   margin-bottom: 3px;
 }
 .outer-container {
-  margin-right: 290px;
+  /* margin-right: 290px; */
   margin-top: 47px;
   margin-bottom: 47px;
 }
@@ -116,7 +116,7 @@ input {
   border: white solid 0px;
   font-size: 27px;
   direction: rtl;
-  padding: 0 22px 0 0 !important;
+  padding: 0 22px 0 0 ;
 }
 .input-wrapper {
   display: flex;
@@ -141,5 +141,40 @@ button {
 
 .sizeFull {
   width: 524px;
+}
+@media screen and (min-width:1100px) {
+  .outer-container{
+    margin-right: 10%;
+  }
+  
+}
+  
+@media screen and (max-width:600px ) {
+  .container{
+    width: 95%;
+  }
+  .outer-container{
+    width: 95%;
+    margin: 25px auto 25px auto;
+  }
+  input{
+    width : 100%;
+    height: 52px;
+    padding-right: 5px;
+
+
+  }
+  input::placeholder{
+font-size: 16px;
+  }
+  .outer-container > label{
+    font-size: 14px;
+  }
+  button{
+    height: 52px;
+  }
+  .sizeFull {
+    width: 100%;
+  }
 }
 </style>

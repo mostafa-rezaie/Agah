@@ -10,11 +10,10 @@
       subTitleClass="sub-title-center"
     ></app-jumbo>
 
-    <div class="container ">
-      <div class="row justify-content-md-center">
+    <div class="custom-container ">
+      <div class="row justify-content-xxl-center custom-row">
         <div class="card col-5 col-md-5 left-card pointer-active">
-          <router-link tag="div" to="consultation">
-            <div class="card-container">
+          <router-link tag="div" to="consultation" class="card-container">
               <app-card
                 :text="{
                   title: 'مشاوره در سرمایه گذاری',
@@ -22,12 +21,10 @@
                 }"
                 :iconSrc="require('../../assets/img/consulidation.svg')"
               ></app-card>
-            </div>
           </router-link>
         </div>
         <div class="card col-5 col-md-5 right-card pointer-active">
-          <router-link tag="div" to="/login">
-            <div class="card-container">
+          <router-link tag="div" to="/login" class="card-container" >
               <app-card
                 :text="{
                   title: 'احراز هویت',
@@ -35,11 +32,10 @@
                 }"
                 :iconSrc="require('../../assets/img/authendicate.svg')"
               ></app-card>
-            </div>
           </router-link>
         </div>
       </div>
-      <div class="row row-pure justify-content-md-center">
+      <div class="row custom-row justify-content-xxl-center">
         <div class="card col-5 col-md-5 left-card pointer-active">
           <router-link tag="div" to="edit">
             <div class="card-container">
@@ -86,11 +82,14 @@ export default {
 </script>
 
 <style scoped>
-.container {
+.custom-container {
   margin-top: 20px;
+  width: 100%;
 }
-.row-pure {
+.custom-row {
   margin-top: 20px;
+  margin-right: auto;
+  margin-left: auto;
 }
 .card {
   background-color: #ececec;
@@ -118,7 +117,6 @@ export default {
 
 .card > div {
   height: 100%;
-  overflow: auto;
 }
 .card {
   padding-right: 0 !important ;
@@ -135,6 +133,41 @@ export default {
     margin: 5px ;
 
   }
+  .custom-row {
+    width: 95%;
+    justify-content: space-between
+  }
+  .left-card,.right-card{
+    width: 46%;
+  }
 }
+@media screen and (max-width:1000px) {
+  .card-container > div{
+    margin: 36px 3% 50px auto ;
+    width: 100%;
+  }
+  .card-container {
+    overflow: hidden;
+  }
+}
+@media screen and (max-width:440px) {
+  .card{
+    width: 80%;
+    margin: auto;
+    height: 80px;
+    margin-bottom: 16px;
+  }
+  .card-container > div{
+    margin: 0 24px 0 0;
+  }
+  .row {
+    flex-direction: column-reverse;
+  }
+  .custom-container div:nth-child(2){
+    margin-top: 0;
+  }
+}
+
+
 
 </style>

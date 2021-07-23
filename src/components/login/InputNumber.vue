@@ -130,7 +130,7 @@ label {
 }
 
 .container {
-  margin-right: 278px;
+  /* margin-right: 278px; */
   margin-top: 47px;
   margin-bottom: 47px;
 }
@@ -143,7 +143,7 @@ input {
   border: white solid 0px;
   font-size: 27px;
   direction: rtl;
-  padding: 0 22px 0 0 !important;
+  padding: 0 22px 0 0 ;
 }
 
 input::placeholder {
@@ -157,4 +157,29 @@ input::placeholder {
   width: 450px;
   display: inline-block;
 }
+@media screen and (min-width : 1100px) {
+  .container {
+  }
+  
+}
+@media screen and (max-width : 568px) {
+  .container {
+    /* margin-right: 16%; */
+    width: 95%;
+  }
+  .container > input{
+    width: 100%;
+    height: 52px;
+  }
+  .container > input::placeholder{
+font-size: 16px;
+  }
+  .container > label{
+    font-size: 14px;
+  }
+  input{
+    padding-right: 5px;
+  }
+}
+
 </style>
