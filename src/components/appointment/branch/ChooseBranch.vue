@@ -15,10 +15,10 @@
                 v-for="(branch, index) in branches"
                 :key="index"
                 :title="branch.title"
-                :subtitle=branch.subtitle
+                :subtitle=branch.address
                 :active="index == activatedCardIndex"
                 :iconIsSet="index == activatedCardIndex "
-                @clicked="clickHandler(index)"
+                @clicked="clickHandler(index,branch.id)"
             >
 
             </app-branch-card>
@@ -37,6 +37,7 @@
 
 <script>
 import BranchCard from "./BranchCard";
+import { mapGetters, mapMutations } from "vuex";
 
 export default {
   data() {
@@ -59,17 +60,31 @@ export default {
       activatedCardIndex: -1
     };
   },
-  computed: {},
+  computed: {
+    ...mapGetters({
+      getBranches: "getChosenCityBranches",
+    }),
+  },
   methods: {
-    clickHandler(index) {
+    ...mapMutations({
+      setChosenBranch : 'setChosenBranchId'
+    }),
+    clickHandler(index,branchId) {
       console.log('hey from parent')
+      this.setChosenBranch(branchId)
       this.activatedCardIndex = index
+    },
+    setBranches (){
+      this.branches = this.getBranches
     }
 
   },
   components: {
     appBranchCard: BranchCard,
   },
+  created (){
+    this.setBranches ()
+  }
 };
 </script>
 

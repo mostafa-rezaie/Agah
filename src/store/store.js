@@ -13,7 +13,26 @@ export const store = new Vuex.Store({
         token : "",
         userStatus:"",
         userFullName : "",
-        userId : ""
+        userId : "",
+        userData :{},
+        chosenBranchId : -1,
+        //additinal data
+        urbanData : {
+            id :{
+                type :String
+            } ,
+            label:{
+                type:String
+            },
+            isSet:{
+                type :Boolean
+            },
+            branches :[]
+
+
+        }
+
+
     },
     getters: {
         getUserTelNumber :state => {
@@ -33,6 +52,12 @@ export const store = new Vuex.Store({
         },
         getUserFullName :state => {
             return state.userFullName
+        },
+        getUrbanData :state => {
+            return state.urbanData
+        },
+        getChosenCityBranches:state =>{
+            return state.urbanData.branches
         }
     },
     mutations: {
@@ -57,6 +82,20 @@ export const store = new Vuex.Store({
         },
         setUserId (state,id){
             state.userId = id
+        },
+        setUserData (state,data){
+            state.userData = data
+        },
+        setUrbanData (state,data){
+            state.urbanData.id = data.id
+            state.urbanData.label = data.label
+            state.urbanData.isSet= data.isSet
+            status.urbanData.branches = data.branches
+            
+        },
+        setChosenBranchId (state,index){
+            state.chosenBranchId = index
         }
     },
+
 });

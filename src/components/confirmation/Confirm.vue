@@ -2,31 +2,32 @@
   <div>
     <app-header></app-header>
     <app-jumbo
-        title="کد تایید را وارد کنید"
-        :subTitle="getSubtitle"
-        jumboActiveClass="text-right"
-        titleClass="title-right"
-        subTitleClass="sub-title-right"
-        tempClass="active"
+      title="کد تایید را وارد کنید"
+      :subTitle="getSubtitle"
+      jumboActiveClass="text-right"
+      titleClass="title-right"
+      subTitleClass="sub-title-right"
+      tempClass="active"
     >
     </app-jumbo>
-    <app-confirm-input-number
-        label="شماه همراه"
+    <div class="container">
+      <app-confirm-input-number
+        label="شماره همراه"
         :placeHolder="getUserTel"
         inputType="tel"
         id="phoneNumber"
         value="09199999999"
         backSrc="/login"
-    ></app-confirm-input-number>
-    <app-confirm-input-number
+      ></app-confirm-input-number>
+      <app-confirm-input-number
         label="کد ملی"
         :placeHolder="getUserId"
         inputType="text"
         id="idNumber"
         value="5555555555"
         backSrc="/login"
-    ></app-confirm-input-number>
-    <app-confirm-input-number
+      ></app-confirm-input-number>
+      <app-confirm-input-number
         label="کد تایید"
         placeHolder="کد تایید خود را وارد کنید"
         inputType="text"
@@ -34,22 +35,23 @@
         :sizeFull="true"
         :inputIsDisabled="false"
         @entered="setConfirmCode"
-    ></app-confirm-input-number>
-    <div class="btn-container">
-      <!-- <router-link to="/result"> -->
-      <app-button
+      ></app-confirm-input-number>
+      <div class="btn-container">
+        <!-- <router-link to="/result"> -->
+        <app-button
           :active="true"
           label="مرحله بعد"
           @clicked="clickHandler"
-      ></app-button>
-      <!-- </router-link> -->
+        ></app-button>
+        <!-- </router-link> -->
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import {mapGetters} from "vuex";
-import {mapMutations} from "vuex";
+import { mapGetters } from "vuex";
+import { mapMutations } from "vuex";
 
 import Jumbotron from "../Jumbotron.vue";
 import ConfirmInputNumber from "./ConfirmInputNumber.vue";
@@ -76,9 +78,9 @@ export default {
     // },
     getSubtitle() {
       let outString =
-          "کد تایید به شماره موبایل ثبت شده توسط شما در سایت کارگزاری آگاه (" +
-          this.getUserTel.toString() +
-          ") ارسال گردید";
+        "کد تایید به شماره موبایل ثبت شده توسط شما در سایت کارگزاری آگاه (" +
+        this.getUserTel.toString() +
+        ") ارسال گردید";
       return outString;
     },
   },
@@ -89,76 +91,58 @@ export default {
       setStatus: "setUserStatus",
       setId: "setUserId",
       setFullName: "setUserFullName",
+      setUserData: "setUserData",
     }),
 
     setConfirmCode(value) {
-      console.log(value)
+      console.log(value);
       this.confirmCode = value;
     },
     clickHandler() {
       if (this.confirmCode.length != 6) {
-        alert('کد تایید وارد شده صحیح نیست')
+        alert("کد تایید وارد شده صحیح نیست");
       } else {
-        console.log('request sent')
-            // TODO add loading page after clicking clicking
-            // console.log(this.getToken);
-            // TODO check for the wrong opt code
-            // TODO delete comment line of code (transfer to the function)
-            // this.$api
-            //     .post("Customer/ValidateOTPByNationaCode", {
-            //       nationalCode: this.getUserId,
-            //       otpCode: this.confirmCode,
-            //       phoneNumber: this.getUserTel,
-            //     })
-            // .then((res) => res.data)
-            const userDataPromise = this.postValidateOtpReq()
-            userDataPromise.then((res) => {
-              if (res.isSuccess) {
-               // TODO delete comment lines (trnasfer to the function)
-                // this.setData(res)
-                // this.setToken(res.data.token);
-                // this.setFullName(res.data.fullName)
-                // this.setId(res.data.id)
+        console.log("request sent");
+        const userDataPromise = this.postValidateOtpReq();
+        userDataPromise
+          .then((res) => {
+            if (res.isSuccess) {
+              this.setData(res);
 
-                this.setData(res)
-                // this.setStatus(res.data.userStatus)
-                // // console.log(res.data.userStatus);
+              //TODO store the data in the local storage
+              console.log("entrance is valid");
+              this.$router.push({ path: "/result" });
+              // TODO handle exceptions
+            } else {
+              alert("خطا در برقراری ارتباط با آگاه یا خطا در مقادیر ورودی");
+            }
+          })
+          .catch((err) => {
+            console.log("error is : ");
+            console.log(err);
 
-                //TODO store the data in the local storage
-                console.log("entrance is valid");
-                this.$router.push({path: "/result"});
-                // TODO handle exceptions
-              } else {
-                alert("خطا در برقراری ارتباط با آگاه یا خطا در مقادیر ورودی");
-              }
-            })
-            .catch((err) => {
-              console.log('error is : ')
-              console.log(err);
-
-              err = err.response.data
-              alert(err.message)
-            })
+            err = err.response.data;
+            alert(err.message);
+          });
       }
     },
     postValidateOtpReq() {
-     return this.$api
-          .post("Customer/ValidateOTPByNationaCode", {
-            nationalCode: this.getUserId,
-            otpCode: this.confirmCode,
-            phoneNumber: this.getUserTel,
-          })
-         .then((res) => res.data)
-
+      return this.$api
+        .post("Customer/ValidateOTPByNationaCode", {
+          nationalCode: this.getUserId,
+          otpCode: this.confirmCode,
+          phoneNumber: this.getUserTel,
+        })
+        .then((res) => res.data);
     },
-    setData(res){
-      this.setData(res)
+    setData(res) {
+      //TODO probably wont need the following line except last one
       this.setToken(res.data.token);
-      this.setFullName(res.data.fullName)
-      this.setId(res.data.id)
-      this.setStatus(res.data.userStatus)
-
-    }
+      this.setFullName(res.data.fullName);
+      this.setId(res.data.id);
+      this.setStatus(res.data.userStatus);
+      this.setUserData(res.data);
+    },
   },
   data() {
     return {
@@ -178,6 +162,24 @@ export default {
 
 .btn-container {
   direction: rtl;
-  margin-right: 290px;
+  /* margin-right: 290px; */
+}
+@media screen and (min-width:1100px) {
+  .container{
+    margin-right: 10%;
+  }
+  
+}
+@media screen and (max-width: 600px) {
+  .btn-container {
+    /* padding-right: 12px; */
+    width: 95%;
+    margin: auto;
+  }
+  .container{
+    padding-right: 0;
+    padding-left: 0;
+  }
+  
 }
 </style>

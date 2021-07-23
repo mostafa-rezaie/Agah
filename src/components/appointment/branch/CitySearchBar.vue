@@ -27,15 +27,19 @@
 
 <script>
 import { mapGetters } from "vuex";
+import { mapMutations } from "vuex";
 export default {
   data() {
     return {
-      citiesTitle: ['تهران' , 'بوشهر' ,'سمنان ' ,'مرکزی' ],
+      //TODO delete the defualt content
+      citiesTitle: ["تهران", "بوشهر", "سمنان ", "مرکزی"],
       filteredCities: [],
       temp: 0,
       chosenCity: {
-        isSet: false,
+        id: -1,
         label: "",
+        isSet: false,
+        branches :[]
       },
       urbanData: [],
       placeHolder: "تهران",
@@ -47,6 +51,9 @@ export default {
     }),
   },
   methods: {
+    ...mapMutations({
+      setUrban: "setUrbanData",
+    }),
     filterCity($e) {
       this.filteredCities = this.citiesTitle.filter(
         (value) =>
@@ -55,9 +62,18 @@ export default {
     },
     updateSearchState(cityTitle) {
       document.getElementById("city").value = cityTitle;
+      this.urbanData.forEach((element) => {
+        if (element.title == cityTitle) {
+          this.choosenCity.label = cityTitle;
+          this.chosenCity.id = element.id;
+          this.chosenCity.isSet = true;
+          this.chosenCity.branches = element.branches
+          //check for branches
+          this.setUrban(this.chosenCity)
+        }
+      });
       this.filteredCities = [];
       this.placeHolder = cityTitle;
-      this.chosenCity.isSet = true;
       this.passCityState();
     },
     passCityState() {
@@ -71,9 +87,7 @@ export default {
             authorization: "Bearer " + this.getToken,
           },
         })
-        .then((res) => res.data)
-        .then((res) => res.data)
-        .then((res) => res.data)
+        .then((res) => res.data.data.data)
         .then((res) => {
           console.log(res);
           this.urbanData = res;
