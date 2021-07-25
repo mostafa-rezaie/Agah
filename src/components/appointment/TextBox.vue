@@ -66,4 +66,10 @@ export default {
   border: solid #0a5bff 2px;
   background-color: #d0dfff;
 }
+@media screen and (max-width:500px) {
+  .text{
+    font-size: 14px;
+  }
+  
+}
 </style>

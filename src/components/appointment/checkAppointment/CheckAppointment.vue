@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="text-box">
-      <div class="title">{{this.getFullName}}</div>
+      <div class="title">{{ this.getFullName }}</div>
       <div class="subTitle">
         برای انتخاب شعبه یکی از گزینه های زیر را انتخاب کنید
       </div>
@@ -58,20 +58,19 @@ export default {
   },
   data() {
     return {
-      state: 'noAppointment',
+      state: "noAppointment",
       // 0 has no appointment
       // 1 has appointment
       iconSrc: require("../../../assets/img/gpsIcon.svg"),
     };
   },
   computed: {
-    
     ...mapGetters({
       // getUserTel: "getUserTelNumber",
       // getUserId: "getUserIdNumber",
       // getCaptcha: "getUserCaptchaCode",
       // getToken: "getUserToken",
-      getFullName : 'getUserFullName'
+      getFullName: "getUserFullName",
     }),
     getState() {
       if (this.state == 1) {
@@ -117,5 +116,22 @@ export default {
 }
 .has-appointment > .title {
   font-weight: 300;
+}
+@media screen and (max-width: 1100px) {
+  .btn-container {
+    flex-direction: column;
+  }
+  .btn-search {
+    margin-right: 0;
+    margin-top: 10px;
+  }
+  .btn-search > a > button {
+    width: 95%;
+    margin-right: 2.5%;
+  }
+  .btn-gps > a > button {
+    width: 95%;
+    margin-right: 2.5%;
+  }
 }
 </style>

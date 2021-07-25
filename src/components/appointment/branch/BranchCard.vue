@@ -1,13 +1,19 @@
 <template>
-  <div class="wrapper" @click="clickHandler">
-    <div class="inner-container row" :class="getClass">
-      <div class="col-1 icon">
-        <img :src="iconIsSet == true ? require  ('../../../assets/img/checked.svg') : require('../../../assets/img/circle-unchecked.svg')"
-             alt=""/>
+  <div class="card-wrapper" @click="clickHandler" :class="getWrapperClass">
+    <div class="row inner-container" :class="getClass">
+      <div class="col-2 icon">
+        <img
+          :src="
+            iconIsSet == true
+              ? require('../../../assets/img/checked.svg')
+              : require('../../../assets/img/circle-unchecked.svg')
+          "
+          alt=""
+        />
       </div>
-      <div class="col-11 text-box-wrapper">
+      <div class="col-10 text-box-wrapper">
         <div class="title">{{ title }}</div>
-        <br/>
+        <br />
         <div class="subtitle">{{ subtitle }}</div>
       </div>
     </div>
@@ -31,12 +37,29 @@ export default {
 
     active: {
       type: Boolean,
-      default: false
+      default: false,
     },
     iconIsSet: {
       type: Boolean,
-      default: false
+      default: false,
+    },
+    wrapperClassDay: {
+      type: Boolean,
+      default: false,
+    },
+    wrapperClassBranch: {
+      type: Boolean,
+      default: false,
+    },
+    innerContainerBranch:{
+      type : Boolean,
+      default : false
+    },
+    innerContainerDay:{
+      type: Boolean,
+      default :false
     }
+
   },
   data() {
     return {};
@@ -46,19 +69,23 @@ export default {
       return {
         active: this.active,
         containerMd: this.containerMd,
+        innerContainerBranch : this.innerContainerBranch,
+        innerContainerDay : this.innerContainerDay
       };
     },
-
-
+    getWrapperClass() {
+      return {
+        wrapperClassDay: this.wrapperClassDay,
+        wrapperClassBranch : this.wrapperClassBranch
+      };
+    },
   },
   methods: {
     clickHandler() {
-      console.log('hey')
-      this.$emit('clicked', true)
+      console.log("hey");
+      this.$emit("clicked", true);
     },
-
-  }
-
+  },
 };
 </script>
 <style scoped>
@@ -92,9 +119,10 @@ export default {
   display: inline-block;
 }
 
-.wrapper {
+.card-wrapper {
   margin-bottom: 24px;
   display: inline-block;
+  /* width: 40%; */
 }
 
 .active {
@@ -108,4 +136,60 @@ export default {
   height: 120px;
   padding: 10px;
 }
+@media screen and (max-width:1400px) {
+  .wrapperClassDay {
+    width: 45%;
+  }
+  .innerContainerDay {
+    width: 100%;
+  }
+}
+@media screen and (max-width:1200px) {
+  .wrapperClassBranch {
+    width: 100%;
+  }
+  .innerContainerBranch {
+    width: 730px;
+  }
+  
+}
+@media screen and (max-width: 1050px) {
+  .innerContainerBranch {
+    width: 95%;
+  }
+}
+@media screen and (max-width: 500px) {
+  .title {
+    font-size: 14px;
+  }
+  .subtitle {
+    font-size: 12px;
+  }
+  .text-box-wrapper {
+    padding-right: 5px;
+  }
+  .wrapperClassBranch {
+    margin-bottom: 15px;
+  }
+  
+}
+@media screen and (max-width:700px) {
+  .innerContainerDay{
+    width: 95%;
+    height: 82px;
+  }
+  .wrapperClassDay{
+    width: 95%;
+    margin-right:4% ;
+    margin-bottom: 10px;
+  }
+ 
+}
+@media screen and (max-width:500px) {
+  .innerContainerDay{
+    height: 38px;
+  }
+  
+}
+
 </style>

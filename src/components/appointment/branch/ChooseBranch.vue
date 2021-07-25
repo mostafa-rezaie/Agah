@@ -1,14 +1,10 @@
 <template>
-  <div>
-    <div class="wrapper">
-      <div class="choose-branch-wrapper">
-        <div class="col-10 text-box-branch">
-          <div class="title-wrapper">
+  <div class="card-wrapper">
+      <div class="col-10 choose-branch-wrapper">
             <div class="title-text">
               شعبه موردنظر برای احراز هویت انتخاب کنید
             </div>
             <div class="vertical-line"></div>
-          </div>
           <div class="cards">
             <app-branch-card
 
@@ -19,6 +15,8 @@
                 :active="index == activatedCardIndex"
                 :iconIsSet="index == activatedCardIndex "
                 @clicked="clickHandler(index,branch.id)"
+                innerContainerBranch
+                wrapperClassBranch
             >
 
             </app-branch-card>
@@ -31,8 +29,6 @@
       </div>
 
 
-    </div>
-  </div>
 </template>
 
 <script>
@@ -83,7 +79,8 @@ export default {
     appBranchCard: BranchCard,
   },
   created (){
-    this.setBranches ()
+    // this.setBranches ()
+    //TODO uncomment this line for API
   }
 };
 </script>
@@ -111,10 +108,10 @@ export default {
   direction: rtl;
   height: 489px;
   width: 1112px;
-  margin: 20px;
+  margin: 30px 70px 20px 0;
 }
 
-.wrapper {
+.card-wrapper {
   direction: rtl;
 }
 
@@ -122,10 +119,39 @@ export default {
   margin: 20px;
   border: solid;
 }
-
-.text-box-branch {
-  direction: rtl;
-  /* border: solid; */
+@media screen and (max-width:1200px) {
+  .choose-branch-wrapper {
+    width: 90%;
+    margin-left: 0;
+    margin-right: 15px;
+  }
+  .vertical-line {
+    width: 40%;
+  }
+}
+@media screen and (max-width:1050px) {
+  .vertical-line{
+    display: none;
+  }
+  
+}
+@media screen and (max-width:700px) {
+  .choose-branch-wrapper {
+    margin-right: 5%;
+    height: auto;
+  }
+}
+@media screen and (max-width:500px) {
+  .title-text{
+    font-size: 14px;
+  }
+ .choose-branch-wrapper{
+   margin-top: 10px;
+   /* height: auto; */
+ } 
+ .cards {
+   margin-top: 20px;
+ }
 }
 
 

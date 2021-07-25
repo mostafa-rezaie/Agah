@@ -36,4 +36,20 @@ export default {
 .active {
   background-color: blue;
 }
+@media screen and (max-width:1250px) {
+  .deactive , .active {
+    margin-right: 19px;
+  }
+  
+}
+@media screen and (max-width:1000px) {
+  
+  .deactive , .active {
+    margin-right: 16px;
+    height: 75px;
+    margin-bottom: 10px;
+  }
+  
+  
+}
 </style>

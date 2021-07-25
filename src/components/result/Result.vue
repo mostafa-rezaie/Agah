@@ -8,6 +8,7 @@
       titleClass="title-right"
       subTitleClass="sub-title-right"
       tempClass="active"
+      jumboClass="jumbotron-lg"
     >
     </app-jumbo>
     <app-confirm-input-number

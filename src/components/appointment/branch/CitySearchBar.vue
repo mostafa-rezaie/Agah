@@ -162,4 +162,10 @@ export default {
 input {
   outline: none;
 }
+@media screen and (max-width:1200px) {
+  .drop-down{
+    margin-right: 5%;
+  }
+  
+}
 </style>
