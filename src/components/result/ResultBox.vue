@@ -1,12 +1,12 @@
 <template>
-  <div>
+  <div >
     <div class="container">
       <div class="title">
-        <slot :title="title"> </slot>
+        <slot :title="title"></slot>
         {{ title }}
       </div>
       <div class="subtitle">
-        <slot :subTitle="subTitle"> </slot>
+        <slot :subTitle="subTitle"></slot>
         {{ subTitle }}
       </div>
     </div>
@@ -32,12 +32,16 @@ export default {
 * {
   direction: rtl;
 }
+
 .container {
-  width: 515px;
+  width: 520px;
   height: 140px;
-  margin-right: 278px;
   background-color: #F2F6FF;
-  margin-bottom: 80px;
+  margin-right: 0;
+  margin-left: 0;
+  margin-bottom: 40px;
+  padding-right: 0;
+  padding-left: 0;
 }
 
 .title {
@@ -46,9 +50,12 @@ export default {
   padding-top: 21px;
   padding-right: 21px;
 }
+
 .subtitle {
-    padding-right: 21px;
-    padding-top: 13px;
-    font-size: 16px;
+  padding-right: 21px;
+  padding-top: 13px;
+  font-size: 16px;
 }
+
+
 </style>

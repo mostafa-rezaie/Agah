@@ -76,7 +76,7 @@ export default {
     width: 85%;
   }
   .title , .subtitle {
-    font-size: 13px;
+    font-size: 16px;
   }
   .subtitle {
     margin-top: 5px;
@@ -87,8 +87,17 @@ export default {
     align-self: center;
   }
 }
-@media screen and (max-width:700px) {
-  
+@media screen and (max-width:440px) {
+  .title, .subtitle{
+    font-size: 14px;
+    width: 90%;
+  }
+  .card-icon{
+    padding-left: 0;
+  }
+.img-container{
+  width: 9%;
+}
 }
 
 </style>

@@ -133,6 +133,8 @@ label {
   /* margin-right: 278px; */
   margin-top: 47px;
   margin-bottom: 47px;
+  padding-right: 0;
+  padding-left: 0;
 }
 
 input {

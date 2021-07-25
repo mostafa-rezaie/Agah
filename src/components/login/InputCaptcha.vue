@@ -86,7 +86,10 @@ export default {
 * {
   direction: rtl;
 }
-
+.container {
+  padding-left: 0;
+  padding-right: 0;
+}
 label {
   display: block;
   margin-bottom: 3px;

@@ -152,13 +152,13 @@ export default {
 }
 @media screen and (max-width:440px) {
   .card{
-    width: 80%;
+    width: 95%;
     margin: auto;
     height: 80px;
     margin-bottom: 16px;
   }
   .card-container > div{
-    margin: 0 24px 0 0;
+    margin: 0 10px 0 0;
   }
   .row {
     flex-direction: column-reverse;

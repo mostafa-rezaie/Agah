@@ -107,6 +107,8 @@ label {
   /* margin-right: 290px; */
   margin-top: 47px;
   margin-bottom: 47px;
+  padding-left: 0;
+  padding-right: 0;
 }
 input {
   box-sizing: border-box;
@@ -144,9 +146,16 @@ button {
 }
 @media screen and (min-width:1100px) {
   .outer-container{
-    margin-right: 10%;
+    margin-right: 0;
+    width: 100%;
   }
   
+}@media screen and (max-width:1100px) {
+  .outer-container{
+    margin-right: 10%;
+    width: 90%;
+  }
+
 }
   
 @media screen and (max-width:600px ) {
@@ -154,6 +163,8 @@ button {
     width: 95%;
   }
   .outer-container{
+    padding-right: 0;
+    padding-left: 0;
     width: 95%;
     margin: 25px auto 25px auto;
   }
