@@ -1,47 +1,47 @@
 <template>
   <div>
     <div class="loader" v-if="loaderFlag">
-      <img src="../../assets/img/loading-gif.svg" alt="" />
+      <img src="../../assets/img/loading-gif.svg" alt=""/>
     </div>
     <app-header></app-header>
     <app-jumbo
-      title="کد ملی و شماره همراه خود را جهت ثبت نوبت احراز هویت وارد کنید"
-      subTitle="نوبت دهی احراز هویت برای افرادی می باشد که قبلا در آگاه ثبت نام کرده اند و احراز هویت نشده اند"
-      jumboActiveClass="text-right"
-      titleClass="title-right"
-      subTitleClass="sub-title-right"
-      tempClass="active"
+        title="کد ملی و شماره همراه خود را جهت ثبت نوبت احراز هویت وارد کنید"
+        subTitle="نوبت دهی احراز هویت برای افرادی می باشد که قبلا در آگاه ثبت نام کرده اند و احراز هویت نشده اند"
+        jumboActiveClass="text-right"
+        titleClass="title-right"
+        subTitleClass="sub-title-right"
+        tempClass="active"
       jumboClass="jumbotron-lg"
     >
     </app-jumbo>
     <div class="container">
       <app-input-number
-        label="شماره همراه"
-        placeHolder="شماره خود را وارد کنید"
-        inputType="tel"
-        id="phoneNumber"
-        value="09128874778"
-        @updateInput="checkInputNumber"
+          label="شماره همراه"
+          placeHolder="شماره خود را وارد کنید"
+          inputType="tel"
+          id="phoneNumber"
+          value="09128874778"
+          @updateInput="checkInputNumber"
       ></app-input-number>
       <!-- TODO delete value prop -->
       <app-input-number
-        label="کد ملی"
-        placeHolder="کد ملی خود را وارد کنید"
-        inputType="text"
-        id="idNumber"
-        value="8673239953"
-        @updateInput="checkIdNumber"
+          label="کد ملی"
+          placeHolder="کد ملی خود را وارد کنید"
+          inputType="text"
+          id="idNumber"
+          value="8673239953"
+          @updateInput="checkIdNumber"
       ></app-input-number>
       <!-- <button style="width : 200px" @click="printInputFlag"></button> -->
       <app-input-captcha
-        label="کد امنیتی"
-        placeHolder="لطفا عدد رو به رو را وارد کنید"
-        inputType="text"
-        :captchaSrc="'https://' + captcha.src"
-        :captcahCode="captcha.id"
-        id="capthcaCode"
-        @clicked="getCaptcha"
-        @entered="setCaptcha"
+          label="کد امنیتی"
+          placeHolder="لطفا عدد رو به رو را وارد کنید"
+          inputType="text"
+          :captchaSrc="'https://' + captcha.src"
+          :captcahCode="captcha.id"
+          id="capthcaCode"
+          @clicked="getCaptcha"
+          @entered="setCaptcha"
       >
       </app-input-captcha>
       <!--    <p>{{captchaEntered}}</p>-->
@@ -49,10 +49,10 @@
         <!--      <router-link to="" tag="div"-->
         <!--      >-->
         <app-button
-          :active="fieldHandler"
-          :not-allowed="!fieldHandler"
-          label="دریافت کد تایید"
-          @clicked="clickHandler"
+            :active="fieldHandler"
+            :not-allowed="!fieldHandler"
+            label="دریافت کد تایید"
+            @clicked="clickHandler"
         ></app-button>
         <!--      </router-link>-->
       </div>
@@ -61,7 +61,7 @@
 </template>
 
 <script>
-import { mapMutations } from "vuex";
+import {mapMutations} from "vuex";
 import Jumbotron from "../Jumbotron.vue";
 import InputNumber from "./InputNumber.vue";
 import InputCaptcha from "./InputCaptcha.vue";
@@ -88,6 +88,10 @@ export default {
           default: " ",
         },
       },
+      systemUp :{
+        type : Boolean,
+        default : false
+      }
     };
   },
 
@@ -101,11 +105,11 @@ export default {
   computed: {
     fieldHandler() {
       if (
-        this.phoneNumber.length > 10 &&
-        this.phoneNumber[0] == "0" &&
-        this.phoneNumber[1] == "9" &&
-        this.idNumber.length > 9 &&
-        this.captchaEntered.length > 0
+          this.phoneNumber.length > 10 &&
+          this.phoneNumber[0] == "0" &&
+          this.phoneNumber[1] == "9" &&
+          this.idNumber.length > 9 &&
+          this.captchaEntered.length > 0
       ) {
         return true;
       } else {
@@ -138,110 +142,96 @@ export default {
     getCaptcha() {
       console.log("hey");
       this.$api
-        .get("Captcha")
-        .then((res) => res.data)
-        .then((res) => {
-          if (res.isSuccess) {
-            console.log(res.data.captchaId);
-            console.log(res.data.captchaUrl);
-            this.captcha.id = res.data.captchaId;
-            this.captcha.src = res.data.captchaUrl;
-            if (this.loaderFlag)
-              setTimeout(() => {
-                this.hideLoader();
-              }, 500);
-          }
-        });
+          .get("Captcha")
+          .then((res) => res.data)
+          .then((res) => {
+            if (res.isSuccess) {
+              console.log(res.data.captchaId);
+              console.log(res.data.captchaUrl);
+              this.captcha.id = res.data.captchaId;
+              this.captcha.src = res.data.captchaUrl;
+              if (this.loaderFlag)
+                setTimeout(() => {
+                  this.hideLoader();
+                }, 500);
+            }
+          });
     },
     clickHandler() {
       if (this.fieldHandler) {
-        //remove the default from this.captcha.id
         if (this.captchaEntered == this.captcha.id) {
-          // if (this.checkSystemIsUp()) {
-          this.$api
-            .get("Customer/IsUp")
-            .then((res) => {
-              if (res.request.status == 200) {
-                console.log("system is up");
-                this.setUserTel(this.phoneNumber);
-                this.setUserId(this.idNumber);
-                this.serUserCaptcha(this.captcha.id);
-                this.$api
-                  .get("/Customer/VerificationCode", {
-                    params: {
-                      NationalCode: this.idNumber,
-                      PhoneNumber: this.phoneNumber,
-                      CaptchaCode: this.captchaEntered,
-                      CaptchaId: this.captcha.id,
-                    },
-                  })
-                  .then((res) => {
-                    if (res.data.isSuccess) {
-                      console.log("validate is success");
-                      this.$router.push({ path: "confirm" });
-                    } else {
-                      alert(
-                        "خطا در برقراری ارتباط با آگاه یا خطا در مقادیر ورودی"
-                      );
-                    }
-                  });
-              }
-            })
-            .catch(() => {
-              console.log("system is down");
-              return false;
-            });
-          console.log("system is running");
-          // if (this.getVerification()) {
-
-          // }
-          // }
+          if (this.systemUp) {
+                  this.setUserTel(this.phoneNumber);
+                  this.setUserId(this.idNumber);
+                  this.serUserCaptcha(this.captcha.id);
+                  this.$api
+                      .get("/Customer/VerificationCode", {
+                        params: {
+                          NationalCode: this.idNumber,
+                          PhoneNumber: this.phoneNumber,
+                          CaptchaCode: this.captchaEntered,
+                          CaptchaId: this.captcha.id,
+                        },
+                      })
+                      .then((res) => {
+                            if (res.data.isSuccess) {
+                              console.log("validate is success");
+                              this.$router.push({path: "confirm"});
+                            }
+                          },
+                          () => {
+                            alert('خطا در برقراری ارتباط با اگاه')
+                          });
+                }else{
+            console.log('اگاه در دسترس نیست')
+          }
         } else alert("captcha is incorrect");
       }
     },
     getVerification() {
       this.$api
-        .get("Customer/VerificationCode")
-        .then((res) => {
-          console.log(res.data);
-        })
-        .catch(() => {
-          console.log("verification code failed");
-        });
+          .get("Customer/VerificationCode")
+          .then((res) => {
+            console.log(res.data);
+          })
+          .catch(() => {
+            console.log("verification code failed");
+          });
     },
 
     checkSystemIsUp() {
-      this.$api
-        .get("Customer/IsUp")
-        .then((res) => {
-          if (res.request.status == 200) {
-            console.log("system is up");
-            return true;
-          } else {
-            return false;
-          }
-        })
-        .catch(() => {
-          console.log("system is down");
-          return false;
-        });
+      return this.$api
+          .get("Customer/IsUp")
+          .then((res) => {
+            if (res.request.status == 200) {
+              console.log("system is up");
+              this.systemUp = true
+            } else {
+              throw 'Bad request'
+            }
+          })
+          .catch(() => {
+            console.log("system is down");
+            alert('آگاه در دسترس نیست')
+          });
     },
     getWord() {
       console.log("hey");
       fetch(
-        "https://agah-admission-api.webjarprojects.ir/api/CustomerAdmission/IsUp"
+          "https://agah-admission-api.webjarprojects.ir/api/CustomerAdmission/IsUp"
       )
-        // .then(res =>  res.data)
-        .then((res) => {
-          console.log(res);
-        })
-        .catch(() => {
-          console.log("error");
-        });
+          // .then(res =>  res.data)
+          .then((res) => {
+            console.log(res);
+          })
+          .catch(() => {
+            console.log("error");
+          });
     },
   },
   mounted() {
     this.getCaptcha();
+    this.checkSystemIsUp();
   },
 };
 </script>
@@ -250,21 +240,24 @@ export default {
 .btn-container {
   direction: rtl;
 }
+
 @media screen and (min-width: 1100px) {
   .btn-container {
   }
 }
+
 @media screen and (max-width: 1100px) {
   .btn-container {
   }
 }
+
 @media screen and (max-width: 600px) {
   .btn-container {
     margin: auto;
     width: 95%;
   }
-  
-  .container{
+
+  .container {
     padding-right: 0;
     padding-left: 0;
   }
