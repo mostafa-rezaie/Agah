@@ -2,46 +2,52 @@
   <div>
     <app-header></app-header>
     <app-jumbo
-      title="کد ملی  خود را جهت ثبت نوبت احراز هویت وارد کنید"
-      subTitle="نوبت دهی احراز هویت برای افرادی می باشد که قبلا در آگاه ثبت نام کرده اند و احراز هویت نشده اند"
-      jumboActiveClass="text-right"
-      titleClass="title-right"
-      subTitleClass="sub-title-right"
-      tempClass="active"
+        title="کد ملی  خود را جهت ثبت نوبت احراز هویت وارد کنید"
+        subTitle="نوبت دهی احراز هویت برای افرادی می باشد که قبلا در آگاه ثبت نام کرده اند و احراز هویت نشده اند"
+        jumboActiveClass="text-right"
+        titleClass="title-right"
+        subTitleClass="sub-title-right"
+        tempClass="active"
       jumboClass="jumbotron-lg"
     >
     </app-jumbo>
-    <app-confirm-input-number
-      label="شماه همراه"
-      :placeHolder="getUserTel"
-      inputType="tel"
-      id="phoneNumber"
-      backSrc="/login"
-    ></app-confirm-input-number>
-    <app-confirm-input-number
-      label="کد ملی"
-      :placeHolder="getUserId"
-      inputType="text"
-      id="idNumber"
-      backSrc="/login"
-    ></app-confirm-input-number>
-    <app-result-box :title="getTitle" :subTitle="getSubTitle"> </app-result-box>
-    <div class="btn-container">
-      <router-link to="/appointment">
-        <app-button :active="true" :label="getLabel"></app-button>
-      </router-link>
+    <div class="wrapper">
+
+      <app-confirm-input-number
+          label="شماره همراه"
+          :placeHolder="getUserTel"
+          inputType="tel"
+          id="phoneNumber"
+          backSrc="/login"
+      ></app-confirm-input-number>
+      <app-confirm-input-number
+          label="کد ملی"
+          :placeHolder="getUserId"
+          inputType="text"
+          id="idNumber"
+          backSrc="/login"
+      ></app-confirm-input-number>
+      <div class="result-container">
+        <app-result-box :title="getTitle" :subTitle="getSubTitle"></app-result-box>
+        </div>
+        <div class="btn-container">
+          <router-link to="/appointment">
+            <app-button :active="true" :label="getLabel"></app-button>
+          </router-link>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import {mapGetters} from "vuex";
 
 import Jumbotron from "../Jumbotron.vue";
 import ConfirmInputNumber from "../confirmation/ConfirmInputNumber.vue";
 import ResultBox from "./ResultBox.vue";
 import Button from "../Button.vue";
 import Header from "../Header.vue";
+
 export default {
   data() {
     return {
@@ -62,7 +68,7 @@ export default {
       getUserTel: "getUserTelNumber",
       getUserId: "getUserIdNumber",
       getCaptcha: "getUserCaptchaCode",
-      getStatus : 'getUserStatus'
+      getStatus: 'getUserStatus'
     }),
     getLabel() {
       switch (this.getStatus) {
@@ -104,13 +110,30 @@ export default {
 };
 </script>
 
-<style  scoped>
+<style scoped>
 .input-number {
   width: 200px;
 }
 
+
 .btn-container {
   direction: rtl;
-  margin-right: 278px;
 }
+@media screen and (min-width: 1100px) {
+  .wrapper {
+    width: 70%;
+    margin: auto;
+  }
+
+}@media screen and (max-width: 1100px) {
+
+  .result-container{
+    margin-right: 10%;
+    width: 90%;
+  }
+  .btn-container{
+    margin-right: 10%;
+  }
+}
+
 </style>
