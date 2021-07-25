@@ -85,4 +85,10 @@ export default {
     background-color: blue;
     margin-right: 48px;
 }
+@media screen and (max-width:700px) {
+  
+ .side-bar{
+   display: none;
+ } 
+}
 </style>

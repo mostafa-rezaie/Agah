@@ -100,7 +100,7 @@ export default {
   display: inline-block;
   margin-right: 10px;
 }
-.btn-container {
+/* .btn-container {
   margin-top: 50px;
-}
+} */
 </style>

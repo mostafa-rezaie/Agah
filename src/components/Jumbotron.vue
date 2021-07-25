@@ -1,6 +1,7 @@
 <template>
   <div :class="getTempClass">
-    <div class="jumbotron">
+    <div class="jumbotron" :class="getJumboClass">
+  <slot></slot>
       <div :class="getClass">
         <h1 :class="getTitleClass">{{ title }}</h1>
         <h3 :class="getSubTitleClass">{{ subTitle }}</h3>
@@ -18,6 +19,7 @@ export default {
     "titleClass",
     "subTitleClass",
     "tempClass",
+    "jumboClass"
   ],
 
   data() {
@@ -54,6 +56,9 @@ export default {
     },
     getTitleClass() {
       return this.titleClass;
+    },
+    getJumboClass() {
+      return this.jumboClass;
     },
   },
 };
@@ -137,7 +142,7 @@ export default {
 
       font-size: 16px;
       }
-      .jumbotron{
+      .jumbotron-lg{
         height: 150px;
 
       }
@@ -151,10 +156,12 @@ export default {
       
     
   }
-  @media screen and (max-width:400px) {
+  @media screen and (max-width:450px) {
     .sub-title-right , .title-right {
       font-size: 14px;
     }
-    
+    .jumbotron-md {
+      height: 102px;
+    }
   }
 </style>

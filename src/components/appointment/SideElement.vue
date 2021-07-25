@@ -30,10 +30,9 @@ export default {
       type: Boolean,
       default: false,
     },
-    iconSrc : {
-      type : String,
-      
-    }
+    iconSrc: {
+      type: String,
+    },
   },
   computed: {
     getSubTitleClass() {
@@ -85,6 +84,77 @@ export default {
   margin-bottom: 20px;
 }
 .subTitleDeactive {
-  color : gray
+  color: gray;
+}
+@media screen and (max-width: 1250px) {
+  .container {
+    padding-right: 0;
+    padding-left: 0;
+  }
+  .text {
+    width: auto;
+  }
+  .image > img {
+    margin-right: 5px;
+  }
+
+  .image {
+    width: 18%;
+  }
+  .title,
+  .subTitle {
+    margin-right: 15px;
+  }
+}
+@media screen and (max-width: 1000px) {
+  .title,
+  .subTitle {
+    font-size: 13px;
+  }
+  .image > img {
+    width: 25px;
+  }
+  .container {
+    margin-bottom: 0;
+  }
+}
+@media screen and (max-width: 700px) {
+  .image > img {
+    width: 55px;
+    height: 48px;
+  }
+
+  .image {
+    width: 11%;
+    height: 60px;
+  }
+  .title,
+  .subTitle {
+    font-size: 19px;
+  }
+  .text {
+    margin-right: 10px;
+  }
+  .title {
+    margin-bottom: 5px;
+  }
+  .container{
+    height: 100%;
+    margin-right: 5%;
+  }
+}
+@media screen and (max-width:450px) {
+  
+  .image > img {
+    width: 36px;
+    height: 30px;
+  }
+  .title,
+  .subTitle {
+    font-size: 15px;
+  }
+  .text {
+    margin-right: 5px;
+  }
 }
 </style>

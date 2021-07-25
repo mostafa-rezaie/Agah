@@ -1,16 +1,14 @@
 <template>
-  <div @click="passToParent" class="outer-container">
-    <div class="inner-container">
-      <button :class="getClass">
-        <div class="btn-container">
-          <img :src="icon" alt="gps icon" class="icon" v-if="iconIsSet" />
-          <div class="btn-text">
-            {{ label }}
-          </div>
+  <!-- <div @click="passToParent" class="outer-container"> -->
+    <button :class="getClass" @click="passToParent" class="outer-container">
+      <div class="text-container">
+        <img :src="icon" alt="gps icon" class="icon" v-if="iconIsSet" />
+        <div class="btn-text">
+          {{ label }}
         </div>
-      </button>
-    </div>
-  </div>
+      </div>
+    </button>
+  <!-- </div> -->
 </template>
 
 <script>
@@ -44,27 +42,30 @@ export default {
       type: Boolean,
       default: false,
     },
-    textColorBlue :{
-      type : Boolean,
-      default : false
+    textColorBlue: {
+      type: Boolean,
+      default: false,
     },
-    smallSize :{
-      type : Boolean,
-      default : false
+    smallSize: {
+      type: Boolean,
+      default: false,
     },
-    notAllowed :{
-      type : Boolean,
+    notAllowed: {
+      type: Boolean,
+      default: false,
+    },
+    sizeFull :{
+      type: Boolean,
       default : false
-
     }
   },
   data() {
     return {};
   },
   methods: {
-    passToParent (){
-      this.$emit('clicked',true)
-    }
+    passToParent() {
+      this.$emit("clicked", true);
+    },
   },
   computed: {
     getClass() {
@@ -74,10 +75,10 @@ export default {
         empty: this.empty,
         iconIsSet: this.iconIsSet,
         simple: this.simple,
-        blueText : this.textColorBlue,
-        smSize : this.smallSize,
-        notAllowed : this.notAllowed
-
+        blueText: this.textColorBlue,
+        smSize: this.smallSize,
+        notAllowed: this.notAllowed,
+        sizeFull : this.sizeFull
       };
     },
     getIcon() {
@@ -92,6 +93,9 @@ export default {
 };
 </script>
 
+<style >
+
+</style>
 <style scoped>
 * {
   direction: rtl;
@@ -102,7 +106,7 @@ button {
   background-color: #80aaff;
   color: white;
   font-size: 20px;
-  cursor: pointer ;
+  cursor: pointer;
   /* border : 2 solid white; */
 }
 .active {
@@ -114,15 +118,14 @@ button {
   display: inline-block;
 }
 .sizeMd {
-  width: 417px;
-  height: 72px;
+  width: 417px ;
+  height: 72px ;
 }
 .empty {
   background-color: white;
   border-color: #0a5bff;
   color: #0a5bff;
   cursor: pointer;
-
 }
 .icon {
   display: inline-block;
@@ -139,13 +142,13 @@ button {
   align-self: center;
   text-align: center;
 }
-.btn-container {
-  width: auto;
-  height: auto;
+.text-container {
+  display: flex;
+  justify-content: center;
 }
 .iconIsSet > div {
-  display: flex;
-  margin-right: 45px;
+  /* display: flex; */
+  /* margin-right: 45px; */
 }
 .iconIsSet > div > .btn-text {
   padding-right: 30px;
@@ -156,26 +159,38 @@ button {
   border: none;
 }
 .blueText div {
-color: #0a5bff;
+  color: #0a5bff;
 }
 .smSize {
   width: 200px;
-
 }
 .notAllowed {
   cursor: not-allowed;
 }
-@media screen and (max-width:600px) {
-  button{
-    width: 100%;
+.sizeFull{
+  /* background-color: red; */
+}
+
+@media screen and (max-width: 700px) {
+   .sizeFull{
+      width: 100%;
+  }
+}
+@media screen and (max-width: 600px) {
+  button {
     height: 60px;
   }
-  .btn-text{
+  .btn-text {
     font-size: 16px;
   }
-  .outer-container{
-    width: 100%;
+   .outer-container{
+      width: 100%;
   }
-
+}
+@media screen and (max-width:450px) {
+  .iconIsSet > div >.btn-text{
+    padding-right: 10px;
+  }
+  
 }
 </style>
