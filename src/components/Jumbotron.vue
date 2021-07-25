@@ -138,7 +138,7 @@ export default {
     }
   }
   @media screen and (max-width:700px) {
-    .sub-title-right , .title-right{
+    .sub-title-right , .title-right , .title-center , .sub-title-center{
 
       font-size: 16px;
       }
@@ -152,7 +152,15 @@ export default {
       .text-right{
         padding-top: 15px;
       }
-      
+      .text-center{
+        padding-right: 0;
+        padding-top: 0;
+        padding-bottom: 0;
+        padding-top: 25px;
+        width: 90%;
+        margin-right: 5%;
+        margin-left: 5%;
+      }
       
     
   }
