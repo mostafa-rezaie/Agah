@@ -19,7 +19,8 @@ export default {
     "titleClass",
     "subTitleClass",
     "tempClass",
-    "jumboClass"
+    "jumboClass",
+
   ],
 
   data() {
@@ -120,6 +121,7 @@ export default {
 }
 .active {
 }
+
 @media screen and (max-width: 500px) {
   .text-center {
     padding-right: 0;

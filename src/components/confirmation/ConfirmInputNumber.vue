@@ -1,5 +1,5 @@
 <template>
-  <div class="outer-container container">
+  <div class="outer-container filed-container">
     <label :for="getId"> {{ this.label }} </label>
     <div class="input-wrapper">
       <input
@@ -152,21 +152,17 @@ button {
   
 }@media screen and (max-width:1100px) {
   .outer-container{
-    margin-right: 10%;
-    width: 90%;
+    width: 100%;
   }
 
 }
   
 @media screen and (max-width:600px ) {
-  .container{
-    width: 95%;
-  }
   .outer-container{
+    width: 100%;
     padding-right: 0;
     padding-left: 0;
-    width: 95%;
-    margin: 25px auto 25px auto;
+    margin: 25px 2% 25px 2%;
   }
   input{
     width : 100%;

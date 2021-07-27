@@ -14,7 +14,7 @@
       jumboClass="jumbotron-lg"
     >
     </app-jumbo>
-    <div class="container">
+    <div class="input-container">
       <app-input-number
           label="شماره همراه"
           placeHolder="شماره خود را وارد کنید"
@@ -240,20 +240,19 @@ export default {
 .btn-container {
   direction: rtl;
 }
-
-@media screen and (min-width: 1100px) {
-  .btn-container {
-  }
+.input-container {
+  margin-right: 16%;
 }
 
 @media screen and (max-width: 1100px) {
-  .btn-container {
+  .input-container{
+    margin-right: 4%;
   }
 }
 
 @media screen and (max-width: 600px) {
   .btn-container {
-    margin: auto;
+    margin-left:5%;
     width: 95%;
   }
 

@@ -8,6 +8,8 @@
       jumboActiveClass="text-center"
       titleClass="title-center"
       subTitleClass="sub-title-center"
+      jumboClass="jumbotron-lg"
+
     ></app-jumbo>
 
     <div class="custom-container ">

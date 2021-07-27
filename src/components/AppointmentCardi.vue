@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="wrapper" :class="getGridClass">
     <div class="card-text">
       <div class="title">
         <div class="title-right">
@@ -59,8 +59,19 @@ export default {
     status:{
       type : String,
       default : ''
+    },
+    gridClass:{
+      type:Boolean,
+      default:false
     }
   },
+  computed:{
+    getGridClass() {
+      return {
+        gridWrapper : this.gridClass
+      }
+    }
+  }
 };
 </script>
 <style scoped>
@@ -103,8 +114,61 @@ export default {
 }
 a{
   text-decoration: none;
+  color: #0A5BFF;
 }
 .left-sub , .key-text{
   color: rgb(119, 119, 119);
+}
+@media screen and (max-width: 1000px){
+  .gridWrapper > .card-text {
+    width: 90%;
+    margin-right: 10px;
+  }
+  .gridWrapper{
+    width: 100% !important;
+  }
+  .gridWrapper > .card-text > .subtitle-container > .right-sub{
+    margin-right: 0;
+  }
+  .gridWrapper > .card-text > .subtitle-container{
+    margin-top: -3px;
+  }
+
+}
+@media screen and (max-width: 700px) {
+  .gridWrapper > .card-text > * {
+    font-size: 14px;
+  }
+  .gridWrapper{
+    height: 130px !important;
+  }
+  .gridWrapper > .card-text{
+    height: 80%;
+
+  }
+}
+@media screen and (max-width: 500px) {
+  .title-right , .title-left , .footer{
+    font-size: 14px;
+    font-weight: bold;
+  }
+  .key-text , .value-text , .left-sub{
+    font-size: 14px ;
+    font-weight: 300;
+  }
+  .card-text{
+    width: 90%;
+    margin: 0 auto 0 auto;
+    height: 83%;
+    padding-top: 14px;
+  }
+  .right-sub{
+    margin-right: 0;
+  }
+  .subtitle-container{
+    margin-top: 0;
+  }
+  .footer{
+  }
 }
 </style>

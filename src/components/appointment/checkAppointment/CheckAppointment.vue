@@ -105,10 +105,10 @@ export default {
   font-weight: 800;
 }
 .subTitle {
-  margin-right: 18px;
+  margin-right: 10px;
   margin-top: 10px;
   font-size: 20px;
-  font-weight: 100;
+  font-weight: normal;
 }
 .has-appointment {
   margin-top: 130px;
@@ -133,5 +133,16 @@ export default {
     width: 95%;
     margin-right: 2.5%;
   }
+}
+@media screen and  (max-width: 600px){
+  .text-box{
+    margin-right: 0;
+
+  }
+  .subTitle{
+    font-size: 14px;
+    font-weight: normal;
+  }
+
 }
 </style>

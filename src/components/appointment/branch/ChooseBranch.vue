@@ -137,6 +137,7 @@ export default {
 }
 @media screen and (max-width:700px) {
   .choose-branch-wrapper {
+    width: 90%;
     margin-right: 5%;
     height: auto;
   }

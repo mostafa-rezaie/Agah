@@ -1,23 +1,23 @@
 <template>
   <div>
     <!-- choose day section -->
-    <div class="wrapper">
+    <div class="wrapper" id="wrapper">
       <div class="choose-day-wrapper">
         <div class="title-wrapper">
           <div class="title-text">روز مراجعه را انتخاب کنید</div>
         </div>
         <div class="cards">
           <app-branch-card
-            v-for="(day, index) in Days"
-            :key="index"
-            :title="day.title"
-            :subtitle="day.subtitle"
-            containerMd
-            wrapperClassDay
-            innerContainerDay
-            :active="index == activatedCardIndex"
-            :iconIsSet="index == activatedCardIndex"
-            @clicked="clickHandler(index)"
+              v-for="(day, index) in Days"
+              :key="index"
+              :title="day.title"
+              :subtitle="day.subtitle"
+              containerMd
+              wrapperClassDay
+              innerContainerDay
+              :active="index == activatedCardIndex"
+              :iconIsSet="index == activatedCardIndex"
+              @clicked="clickHandler(index)"
           ></app-branch-card>
         </div>
       </div>
@@ -27,11 +27,11 @@
         <div class="title-text" id="title-text">ساعت مراجعه را انتخاب کنید</div>
         <div class="time-box-wrapper">
           <app-text-box
-            v-for="(time, index) in times"
-            :key="index"
-            :text="time"
-            :textBoxActive="index == activatedTextBox"
-            @clicked="textBoxClickHandler(index)"
+              v-for="(time, index) in times"
+              :key="index"
+              :text="time"
+              :textBoxActive="index == activatedTextBox"
+              @clicked="textBoxClickHandler(index)"
           ></app-text-box>
         </div>
       </div>
@@ -41,17 +41,17 @@
       <!-- right button  -->
 
       <div class="btn-box">
-        <router-link to="branch">
+        <router-link to="branch" tag="div" id="pre-btn-container">
           <app-button
-            label="مرحله قبل"
-            simple
-            iconIsSet
-            :icon="goBackIconSrc"
+              label="مرحله قبل"
+              simple
+              iconIsSet
+              :icon="goBackIconSrc"
           ></app-button>
         </router-link>
 
         <!-- left button  -->
-        <router-link to="summary">
+        <router-link to="summary" tag="div" id="nxt-btn-container">
           <app-button label="مرحله بعدی"></app-button>
         </router-link>
       </div>
@@ -126,7 +126,7 @@ export default {
 }
 
 .cards {
-  margin-top: 49px;
+  margin-top: 20px;
 }
 
 .title-text {
@@ -149,18 +149,26 @@ export default {
 
 .time-box-wrapper {
   height: auto;
-  margin: 20px 2% 0 0 ;
+  margin: 20px 2% 0 0;
   width: 98%;
 }
 
 .wrapper {
+  height: 100%;
   direction: rtl;
 }
+#wrapper{
+  height: 83vh;
+  display: flex;
+  flex-direction: column;
 
+}
 .btn-box {
   direction: rtl;
-  position: relative;
-  bottom: -10px;
+  display: flex;
+  justify-self: end;
+  margin-top: auto;
+  margin-bottom: 10px;
 }
 
 @media screen and (max-width: 1400px) {
@@ -168,56 +176,118 @@ export default {
     width: 98%;
     margin-left: 5px;
   }
+
   .choose-day-wrapper {
     width: 100%;
     margin: 2px;
   }
+
   .cards {
     margin-right: 15px;
   }
-  .time-box-wrapper > div{
-  width: 30%;
+
+  .time-box-wrapper > div {
+    width: 30%;
+  }
 }
+
+@media screen and (max-width: 1100px) {
+  .time-box-wrapper > div {
+    width: 45%;
+    margin-bottom: 5px !important;
+  }
+
+  .time-box-wrapper > div:nth-child(2n) {
+    margin-right: 2.5% !important;
+  }
+  .time-box-wrapper > div:nth-child(2n+1) {
+    margin-right: 12px;
+  }
+
 }
-@media screen and (max-width:1100px) {
-  .time-box-wrapper > div{
-  width: 45%;
-  margin-bottom: 5px !important;
+
+@media screen and (max-width: 800px) {
+  .cards {
+    width: 92%;
+  }
+
 }
-.time-box-wrapper > div:nth-child(2n){
-  margin-right: 5% !important;
-}
-  
-}
+
 @media screen and (max-width: 700px) {
+  #wrapper{
+    height: 90vh;
+  }
   .cards > .card-wrapper:nth-child(2n) {
     margin-right: 4%;
   }
+
   .title-wrapper {
     margin: 20px !important;
   }
+
   .cards {
     margin-top: 2px;
   }
-  #title-text {
-   margin: 20px 20px 0 0; 
+
+  .title-text {
+    font-size: 14px;
+    font-weight: bold;
+
   }
-  .time-box-wrapper > div{
-  width: 45%;
-  margin-bottom: 5px !important;
+
+  #title-text {
+    margin: 20px 20px 0 0;
+  }
+
+  .time-box-wrapper > div {
+    width: 45%;
+    margin-bottom: 5px !important;
+  }
+
+  .time-box-wrapper > div:nth-child(2n) {
+    margin-right: 3% !important;
+  }
+  .time-box-wrapper{
+    width: 92%;
+  }
+  #nxt-btn-container > button {
+    width: 100%;
+  }
+  #nxt-btn-container{
+    width: 60%;
+  }
+  #pre-btn-container{
+
+    width: 40%;
+  }
+  .btn-box{
+    margin-right: 4%;
+    width: 87%;
+  }
 }
-.time-box-wrapper > div:nth-child(2n){
-  margin-right: 5% !important;
+
+@media screen and (max-width: 600px) {
+  .time-box-wrapper > div {
+    width: 42%;
+  }
+  .time-box-wrapper{
+    width: 98%;
+  }
+  #pre-btn-container > button > .text-container > img{
+    width: 9px;
+    height: 14px;
+  }
+
 }
-}
-@media screen and (max-width:500px) {
-  .time-box-wrapper > div{
-  width: 40%;
-  margin-bottom: 5px !important;
-}
-.time-box-wrapper > div:nth-child(2n){
-  margin-right: 5% !important;
-}
-  
+
+@media screen and (max-width: 500px) {
+  .time-box-wrapper > div {
+    margin-bottom: 5px !important;
+  }
+
+  .time-box-wrapper > div:nth-child(2n) {
+    margin-right: 4% !important;
+  }
+
 }
 </style>

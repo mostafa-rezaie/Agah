@@ -9,7 +9,10 @@
         :placeholder="getPlaceHolder"
         :id="getId"
       />
+      <div class="captcha-container">
+
       <img :src="getCaptchaSrc" alt="captcha img" />
+      </div>
       <button @click="clickHandler(true)">
         <img src="../../assets/img/restartCaptcha.svg" alt="Captcha" />
       </button>
@@ -89,19 +92,19 @@ export default {
 .container {
   padding-left: 0;
   padding-right: 0;
+   margin-right: 0;
+  margin-top: 47px;
+  margin-bottom: 47px;
+  width: 526px;
+
 }
 label {
   display: block;
   margin-bottom: 3px;
 }
-.container {
-  /* margin-right: 278px; */
-  margin-top: 47px;
-  margin-bottom: 47px;
-}
 input {
   box-sizing: border-box;
-  width: 320px;
+  width: auto;
   height: 74px;
   background-color: #f8f9fa;
   border: white solid 0px;
@@ -129,6 +132,12 @@ button {
 .container > img {
   margin-right: 3px;
 }
+
+.captcha-container{
+  display: inline-block;
+  width: 15%;
+}
+/*start media queries*/
 @media screen and (min-width : 1100px) {
   .container {
   }
@@ -138,15 +147,15 @@ button {
   .container {
     /* margin-right: 16%; */
     width: 95%;
-    margin-right: auto;
+    margin-right: 0;
     margin-left: auto;
   }
   .container > input{
-    width: 65%;
+    width: 60%;
     height: 52px;
   }
-  .container > img{
-    width: 15%;
+  .container > .captcha-container {
+    width: 23%;
   }
   .container > button{
     position: relative;

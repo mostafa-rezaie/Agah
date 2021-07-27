@@ -8,27 +8,27 @@
         <div class="top-subtitle">نوبت احراز هویت شما در دفتر مرکزی در بازه فلان تا فلان ثبت شد</div>
       </div>
       <div class="accept-text-container">
-        <span>داشتن مدارک زیر الزامی است :</span>
+        <span class="middle-title">داشتن مدارک زیر الزامی است :</span>
         <ul>
           <li>اصل شناسنامه و کمی از تمام صفحات شناسنامه</li>
           <li>اصل کارت ملی و کمی شناسنامه</li>
           <li>کمی مدرک تحصیلی</li>
         </ul>
       </div>
+
+      <div class="btn-box">
+
+
+        <!-- left button  -->
+        <router-link to="/" tag="div" class="btn-container">
+
+          <app-button
+              active
+              label="بازگشت به صفحه اصلی"></app-button>
+        </router-link>
+      </div>
+
     </div>
-
-    <div class="btn-box">
-
-
-      <!-- left button  -->
-      <router-link to="/">
-
-        <app-button
-            active
-            label="بازگشت به صفحه اصلی"></app-button>
-      </router-link>
-    </div>
-
 
   </div>
 
@@ -61,6 +61,7 @@ export default {
   margin-right: 86px;
   margin-top: 82px;
   direction: rtl;
+
 }
 
 .name {
@@ -96,15 +97,43 @@ export default {
   bottom: -10px;
 
 }
+
 li {
   list-style: none;
   margin-bottom: 15px;
 }
-li::before{
+
+li::before {
   content: '• ';
   color: #0A5BFF;
 }
-ul{
+
+ul {
   padding: 0;
+}
+@media screen and (max-width: 1000px) {
+  .wrapper{
+    margin-right: auto;
+    width: 92%;
+    margin-left: auto;
+  }
+}
+@media screen and (max-width: 700px) {
+  .top-subtitle , .middle-title{
+    font-size: 14px;
+    font-weight: 300;
+  }
+  .name{
+    font-size: 16px;
+    font-weight: bold;
+  }
+  .top-text-container > img{
+    width: 46px;
+    height: 33px;
+  }
+  .btn-container > button {
+    width: 100%;
+
+  }
 }
 </style>

@@ -11,7 +11,7 @@
       jumboClass="jumbotron-lg"
     >
     </app-jumbo>
-    <div class="container">
+    <div class="input-container">
       <app-confirm-input-number
           label="شماره همراه"
           :placeHolder="getUserTel"
@@ -164,7 +164,9 @@ export default {
 .input-number {
   width: 200px;
 }
-
+.input-container{
+  margin-right: 15%;
+}
 .btn-container {
   direction: rtl;
   /* margin-right: 290px; */
@@ -176,12 +178,18 @@ export default {
   }
 
 }
+@media screen and (max-width: 1100px) {
+  .input-container{
+    margin-right: 4%;
+  }
+
+}
 
 @media screen and (max-width: 600px) {
   .btn-container {
     /* padding-right: 12px; */
-    width: 95%;
-    margin: auto;
+    width: 100%;
+    margin: 25px 2% 25px 2%;
   }
 
   .container {

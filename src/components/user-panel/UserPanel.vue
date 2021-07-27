@@ -8,19 +8,20 @@
         jumboActiveClass="text-center"
         titleClass="title-center"
         subTitleClass="sub-title-center"
+        jumbo-class="jumbotron-lg"
     ></app-jumbo>
 
-    <div class="container">
+    <div class="container" id="appointment-toggle">
       <div class="row appointment-status-wrapper">
         <div
             :class="{ active: getActiveClass }"
-            class="col-2"
+            class="col-2 active-appointment"
             @click="appointmentStatus = !appointmentStatus"
         >
           نوبت های فعال
         </div>
         <div
-            class="col-2"
+            class="col-2 inactive-appointment"
             :class="{ active: !getActiveClass }"
             @click="appointmentStatus = !appointmentStatus"
         >
@@ -42,7 +43,7 @@
 
     <!-- deactive appointment section  -->
 
-    <div class="container" v-if="!appointmentStatus">
+    <div class=" inactive-cards" v-if="!appointmentStatus">
       <div class="card-container grid-card-container">
         <app-appointment-card
             v-for="(appointment, index) in failedAppointments"
@@ -50,6 +51,7 @@
             :status="appointment.status"
             :subtitleRightValueText="appointment.branch"
             :subtitleLeft="appointment.date"
+            grid-class
             linkSrc="appointment/edit-appointment"
         ></app-appointment-card>
       </div>
@@ -175,6 +177,7 @@ export default {
   grid-column-end: col2-end;
 }
 
+
 .grid-card-container > div:nth-child(n+3) {
   margin-top: -160px;
 
@@ -184,5 +187,82 @@ export default {
   background-color: #ececec;
   direction: rtl;
   width: 400px;
+}
+
+@media screen and (max-width: 1000px) {
+  .active-appointment, .inactive-appointment {
+    width: 25%;
+  }
+
+  .card {
+    margin: auto;
+  }
+
+  .inactive-cards {
+    width: 90%;
+    margin: auto;
+  }
+
+  .card-container {
+    width: 90%;
+    margin: auto;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .card-container > .wrapper {
+    width: 100%;
+    height: 100%;
+  }
+
+}
+
+@media screen and (max-width: 800px) {
+
+  .container {
+    padding-left: 0;
+    padding-right: 0;
+    width: 98% !important;
+  }
+
+}
+
+@media screen and (max-width: 700px) {
+
+  .active-appointment, .inactive-appointment {
+    font-size: 14px;
+    font-weight: 300;
+    width: 40%;
+    padding-right: 2% !important;
+    padding-left: 2% !important;
+
+  }
+
+}
+
+@media screen and (max-width: 600px) {
+  .grid-card-container {
+    grid-template-columns: 1fr;
+  }
+
+  .grid-card-container > div {
+    grid-column: 1/span 1 !important;
+  }
+
+  .grid-card-container > div:nth-child(n+2) {
+    margin-top: 10px;
+
+  }
+  #appointment-toggle{
+    margin-bottom: 33px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .card {
+    width: 85%;
+    height: 140px;
+  }
+
 }
 </style>

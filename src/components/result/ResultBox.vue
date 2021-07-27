@@ -56,6 +56,20 @@ export default {
   padding-top: 13px;
   font-size: 16px;
 }
+@media screen and (max-width: 600px) {
+  .container{
+    width: 100%;
+    max-width: 551px;
+    height: 116px;
+  }
+  .title{
+    font-size: 14px;
 
+  }
+  .subtitle{
+    font-size: 12px;
+  }
+
+}
 
 </style>

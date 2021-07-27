@@ -40,7 +40,7 @@
       </div>
 
       <div class="btn-box">
-        <router-link to="choose-day">
+        <router-link to="choose-day" tag="div" id="pre-btn-container">
           <app-button
             label="مرحله قبل"
             simple
@@ -50,7 +50,7 @@
         </router-link>
 
         <!-- left button  -->
-        <router-link to="accept">
+        <router-link to="accept"  tag="div" id="nxt-btn-container">
           <app-button label="مرحله بعدی"></app-button>
         </router-link>
       </div>
@@ -98,9 +98,10 @@ export default {
   display: flex;
   flex-direction: column;
   margin-right: 20px;
+  margin-left: 20px;
   margin-top: 30px;
   direction: rtl;
-  height: 735px;
+  height: 79vh;
   justify-content: space-between;
 }
 
@@ -128,6 +129,43 @@ export default {
 
 .btn-box {
   direction: rtl;
-  margin-right: -20px;
+  margin-bottom: 10px;
+  display: flex;
+}
+@media screen and (max-width: 700px) {
+  .btn-box{
+    width: 100%;
+  }
+  #nxt-btn-container > button {
+    width: 100%;
+  }
+  #nxt-btn-container{
+    width: 60%;
+  }
+  #pre-btn-container{
+
+    width: 40%;
+  }
+  #pre-btn-container > button > .text-container > img{
+    width: 9px;
+    height: 14px;
+  }
+}
+@media screen and (max-width: 600px) {
+  .subtitle {
+    font-size: 14px;
+    font-weight: 300;
+  }
+  .title{
+    font-size: 14px;
+    font-weight: bold;
+  }
+  .top-subtitle{
+    margin-right: 0;
+    line-height: normal;
+    font-size: 14px;
+    font-weight: 300;
+  }
+
 }
 </style>

@@ -181,7 +181,7 @@ button {
     height: 60px;
   }
   .btn-text {
-    font-size: 16px;
+    font-size: 14px;
   }
    .outer-container{
       width: 100%;

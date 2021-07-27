@@ -128,12 +128,22 @@ export default {
 }@media screen and (max-width: 1100px) {
 
   .result-container{
-    margin-right: 10%;
-    width: 90%;
   }
   .btn-container{
-    margin-right: 10%;
+  }
+  .wrapper{
+    margin-right: 5%;
   }
 }
+@media screen and (max-width: 600px) {
+  .result-container{
+    width: 100%;
+    margin-left: 2%;
+  }
+  .btn-container{
+  width: 100%;
+    margin-left: 2%;
+  }
 
+}
 </style>

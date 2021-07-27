@@ -3,17 +3,17 @@
     <div class="row inner-container" :class="getClass">
       <div class="col-2 icon">
         <img
-          :src="
+            :src="
             iconIsSet == true
               ? require('../../../assets/img/checked.svg')
               : require('../../../assets/img/circle-unchecked.svg')
           "
-          alt=""
+            alt=""
         />
       </div>
       <div class="col-10 text-box-wrapper">
         <div class="title">{{ title }}</div>
-        <br />
+        <br/>
         <div class="subtitle">{{ subtitle }}</div>
       </div>
     </div>
@@ -51,13 +51,13 @@ export default {
       type: Boolean,
       default: false,
     },
-    innerContainerBranch:{
-      type : Boolean,
-      default : false
-    },
-    innerContainerDay:{
+    innerContainerBranch: {
       type: Boolean,
-      default :false
+      default: false
+    },
+    innerContainerDay: {
+      type: Boolean,
+      default: false
     }
 
   },
@@ -69,14 +69,14 @@ export default {
       return {
         active: this.active,
         containerMd: this.containerMd,
-        innerContainerBranch : this.innerContainerBranch,
-        innerContainerDay : this.innerContainerDay
+        innerContainerBranch: this.innerContainerBranch,
+        innerContainerDay: this.innerContainerDay
       };
     },
     getWrapperClass() {
       return {
         wrapperClassDay: this.wrapperClassDay,
-        wrapperClassBranch : this.wrapperClassBranch
+        wrapperClassBranch: this.wrapperClassBranch
       };
     },
   },
@@ -136,60 +136,83 @@ export default {
   height: 120px;
   padding: 10px;
 }
-@media screen and (max-width:1400px) {
+
+@media screen and (max-width: 1400px) {
   .wrapperClassDay {
     width: 45%;
   }
+
   .innerContainerDay {
     width: 100%;
   }
 }
-@media screen and (max-width:1200px) {
+
+@media screen and (max-width: 1200px) {
   .wrapperClassBranch {
     width: 100%;
   }
+
   .innerContainerBranch {
     width: 730px;
   }
-  
+
 }
+
 @media screen and (max-width: 1050px) {
   .innerContainerBranch {
     width: 95%;
   }
 }
+
+@media screen and (max-width: 700px) {
+  .innerContainerDay {
+    width: 95%;
+    height: 82px;
+  }
+
+  .wrapperClassDay {
+    width: 95%;
+    margin-right: 4%;
+    margin-bottom: 10px;
+  }
+
+  .innerContainerBranch {
+    padding: 14px;
+  }
+}
+
 @media screen and (max-width: 500px) {
   .title {
     font-size: 14px;
   }
+
   .subtitle {
     font-size: 12px;
   }
+
   .text-box-wrapper {
     padding-right: 5px;
   }
+
   .wrapperClassBranch {
     margin-bottom: 15px;
   }
-  
-}
-@media screen and (max-width:700px) {
-  .innerContainerDay{
-    width: 95%;
-    height: 82px;
-  }
-  .wrapperClassDay{
-    width: 95%;
-    margin-right:4% ;
-    margin-bottom: 10px;
-  }
- 
-}
-@media screen and (max-width:500px) {
-  .innerContainerDay{
+
+  .innerContainerDay {
     height: 38px;
   }
-  
+
+  .innerContainerBranch {
+    width: 89%;
+    margin: auto;
+  }
+
+  .inner-container > .text-box-wrapper {
+    padding-right: 15px;
+  }
+  .innerContainerDay > .text-box-wrapper>.subtitle{
+    margin-right: 0;
+  }
 }
 
 </style>
