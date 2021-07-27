@@ -45,6 +45,7 @@
             label="مرحله قبل"
             simple
             iconIsSet
+            iconMobile
             :icon="goBackIconSrc"
           ></app-button>
         </router-link>

@@ -204,7 +204,7 @@ export default {
   }
 
   .card-container {
-    width: 90%;
+    width: 95%;
     margin: auto;
   }
 }

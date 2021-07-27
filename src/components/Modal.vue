@@ -1,23 +1,24 @@
 <template>
-
-  <div class="modal-backdrop isHidden" >
+  <div class="modal-backdrop">
     <!-- TODO delete isHidden class  -->
-    <div class="modal " >
+    <div class="modal">
       <div class="modal-header">
         {{ modalText.headerText }}
       </div>
 
-      <br/>
+      <br />
       <div class="modal-body">
         <slot name="icon"></slot>
-        <br>
-        {{ modalText.bodyText }}
+        <br />
+        <div class="modal-body-text">
+          {{ modalText.bodyText }}
+        </div>
       </div>
-      <br/>
+      <br />
       <div class="modal-body-subtitle">
         {{ modalText.subtitleBodyText }}
       </div>
-      <br/>
+      <br />
 
       <div class="modal-footer">
         {{ modalText.footerText }}
@@ -98,7 +99,6 @@ export default {
   margin-right: 52px;
   margin-top: -10px;
   font-weight: 300;
-
 }
 
 .modal-body {
@@ -122,5 +122,25 @@ export default {
 .btn-container {
   margin-top: 50px;
   text-align: center;
+}
+@media screen and (max-width: 700px) {
+  .modal-backdrop {
+    align-items: end;
+  }
+  .modal-header,
+  .modal-body-subtitle,
+  .modal-foote .modal-body,
+  .modal-body-text,
+  #text {
+    font-size: 14px;
+  }
+}
+@media screen and (max-width:600px) {
+.modal-body , .modal-body-subtitle{
+  margin-right: 4px;
+}
+  .modal{
+    height: 300px;
+  }
 }
 </style>

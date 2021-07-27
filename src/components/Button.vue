@@ -1,13 +1,19 @@
 <template>
   <!-- <div @click="passToParent" class="outer-container"> -->
-    <button :class="getClass" @click="passToParent" class="outer-container">
-      <div class="text-container">
-        <img :src="icon" alt="gps icon" class="icon" v-if="iconIsSet" />
-        <div class="btn-text">
-          {{ label }}
-        </div>
+  <button :class="getClass" @click="passToParent" class="outer-container">
+    <div class="text-container">
+      <img
+        :src="icon"
+        alt="gps icon"
+        class="icon"
+        v-if="iconIsSet"
+        :class="getIconClass"
+      />
+      <div class="btn-text">
+        {{ label }}
       </div>
-    </button>
+    </div>
+  </button>
   <!-- </div> -->
 </template>
 
@@ -54,10 +60,14 @@ export default {
       type: Boolean,
       default: false,
     },
-    sizeFull :{
+    sizeFull: {
       type: Boolean,
-      default : false
-    }
+      default: false,
+    },
+    iconMobile: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {};
@@ -78,7 +88,7 @@ export default {
         blueText: this.textColorBlue,
         smSize: this.smallSize,
         notAllowed: this.notAllowed,
-        sizeFull : this.sizeFull
+        sizeFull: this.sizeFull,
       };
     },
     getIcon() {
@@ -89,12 +99,16 @@ export default {
     getIconIsSet() {
       return this.iconIsSet;
     },
+    getIconClass() {
+      return {
+        iconMobile: this.iconMobile,
+      };
+    },
   },
 };
 </script>
 
 <style >
-
 </style>
 <style scoped>
 * {
@@ -118,8 +132,8 @@ button {
   display: inline-block;
 }
 .sizeMd {
-  width: 417px ;
-  height: 72px ;
+  width: 417px;
+  height: 72px;
 }
 .empty {
   background-color: white;
@@ -167,13 +181,13 @@ button {
 .notAllowed {
   cursor: not-allowed;
 }
-.sizeFull{
+.sizeFull {
   /* background-color: red; */
 }
 
 @media screen and (max-width: 700px) {
-   .sizeFull{
-      width: 100%;
+  .sizeFull {
+    width: 100%;
   }
 }
 @media screen and (max-width: 600px) {
@@ -183,14 +197,17 @@ button {
   .btn-text {
     font-size: 14px;
   }
-   .outer-container{
-      width: 100%;
+  .outer-container {
+    width: 100%;
+  }
+  .iconMobile{
+    width: 9px;
+    height: 14px;
   }
 }
-@media screen and (max-width:450px) {
-  .iconIsSet > div >.btn-text{
+@media screen and (max-width: 450px) {
+  .iconIsSet > div > .btn-text {
     padding-right: 10px;
   }
-  
 }
 </style>

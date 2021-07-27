@@ -1,6 +1,7 @@
 <template>
   <div>
     <!-- choose day section -->
+
     <div class="wrapper" id="wrapper">
       <div class="choose-day-wrapper">
         <div class="title-wrapper">
@@ -46,6 +47,7 @@
               label="مرحله قبل"
               simple
               iconIsSet
+              iconMobile
               :icon="goBackIconSrc"
           ></app-button>
         </router-link>
@@ -263,6 +265,10 @@ export default {
   .btn-box{
     margin-right: 4%;
     width: 87%;
+    margin-top: 25px;
+  }
+  #pre-btn-container > button{
+    width : 100%;
   }
 }
 
@@ -272,10 +278,6 @@ export default {
   }
   .time-box-wrapper{
     width: 98%;
-  }
-  #pre-btn-container > button > .text-container > img{
-    width: 9px;
-    height: 14px;
   }
 
 }

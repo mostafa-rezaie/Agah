@@ -104,7 +104,7 @@ label {
 }
 input {
   box-sizing: border-box;
-  width: auto;
+  width: 60%;
   height: 74px;
   background-color: #f8f9fa;
   border: white solid 0px;
@@ -135,12 +135,10 @@ button {
 
 .captcha-container{
   display: inline-block;
-  width: 15%;
+  width: 25%;
 }
 /*start media queries*/
 @media screen and (min-width : 1100px) {
-  .container {
-  }
   
 }
 @media screen and (max-width : 568px) {
@@ -151,11 +149,16 @@ button {
     margin-left: auto;
   }
   .container > input{
-    width: 60%;
+    width: 100%;
     height: 52px;
   }
   .container > .captcha-container {
-    width: 23%;
+    width: 83%;
+    text-align: center;
+  }
+  .container > .captcha-container {
+    margin-top: 10px;
+
   }
   .container > button{
     position: relative;

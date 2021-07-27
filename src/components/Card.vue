@@ -99,5 +99,11 @@ export default {
   width: 9%;
 }
 }
+@media screen and (max-width:300px) {
+  .card-text{
+    margin-right: 10px;
+  }
+  
+}
 
 </style>

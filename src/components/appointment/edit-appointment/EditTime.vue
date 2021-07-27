@@ -1,42 +1,39 @@
 <template>
   <div>
     <!-- choose day section -->
-    <div class="wrapper">
-      <div class="inner-wrapper">
-
-        <div class="choose-day-wrapper">
-          <div class="box-day">
-            <div class="title-wrapper">
-              <div class=" first-title">ویرایش زمان نوبت</div>
-              <div class="title-text second">روز مراجعه را انتخاب کنید</div>
-            </div>
-            <div class="cards">
-              <app-branch-card
-                  v-for="(day, index) in Days"
-                  :key="index"
-                  :title="day.title"
-                  :subtitle="day.subtitle"
-                  containerMd
-                  :active="index == activatedCardIndex"
-                  :iconIsSet="index == activatedCardIndex "
-                  @clicked="clickHandler(index)"
-              ></app-branch-card>
-            </div>
-          </div>
+    <div class="wrapper" id="wrapper">
+      <div class="choose-day-wrapper">
+        <div class="title-wrapper">
+          <div class="first-title">ویرایش زمان نوبت</div>
+          <div class="title-text">روز مراجعه را انتخاب کنید</div>
         </div>
+        <div class="cards">
+          <app-branch-card
+            v-for="(day, index) in Days"
+            :key="index"
+            :title="day.title"
+            :subtitle="day.subtitle"
+            containerMd
+            wrapperClassDay
+            innerContainerDay
+            :active="index == activatedCardIndex"
+            :iconIsSet="index == activatedCardIndex"
+            @clicked="clickHandler(index)"
+          ></app-branch-card>
+        </div>
+      </div>
 
-        <!-- choose time section  -->
-        <div v-if="activatedCardIndex != -1" class="choose-time-wrapper">
-          <div class="title-text">ساعت مراجعه را انتخاب کنید</div>
-          <div class="time-box-wrapper">
-            <app-text-box
-                v-for="(time, index) in times"
-                :key="index"
-                :text="time"
-                :textBoxActive="index == activatedTextBox"
-                @clicked="textBoxClickHandler(index)"
-            ></app-text-box>
-          </div>
+      <!-- choose time section  -->
+      <div v-if="activatedCardIndex != -1" class="choose-time-wrapper">
+        <div class="title-text" id="title-text">ساعت مراجعه را انتخاب کنید</div>
+        <div class="time-box-wrapper">
+          <app-text-box
+            v-for="(time, index) in times"
+            :key="index"
+            :text="time"
+            :textBoxActive="index == activatedTextBox"
+            @clicked="textBoxClickHandler(index)"
+          ></app-text-box>
         </div>
       </div>
 
@@ -45,19 +42,24 @@
       <!-- right button  -->
 
       <div class="btn-box">
-      <router-link to="edit-appointment">
-        <app-button
+        <router-link
+          to="edit-appointment"
+          tag="div"
+          id="pre-btn-container"
+          class="pre-btn-container"
+        >
+          <app-button
             label="حذف نوبت"
             simple
             iconIsSet
+            iconMobile
             :icon="goBackIconSrc"
-        ></app-button>
-      </router-link>
+          ></app-button>
+        </router-link>
 
         <!-- left button  -->
-        <router-link to="/">
-
-        <app-button label="ویرایش زمان نوبت"></app-button>
+        <router-link to="/" tag="div" id="nxt-btn-container">
+          <app-button label="ویرایش زمان نوبت"></app-button>
         </router-link>
       </div>
     </div>
@@ -96,8 +98,7 @@ export default {
       ],
       times: ["بین 8 الی 12", "بین 8 الی 12", "بین 8 الی 12", "بین 8 الی 12"],
       activatedCardIndex: -1,
-      activatedTextBox : -1,
-
+      activatedTextBox: -1,
     };
   },
   computed: {},
@@ -107,20 +108,16 @@ export default {
     appTextBox: TextBox,
   },
   methods: {
-
     updateTimeState(val) {
       this.timeState = val;
     },
     clickHandler(index) {
-      this.activatedCardIndex = index
+      this.activatedCardIndex = index;
     },
-    textBoxClickHandler(index){
-
-      this.activatedTextBox = index
+    textBoxClickHandler(index) {
+      this.activatedTextBox = index;
+    },
   },
-
-
-  }
 };
 </script>
 
@@ -131,61 +128,165 @@ export default {
   margin: 100px;
 }
 
-.cards > .wrapper:nth-child(2n) {
+.cards > .card-wrapper:nth-child(2n) {
   margin-right: 45px;
 }
 
 .cards {
-  margin-top: 49px;
+  margin-top: 20px;
 }
 
 .title-text {
-  font-size: 20px;
+  font-size: 24px;
   display: inline-block;
 }
-.first-title {
-  font-size: 24px;
-  margin-bottom: 25px;
-  font-weight: bold;
-}
+
 .choose-day-wrapper,
 .time-box-wrapper {
   direction: rtl;
-  height: 430px;
+  height: auto;
   width: 1112px;
   margin: 20px;
 }
-.choose-time-wrapper {
-  margin-top: 70px;
-  position: relative;
-}
-.inner-wrapper{
-  width: 1112px;
-  height: 650px;
-}
-.time-box-wrapper > .wrapper {
-  margin-bottom: 30px;
+
+.time-box-wrapper > div {
+  margin-bottom: 15px;
   margin-right: 20px;
 }
 
 .time-box-wrapper {
-  margin-right: 0px !important;
   height: auto;
+  margin: 20px 2% 0 0;
+  width: 98%;
 }
 
 .wrapper {
+  height: 100%;
   direction: rtl;
 }
-
-.box-day {
-  direction: rtl;
-  /* border: solid; */
+#wrapper {
+  height: 83vh;
+  display: flex;
+  flex-direction: column;
 }
-
 .btn-box {
   direction: rtl;
-  position: relative;
-  bottom: -10px;
+  display: flex;
+  justify-self: end;
+  margin-top: auto;
+  margin-bottom: 10px;
+}
 
+@media screen and (max-width: 1400px) {
+  .wrapper {
+    width: 98%;
+    margin-left: 5px;
+  }
+
+  .choose-day-wrapper {
+    width: 100%;
+    margin: 2px;
+  }
+
+  .cards {
+    margin-right: 15px;
+  }
+
+  .time-box-wrapper > div {
+    width: 30%;
+  }
+}
+
+@media screen and (max-width: 1100px) {
+  .time-box-wrapper > div {
+    width: 45%;
+    margin-bottom: 5px !important;
+  }
+
+  .time-box-wrapper > div:nth-child(2n) {
+    margin-right: 2.5% !important;
+  }
+  .time-box-wrapper > div:nth-child(2n + 1) {
+    margin-right: 12px;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .cards {
+    width: 92%;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  #wrapper {
+    height: 90vh;
+  }
+  .cards > .card-wrapper:nth-child(2n) {
+    margin-right: 4%;
+  }
+
+  .title-wrapper {
+    margin: 20px !important;
+  }
+
+  .cards {
+    margin-top: 2px;
+  }
+
+  .title-text {
+    font-size: 14px;
+    font-weight: bold;
+  }
+
+  #title-text {
+    margin: 20px 20px 0 0;
+  }
+
+  .time-box-wrapper > div {
+    width: 45%;
+    margin-bottom: 5px !important;
+  }
+
+  .time-box-wrapper > div:nth-child(2n) {
+    margin-right: 3% !important;
+  }
+  .time-box-wrapper {
+    width: 92%;
+  }
+  #nxt-btn-container > button {
+    width: 100%;
+  }
+  #nxt-btn-container {
+    width: 60%;
+  }
+  #pre-btn-container {
+    width: 40%;
+  }
+  .btn-box {
+    margin-right: 4%;
+    width: 87%;
+  }
+  #pre-btn-container > button {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .time-box-wrapper > div {
+    width: 42%;
+  }
+  .time-box-wrapper {
+    width: 98%;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .time-box-wrapper > div {
+    margin-bottom: 5px !important;
+  }
+
+  .time-box-wrapper > div:nth-child(2n) {
+    margin-right: 4% !important;
+  }
 }
 </style>
