@@ -1,5 +1,5 @@
 <template>
-  <div class="modal-backdrop">
+  <div class="modal-backdrop" :class="getHiddenClass">
     <!-- TODO delete isHidden class  -->
     <div class="modal">
       <div class="modal-header">

@@ -7,7 +7,9 @@
     <div class="title-text">
       <div class="title">شعبه</div>
       <div class="subtitle">
-        تهران - تهران
+        <!-- تهران - تهران -->
+        <!-- new code  -->
+        {{this.getChosenCityTitle}}
         <img src="../../../assets/img/edit-pen.svg" alt="" />
         <span class="edit-text"> ویرایش </span>
       </div>
@@ -36,6 +38,7 @@
 import citySearchBar from "./CitySearchBar";
 import ChooseBranch from "./ChooseBranch";
 import Button from "../../Button.vue";
+import { mapGetters } from "vuex";
 
 export default {
   components: {
@@ -54,6 +57,11 @@ export default {
       console.log(value);
       this.cityIsSet = true;
     },
+  },
+  computed: {
+  ...mapGetters ({
+    getChosenCityTitle : 'getCityTitle'
+  })    
   },
 };
 </script>

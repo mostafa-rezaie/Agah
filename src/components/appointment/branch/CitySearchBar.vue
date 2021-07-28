@@ -37,10 +37,12 @@ export default {
       temp: 0,
       chosenCity: {
         id: -1,
-        label: "",
+        label: "labelTemp",
         isSet: false,
-        branches :[]
+        branches: [],
       },
+      cityInfo: [],
+      branchesInfo: [],
       urbanData: [],
       placeHolder: "تهران",
     };
@@ -52,7 +54,7 @@ export default {
   },
   methods: {
     ...mapMutations({
-      setUrban: "setUrbanData",
+      setChosenUrban: "setChosenUrbanData",
     }),
     filterCity($e) {
       this.filteredCities = this.citiesTitle.filter(
@@ -64,14 +66,18 @@ export default {
       document.getElementById("city").value = cityTitle;
       this.urbanData.forEach((element) => {
         if (element.title == cityTitle) {
-          this.choosenCity.label = cityTitle;
+          this.chosenCity.label = element.title;
           this.chosenCity.id = element.id;
           this.chosenCity.isSet = true;
-          this.chosenCity.branches = element.branches
+          // this.chosenCity.branches = element.branches;
+          this.chosenCity.branches = [];
+          element.branches.forEach((branchElement)=>{
+            this.chosenCity.branches.push(branchElement)
+          })
           //check for branches
-          this.setUrban(this.chosenCity)
         }
       });
+      this.setChosenUrban(this.chosenCity);
       this.filteredCities = [];
       this.placeHolder = cityTitle;
       this.passCityState();
@@ -80,25 +86,40 @@ export default {
       this.$emit("getCityState", this.chosenCity.isSet);
     },
     getCities() {
+      //TODO delete line 
+      this.urbanData = []
       console.log(this.getToken);
       this.$api
-        .get("/Urban/branch", {
+        .get("Urban/branch", {
           headers: {
             authorization: "Bearer " + this.getToken,
           },
         })
         .then((res) => res.data.data.data)
         .then((res) => {
-          console.log(res);
-          this.urbanData = res;
+          res.forEach((element) => {
+            this.urbanData.push(element);
+          });
           this.setCitiesTitle();
         });
     },
     setCitiesTitle() {
-      let i = 0;
       this.urbanData.forEach((element) => {
-        this.citiesTitle[i] = element.title;
-        i++;
+        //save the titles
+        this.citiesTitle.push(element.title);
+        //save the city information
+        this.cityInfo.push({ id: element.id, title: element.title });
+        //save city branches information
+        element.branches.forEach((branchElement) => {
+          this.branchesInfo.push({
+            cityId: element.id,
+            address: branchElement.address,
+            id: branchElement.id,
+            latitude: branchElement.latitude,
+            longtitude: branchElement.longtitude,
+            title: branchElement.title,
+          });
+        });
       });
     },
   },
@@ -162,10 +183,9 @@ export default {
 input {
   outline: none;
 }
-@media screen and (max-width:1200px) {
-  .drop-down{
+@media screen and (max-width: 1200px) {
+  .drop-down {
     margin-right: 5%;
   }
-  
 }
 </style>

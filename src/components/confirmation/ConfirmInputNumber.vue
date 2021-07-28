@@ -11,8 +11,8 @@
         @input="passConfirmCode"
         @keypress="preventInput"
       />
-      <router-link :to="backSrc">
-        <button v-show="getId !== 'confirmCode'">
+      <router-link :to="backSrc" v-show="getId !== 'confirmCode'">
+        <button >
           <img src="../../assets/img/editButton.svg" alt="editButton" />
         </button>
       </router-link>

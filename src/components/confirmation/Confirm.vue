@@ -13,36 +13,36 @@
     </app-jumbo>
     <div class="input-container">
       <app-confirm-input-number
-          label="شماره همراه"
-          :placeHolder="getUserTel"
-          inputType="tel"
-          id="phoneNumber"
-          value="09199999999"
-          backSrc="/login"
+        label="شماره همراه"
+        :placeHolder="getUserTel"
+        inputType="tel"
+        id="phoneNumber"
+        value="09199999999"
+        backSrc="/login"
       ></app-confirm-input-number>
       <app-confirm-input-number
-          label="کد ملی"
-          :placeHolder="getUserId"
-          inputType="text"
-          id="idNumber"
-          value="5555555555"
-          backSrc="/login"
+        label="کد ملی"
+        :placeHolder="getUserId"
+        inputType="text"
+        id="idNumber"
+        value="5555555555"
+        backSrc="/login"
       ></app-confirm-input-number>
       <app-confirm-input-number
-          label="کد تایید"
-          placeHolder="کد تایید خود را وارد کنید"
-          inputType="text"
-          id="confirmCode"
-          :sizeFull="true"
-          :inputIsDisabled="false"
-          @entered="setConfirmCode"
+        label="کد تایید"
+        placeHolder="کد تایید خود را وارد کنید"
+        inputType="text"
+        id="confirmCode"
+        :sizeFull="true"
+        :inputIsDisabled="false"
+        @entered="setConfirmCode"
       ></app-confirm-input-number>
       <div class="btn-container">
         <!-- <router-link to="/result"> -->
         <app-button
-            :active="true"
-            label="مرحله بعد"
-            @clicked="clickHandler"
+          :active="true"
+          label="مرحله بعد"
+          @clicked="clickHandler"
         ></app-button>
         <!-- </router-link> -->
       </div>
@@ -51,8 +51,8 @@
 </template>
 
 <script>
-import {mapGetters} from "vuex";
-import {mapMutations} from "vuex";
+import { mapGetters } from "vuex";
+import { mapMutations } from "vuex";
 
 import Jumbotron from "../Jumbotron.vue";
 import ConfirmInputNumber from "./ConfirmInputNumber.vue";
@@ -72,6 +72,7 @@ export default {
       getUserId: "getUserIdNumber",
       getCaptcha: "getUserCaptchaCode",
       getToken: "getUserToken",
+      getData: "getUserData",
     }),
     // showMe (){
     //   console.log(this.getUserTel)
@@ -79,9 +80,9 @@ export default {
     // },
     getSubtitle() {
       let outString =
-          "کد تایید به شماره موبایل ثبت شده توسط شما در سایت کارگزاری آگاه (" +
-          this.getUserTel.toString() +
-          ") ارسال گردید";
+        "کد تایید به شماره موبایل ثبت شده توسط شما در سایت کارگزاری آگاه (" +
+        this.getUserTel.toString() +
+        ") ارسال گردید";
       return outString;
     },
   },
@@ -106,39 +107,47 @@ export default {
         console.log("request sent");
         const userDataPromise = this.postValidateOtpReq();
         userDataPromise
-            .then((res) => {
-              if (res.isSuccess) {
-                this.setData(res);
-
-                //TODO store the data in the local storage
-                console.log("entrance is valid");
-                this.$router.push({path: "/result"});
-                // TODO handle exceptions
-              } else {
-                alert("خطا در برقراری ارتباط با آگاه یا خطا در مقادیر ورودی");
-              }
-            })
-            .catch(()=>{
-              console.log('error has happened')
-            })
-
+          .then((res) => {
+            console.log(res);
+            if (res.isSuccess) {
+              this.setData(res);
+              let userData = {
+                fullName: res.data.fullName,
+                id: res.data.id,
+                isUserPhoneNumberExist: res.data.isUserPhoneNumberExist,
+                lastModifyAt: res.data.lastModifyAt,
+                nationalCode: res.data.nationalCode,
+                token: res.data.token,
+              };
+              this.setUserData(userData);
+              //TODO store the data in the local storage
+              console.log("entrance is valid");
+              this.$router.push({ path: "/result" });
+              // TODO handle exceptions
+            } else {
+              alert("خطا در برقراری ارتباط با آگاه یا خطا در مقادیر ورودی");
+            }
+          })
+          .catch(() => {
+            console.log("error has happened");
+          });
       }
     },
     postValidateOtpReq() {
       return this.$api
-          .post("Customer/ValidateOTPByNationaCode", {
-            nationalCode: this.getUserId,
-            otpCode: this.confirmCode,
-            phoneNumber: this.getUserTel,
-          })
-          .then((res) => res.data)
-          .catch((err) => {
-            console.log("error is : ");
-            console.log(err);
+        .post("Customer/ValidateOTPByNationaCode", {
+          nationalCode: this.getUserId,
+          otpCode: this.confirmCode,
+          phoneNumber: this.getUserTel,
+        })
+        .then((res) => res.data)
+        .catch((err) => {
+          console.log("error is : ");
+          console.log(err);
 
-            err = err.response.data;
-            alert(err.message);
-          });
+          err = err.response.data;
+          alert(err.message);
+        });
     },
     setData(res) {
       //TODO probably wont need the following line except last one
@@ -146,7 +155,7 @@ export default {
       this.setFullName(res.data.fullName);
       this.setId(res.data.id);
       this.setStatus(res.data.userStatus);
-      this.setUserData(res.data);
+      // this.setUserData(res.data);
     },
   },
   data() {
@@ -164,7 +173,7 @@ export default {
 .input-number {
   width: 200px;
 }
-.input-container{
+.input-container {
   margin-right: 15%;
 }
 .btn-container {
@@ -176,13 +185,11 @@ export default {
   .container {
     margin-right: 10%;
   }
-
 }
 @media screen and (max-width: 1100px) {
-  .input-container{
+  .input-container {
     margin-right: 4%;
   }
-
 }
 
 @media screen and (max-width: 600px) {
@@ -196,6 +203,5 @@ export default {
     padding-right: 0;
     padding-left: 0;
   }
-
 }
 </style>

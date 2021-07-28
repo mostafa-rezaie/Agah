@@ -18,7 +18,7 @@
               innerContainerDay
               :active="index == activatedCardIndex"
               :iconIsSet="index == activatedCardIndex"
-              @clicked="clickHandler(index)"
+              @clicked="dayClickHandler(index)"
           ></app-branch-card>
         </div>
       </div>
@@ -32,7 +32,7 @@
               :key="index"
               :text="time"
               :textBoxActive="index == activatedTextBox"
-              @clicked="textBoxClickHandler(index)"
+              @clicked="timeClickHandler(index)"
           ></app-text-box>
         </div>
       </div>
@@ -65,6 +65,7 @@
 import Button from "../../Button.vue";
 import BranchCard from "../branch/BranchCard";
 import TextBox from "../TextBox.vue";
+import { mapGetters , mapMutations } from "vuex";
 
 export default {
   data() {
@@ -96,22 +97,57 @@ export default {
       activatedTextBox: -1,
     };
   },
-  computed: {},
+  computed: {
+    ...mapGetters({
+      getToken : 'getUserToken'
+    })
+  },
   components: {
     appButton: Button,
     appBranchCard: BranchCard,
     appTextBox: TextBox,
   },
   methods: {
+    ...mapMutations({
+      setChosenDay : 'setDay',
+      setChosenTime : 'setTime',
+    }),
     updateTimeState(val) {
       this.timeState = val;
     },
-    clickHandler(index) {
+    dayClickHandler(index) {
       this.activatedCardIndex = index;
+      //TODO send the day from the function params
+      this.setChosenDay()
     },
-    textBoxClickHandler(index) {
+    timeClickHandler(index) {
       this.activatedTextBox = index;
+      //TODO send the time from the function params
+      this.setChosenTime()
     },
+    getReservableDate (){
+      this.$api
+      .get('BranchCapacity/reservableDate',{
+         headers: {
+            authorization: "Bearer " + this.getToken,
+          },
+      })
+      //TODO get the days
+    },
+    getReservableTime (){
+      this.$api
+      .get('BranchCapacity/reservableTime',{
+         headers: {
+            authorization: "Bearer " + this.getToken,
+          },
+      })
+      //TODO get the times
+    }
+  },
+
+  mounted() {
+    this.getReservableDate();
+    this.getReservableTime();
   },
 };
 </script>

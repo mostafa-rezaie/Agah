@@ -1,34 +1,26 @@
 <template>
   <div class="card-wrapper">
-      <div class="col-10 choose-branch-wrapper">
-            <div class="title-text">
-              شعبه موردنظر برای احراز هویت انتخاب کنید
-            </div>
-            <div class="vertical-line"></div>
-          <div class="cards">
-            <app-branch-card
-
-                v-for="(branch, index) in branches"
-                :key="index"
-                :title="branch.title"
-                :subtitle=branch.address
-                :active="index == activatedCardIndex"
-                :iconIsSet="index == activatedCardIndex "
-                @clicked="clickHandler(index,branch.id)"
-                innerContainerBranch
-                wrapperClassBranch
-            >
-
-            </app-branch-card>
-
-
-          </div>
-
-          <!-- <img src="../../../assets/img/checked.svg" alt=""> -->
-        </div>
+    <div class="col-10 choose-branch-wrapper">
+      <div class="title-text">شعبه موردنظر برای احراز هویت انتخاب کنید</div>
+      <div class="vertical-line"></div>
+      <div class="cards">
+        <app-branch-card
+          v-for="(branch, index) in branches"
+          :key="index"
+          :title="branch.title"
+          :subtitle="branch.address"
+          :active="index == activatedCardIndex"
+          :iconIsSet="index == activatedCardIndex"
+          @clicked="clickHandler(index, branch.id)"
+          innerContainerBranch
+          wrapperClassBranch
+        >
+        </app-branch-card>
       </div>
 
-
+      <!-- <img src="../../../assets/img/checked.svg" alt=""> -->
+    </div>
+  </div>
 </template>
 
 <script>
@@ -42,18 +34,21 @@ export default {
       branches: [
         {
           title: "دفترمرکزی",
-          subtitle: "خیابان نلسون ماندلا (آفریقا) بالاتر از میرداماد، بن بست پیروز، پلاک 13، طبقه همکف",
+          address:
+            "خیابان نلسون ماندلا (آفریقا) بالاتر از میرداماد، بن بست پیروز، پلاک 13، طبقه همکف",
         },
         {
           title: "تهران (اندرزگو)",
-          subtitle: "بلوار اندرزگو، بعد از سلیمی جنوبی پلاک 52 ساختمان سام اندرزگو طبقه دوم",
+          address:
+            "بلوار اندرزگو، بعد از سلیمی جنوبی پلاک 52 ساختمان سام اندرزگو طبقه دوم",
         },
         {
           title: "تهران (سعادت آباد)",
-          subtitle: "تهران، سعادت آباد، بلوار دریا، روبه روی پارک دلاوران، طبقه فوقانی جین وست",
+          address:
+            "تهران، سعادت آباد، بلوار دریا، روبه روی پارک دلاوران، طبقه فوقانی جین وست",
         },
       ],
-      activatedCardIndex: -1
+      activatedCardIndex: -1,
     };
   },
   computed: {
@@ -63,25 +58,30 @@ export default {
   },
   methods: {
     ...mapMutations({
-      setChosenBranch : 'setChosenBranchId'
+      setChosenBranchId: "setChosneBranchId",
     }),
-    clickHandler(index,branchId) {
-      console.log('hey from parent')
-      this.setChosenBranch(branchId)
-      this.activatedCardIndex = index
+    clickHandler(index, branchId) {
+      this.setChosenBranchId(branchId);
+      this.activatedCardIndex = index;
     },
-    setBranches (){
-      this.branches = this.getBranches
-    }
-
+    setBranches() {
+      this.branches = [];
+      this.getBranches.forEach((element) => {
+        this.branches.push({
+          title: element.title,
+          address: element.address,
+          id: element.id,
+        });
+      });
+    },
   },
   components: {
     appBranchCard: BranchCard,
   },
-  created (){
+  created() {
     // this.setBranches ()
     //TODO uncomment this line for API
-  }
+  },
 };
 </script>
 
@@ -119,7 +119,7 @@ export default {
   margin: 20px;
   border: solid;
 }
-@media screen and (max-width:1200px) {
+@media screen and (max-width: 1200px) {
   .choose-branch-wrapper {
     width: 90%;
     margin-left: 0;
@@ -129,31 +129,28 @@ export default {
     width: 40%;
   }
 }
-@media screen and (max-width:1050px) {
-  .vertical-line{
+@media screen and (max-width: 1050px) {
+  .vertical-line {
     display: none;
   }
-  
 }
-@media screen and (max-width:700px) {
+@media screen and (max-width: 700px) {
   .choose-branch-wrapper {
     width: 90%;
     margin-right: 5%;
     height: auto;
   }
 }
-@media screen and (max-width:500px) {
-  .title-text{
+@media screen and (max-width: 500px) {
+  .title-text {
     font-size: 14px;
   }
- .choose-branch-wrapper{
-   margin-top: 10px;
-   /* height: auto; */
- } 
- .cards {
-   margin-top: 20px;
- }
+  .choose-branch-wrapper {
+    margin-top: 10px;
+    /* height: auto; */
+  }
+  .cards {
+    margin-top: 20px;
+  }
 }
-
-
 </style>

@@ -39,7 +39,7 @@
           'عرفان محمدی عزیز یک نوبت برای شما فعال است.در صورت افزودن نوبت جدبد نوبت قبلی شما حذف میشود',
         footerText: '',
       }"
-      :isHidden="false"
+      isHidden
     ></app-modal>
   </div>
 </template>
