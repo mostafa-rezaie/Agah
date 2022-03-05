@@ -74,7 +74,7 @@ export default {
     return {
       numberIsCorrect: false,
       captchaIsEntered: false,
-      loaderFlag: true,
+      loaderFlag: false,
       phoneNumber: "",
       idNumber: "",
       captchaEntered: "",
@@ -160,12 +160,13 @@ export default {
     clickHandler() {
       if (this.systemUp) {
         if (this.fieldHandler) {
-          if (this.captchaEntered == this.captcha.id) {
+          // if (this.captchaEntered == this.captcha.id) {
             this.setUserTel(this.phoneNumber);
             this.setUserId(this.idNumber);
             this.serUserCaptcha(this.captcha.id);
             this.getVerification();
-          } else alert("کپچا نادرست است");
+          // }
+          // else alert("کپچا نادرست است");
         }
       } else {
         console.log("اگاه در دسترس نیست");
