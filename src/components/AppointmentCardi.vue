@@ -150,7 +150,7 @@ a{
 @media screen and (max-width: 500px) {
   .title-right , .title-left , .footer{
     font-size: 14px;
-    font-weight: bold;
+    /*font-weight: bold;*/
   }
   .key-text , .value-text , .left-sub{
     font-size: 14px ;
